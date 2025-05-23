@@ -1,0 +1,102 @@
+.vocabulary-browser {
+    display: flex;
+    height: 100vh;
+    padding: 20px;
+    gap: 20px;
+    background-color: #f5f5f5;
+}
+
+.sidebar {
+    flex: 0 0 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.content {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+.folder {
+    margin-bottom: 20px;
+}
+
+.folder h3 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    text-transform: capitalize;
+}
+
+.files {
+    margin-left: 10px;
+}
+
+.file {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.word-count {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.load-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.load-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.load-button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.loaded-words table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.loaded-words th,
+.loaded-words td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.loaded-words th {
+    background-color: #f8f8f8;
+    font-weight: 600;
+}
+
+.loaded-words tr:hover {
+    background-color: #f5f5f5;
+} 

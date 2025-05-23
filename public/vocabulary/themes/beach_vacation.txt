@@ -1,0 +1,20 @@
+pantai	beach
+laut	sea/ocean
+pasir	sand
+ombak	wave
+matahari	sun
+angin	wind
+air	water
+panas	hot
+dingin	cold
+berenang	to swim
+berjemur	to sunbathe
+payung	umbrella
+handuk	towel
+kacamata hitam	sunglasses
+topi	hat
+perahu	boat
+nelayan	fisherman
+kerang	seashell
+ikan	fish
+bintang laut	starfish 

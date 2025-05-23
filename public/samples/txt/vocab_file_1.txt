@@ -1,0 +1,12 @@
+nasi	rice
+ayam	chicken
+ikan	fish
+sayur	vegetables
+buah	fruit
+air	water
+minum	drink
+makan	eat
+manis	sweet
+pedas	spicy
+enak	delicious
+lapar	hungry

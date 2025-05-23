@@ -1,0 +1,68 @@
+.vocabulary-sidebar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vocabulary-sidebar h2 {
+  margin: 0;
+  color: #2e7d32;
+  font-size: 1.5rem;
+}
+
+.vocabulary-sidebar h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.upload-section {
+  padding: 15px;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+}
+
+.available-sets {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.selection-summary {
+  padding: 12px;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.selection-summary p {
+  margin: 0;
+  color: #2e7d32;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.clear-selection {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 0.85rem;
+  padding: 4px 0;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.clear-selection:hover {
+  color: #d32f2f;
+}
+
+.clear-selection svg {
+  width: 14px;
+  height: 14px;
+} 

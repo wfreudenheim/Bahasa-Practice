@@ -1,0 +1,12 @@
+rumah	house
+mobil	car
+jalan	road
+sekolah	school
+buku	book
+meja	table
+kursi	chair
+pintu	door
+jendela	window
+tidur	sleep
+bangun	wake up
+pergi	go
