@@ -1,15 +1,10 @@
 import React from 'react';
-import { FlashcardGame } from './FlashcardGame/FlashcardGame';
-import { MatchingGame } from './MatchingGame/MatchingGame';
-import { GameSetupTest } from '../GameSetupTest/GameSetupTest';
-import { ClaudeTest } from '../ClaudeTest/ClaudeTest';
 import { VocabItem } from '../../interfaces/vocab';
+import GameRegistry from '../../services/gameRegistry';
 import './GameView.css';
 
-export type GameType = 'flashcards' | 'matching' | 'setup-test' | 'claude-test';
-
 interface GameViewProps {
-  gameType: GameType;
+  gameType: string;
   onBack: () => void;
   selectedWords: VocabItem[];
   config?: {
@@ -41,32 +36,27 @@ export const GameView: React.FC<GameViewProps> = ({
     // TODO: Handle game completion, save stats, etc.
   };
 
-  switch (gameType) {
-    case 'flashcards':
-      return <FlashcardGame words={selectedWords} onBack={onBack} />;
-    case 'setup-test':
-      return <GameSetupTest onBack={onBack} selectedWords={selectedWords} />;
-    case 'matching':
-      return (
-        <MatchingGame
-          words={selectedWords}
-          onBack={onBack}
-          config={config}
-          onComplete={handleGameComplete}
-        />
-      );
-    case 'claude-test':
-      return <ClaudeTest selectedVocabulary={selectedWords} />;
-    default:
-      return (
-        <div className="game-view">
-          <div className="game-header">
-            <button onClick={onBack} className="back-button">← Back</button>
-            <div className="game-info">
-              <h2>Unknown Game Type</h2>
-            </div>
+  const game = GameRegistry.getGame(gameType);
+  if (!game) {
+    return (
+      <div className="game-view">
+        <div className="game-header">
+          <button onClick={onBack} className="back-button">← Back</button>
+          <div className="game-info">
+            <h2>Unknown Game Type</h2>
           </div>
         </div>
-      );
+      </div>
+    );
   }
+
+  const GameComponent = game.component;
+  return (
+    <GameComponent
+      words={selectedWords}
+      onBack={onBack}
+      config={config}
+      onComplete={handleGameComplete}
+    />
+  );
 }; 

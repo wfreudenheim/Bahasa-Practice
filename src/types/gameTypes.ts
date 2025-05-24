@@ -3,6 +3,7 @@ export interface GameConfig {
     timeLimit: number; // in seconds
     numberOfParagraphs?: number; // optional, for story-based games
     storyComplexity?: 'easy' | 'medium' | 'hard'; // optional, for story-based games
+    customPrompt?: string; // optional, for story-based games
 }
 
 export interface GameSetupProps {
@@ -13,6 +14,7 @@ export interface GameSetupProps {
     maxWordCount?: number;
     minTimeLimit?: number;
     maxTimeLimit?: number;
+    hideSubmitButton?: boolean; // option to hide the submit button when we want to control it externally
 }
 
 export interface GameResult {
@@ -33,5 +35,5 @@ export interface TimerProps {
     shouldStop?: boolean; // Whether the timer should be forcibly stopped
 }
 
-// Update the GameType to include our test
-export type GameType = 'flashcards' | 'matching' | 'quiz' | 'setup-test'; 
+// Update the GameType to include all registered games
+export type GameType = 'flashcards' | 'matching' | 'fill-in-story' | 'setup-test' | 'claude-test'; 

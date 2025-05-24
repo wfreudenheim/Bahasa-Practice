@@ -12,6 +12,22 @@ export interface GeneratedContent {
   usedVocabulary: string[];
 }
 
+export interface FillInStoryConfig {
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  sentenceCount: number;
+  customPrompt?: string;
+  blankCount: number;
+}
+
+export interface FillInStoryResponse {
+  story: string;
+  answers: string[];
+  title: {
+    indonesian: string;
+    english: string;
+  };
+}
+
 export class ClaudeService {
   private baseUrl = 'https://api.anthropic.com/v1/messages';
 
@@ -150,5 +166,130 @@ Do not include any section markers or vocabulary lists within the conversation t
       english,
       usedVocabulary
     };
+  }
+
+  private buildFillInStoryPrompt(vocabulary: VocabItem[], config: FillInStoryConfig): string {
+    const vocabList = vocabulary.map(v => v.indonesian).join(', ');
+    const { difficulty, sentenceCount, customPrompt, blankCount } = config;
+
+    let prompt = `Create a fill-in-the-blank story in Indonesian using EXACTLY ${blankCount} words from this vocabulary list: ${vocabList}\n\n`;
+    
+    prompt += `First, provide a short title for the story in both Indonesian and English in this format:\nTITLE:\nIndonesian: (Indonesian title here)\nEnglish: (English translation here)\n\n`;
+
+    if (customPrompt) {
+      prompt += `Story context: ${customPrompt}\n\n`;
+    }
+
+    prompt += `Guidelines:
+- Write ${sentenceCount} paragraph(s)
+- Level: ${difficulty}
+- Use EXACTLY ${blankCount} words from the vocabulary list
+- For each vocabulary word you use, put it in double brackets like this: [[word]]
+- Make sure the story flows naturally and makes sense
+- Do not include any section markers or metadata within the story itself
+- Start the story immediately after the title\n`;
+
+    return prompt;
+  }
+
+  private parseFillInStoryResponse(response: any, expectedBlankCount: number): FillInStoryResponse {
+    if (!response.content || !Array.isArray(response.content) || response.content.length === 0) {
+      throw new Error('Invalid API response format');
+    }
+
+    const content = response.content[0].text;
+    console.log('Raw Claude response:', content);
+
+    // Extract title
+    const titleMatch = content.match(/TITLE:\s*Indonesian:\s*(.*?)\s*English:\s*(.*?)(?:\n|$)/s);
+    if (!titleMatch) {
+      throw new Error('Failed to parse title section');
+    }
+
+    const title = {
+      indonesian: titleMatch[1].trim(),
+      english: titleMatch[2].trim()
+    };
+
+    // Remove title section to get just the story - using a more precise pattern
+    const storyContent = content
+      .replace(/TITLE:[\s\S]*?English:.*?\n/s, '')  // Remove the TITLE block
+      .trim()  // Remove leading/trailing whitespace
+      .replace(/^\n+/, '');  // Remove any leading newlines
+
+    // Extract all words in double brackets
+    const bracketMatches = storyContent.match(/\[\[(.*?)\]\]/g) || [];
+    const answers = bracketMatches.map((match: string) => match.slice(2, -2).trim());
+
+    // Log word count difference but don't throw error
+    if (answers.length !== expectedBlankCount) {
+      console.log(`Note: Story generated with ${answers.length} words (${expectedBlankCount} were requested). Proceeding with generated story.`);
+    }
+
+    // Validate that all answers are non-empty and properly formatted
+    const invalidAnswers = answers.filter((answer: string) => !answer.trim());
+    if (invalidAnswers.length > 0) {
+      console.error('Invalid answers found:', invalidAnswers);
+      throw new Error('Invalid answers detected in response');
+    }
+
+    // Replace [[word]] with [BLANK] to maintain compatibility with existing UI
+    const story = storyContent.replace(/\[\[(.*?)\]\]/g, '[BLANK]');
+
+    return {
+      story,
+      answers,
+      title
+    };
+  }
+
+  async generateFillInStory(vocabulary: VocabItem[], config: FillInStoryConfig): Promise<FillInStoryResponse> {
+    const maxRetries = 3;
+    let lastError: Error | null = null;
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        const prompt = this.buildFillInStoryPrompt(vocabulary, config);
+        
+        const response = await fetch(this.baseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': this.getApiKey(),
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true'
+          },
+          body: JSON.stringify({
+            model: 'claude-3-haiku-20240307',
+            max_tokens: 500,
+            messages: [{
+              role: 'user',
+              content: prompt
+            }],
+            system: "Generate educational Indonesian language content with fill-in-the-blank exercises. Use double brackets [[word]] for vocabulary words."
+          })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => null);
+          throw new Error(`API request failed: ${response.statusText}${errorData ? ` - ${JSON.stringify(errorData)}` : ''}`);
+        }
+
+        const data = await response.json();
+        return this.parseFillInStoryResponse(data, config.blankCount);
+      } catch (error) {
+        console.error(`Attempt ${attempt} failed:`, error);
+        lastError = error as Error;
+        
+        if (attempt < maxRetries) {
+          console.log(`Retrying... (attempt ${attempt + 1}/${maxRetries})`);
+          continue;
+        }
+        
+        throw new Error(`Failed to generate story after ${maxRetries} attempts: ${lastError.message}`);
+      }
+    }
+
+    throw new Error('Unexpected end of generation attempts');
   }
 } 

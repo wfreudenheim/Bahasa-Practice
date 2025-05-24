@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { GameView, GameType } from '../Games/GameView';
-import { VocabItem } from '../../interfaces/vocab';
+import { GameView } from '../Games/GameView';
+import { VocabItem } from '../../types/vocabulary';
+import { GameType } from '../../types/gameTypes';
+import GameRegistry, { Game } from '../../services/gameRegistry';
 import './MainContent.css';
 
 interface MainContentProps {
@@ -18,6 +20,17 @@ export const MainContent: React.FC<MainContentProps> = ({ selectedWords }) => {
     setCurrentGame(null);
   };
 
+  const getGameDisabledReason = (game: Game): string | null => {
+    if (selectedWords.length === 0) return 'Select vocabulary words to play';
+    if (game.minWords && selectedWords.length < game.minWords) {
+      return `Requires at least ${game.minWords} words`;
+    }
+    if (game.maxWords && selectedWords.length > game.maxWords) {
+      return `Limited to ${game.maxWords} words maximum`;
+    }
+    return null;
+  };
+
   if (currentGame) {
     return (
       <GameView 
@@ -28,6 +41,12 @@ export const MainContent: React.FC<MainContentProps> = ({ selectedWords }) => {
     );
   }
 
+  // Get all games instead of just available ones
+  const allGames = GameRegistry.getAllGames();
+  const staticGames = allGames.filter(game => game.category === 'static');
+  const aiGames = allGames.filter(game => game.category === 'ai-generated');
+  const devGames = allGames.filter(game => game.category === 'development');
+
   return (
     <div className="main-content">
       <div className="welcome-section">
@@ -37,54 +56,71 @@ export const MainContent: React.FC<MainContentProps> = ({ selectedWords }) => {
         <div className="game-section">
           <h3>Static Games</h3>
           <div className="game-grid">
-            <button 
-              className="game-button flashcards"
-              onClick={() => handleGameSelect('flashcards')}
-              disabled={selectedWords.length === 0}
-            >
-              <h4>Flashcards</h4>
-              <p>Basic practice</p>
-            </button>
-            <button 
-              className="game-button matching"
-              onClick={() => handleGameSelect('matching')}
-              disabled={selectedWords.length === 0}
-            >
-              <h4>Matching</h4>
-              <p>Connect words</p>
-            </button>
+            {staticGames.map(game => {
+              const disabledReason = getGameDisabledReason(game);
+              return (
+                <button 
+                  key={game.id}
+                  className={`game-button ${game.id} ${disabledReason ? 'disabled' : ''}`}
+                  onClick={() => handleGameSelect(game.id as GameType)}
+                  disabled={!!disabledReason}
+                  title={disabledReason || ''}
+                >
+                  <h4>{game.name}</h4>
+                  <p>{game.description}</p>
+                  {disabledReason && <small className="disabled-reason">{disabledReason}</small>}
+                </button>
+              );
+            })}
           </div>
 
-          <h3>Development & Testing</h3>
-          <div className="game-grid">
-            <button 
-              className="game-button setup-test"
-              onClick={() => handleGameSelect('setup-test')}
-              disabled={selectedWords.length === 0}
-            >
-              <h4>Game Setup Test</h4>
-              <p>Test new game configuration</p>
-            </button>
-            <button 
-              className="game-button claude-test"
-              onClick={() => handleGameSelect('claude-test')}
-              disabled={selectedWords.length === 0}
-            >
-              <h4>Claude Story Generator</h4>
-              <p>Test AI story generation</p>
-            </button>
-          </div>
+          {aiGames.length > 0 && (
+            <>
+              <h3>AI-Generated Games</h3>
+              <div className="game-grid">
+                {aiGames.map(game => {
+                  const disabledReason = getGameDisabledReason(game);
+                  return (
+                    <button 
+                      key={game.id}
+                      className={`game-button ${game.id} ${disabledReason ? 'disabled' : ''}`}
+                      onClick={() => handleGameSelect(game.id as GameType)}
+                      disabled={!!disabledReason}
+                      title={disabledReason || ''}
+                    >
+                      <h4>{game.name}</h4>
+                      <p>{game.description}</p>
+                      {disabledReason && <small className="disabled-reason">{disabledReason}</small>}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
 
-          <h3>AI-Generated Games</h3>
-          <div className="game-grid">
-            <button 
-              className="game-button ai-game"
-              disabled={true}
-            >
-              <h4>Coming Soon</h4>
-              <p>AI-powered practice</p>
-            </button>
-          </div>
+          {devGames.length > 0 && (
+            <>
+              <h3>Development & Testing</h3>
+              <div className="game-grid">
+                {devGames.map(game => {
+                  const disabledReason = getGameDisabledReason(game);
+                  return (
+                    <button 
+                      key={game.id}
+                      className={`game-button ${game.id} ${disabledReason ? 'disabled' : ''}`}
+                      onClick={() => handleGameSelect(game.id as GameType)}
+                      disabled={!!disabledReason}
+                      title={disabledReason || ''}
+                    >
+                      <h4>{game.name}</h4>
+                      <p>{game.description}</p>
+                      {disabledReason && <small className="disabled-reason">{disabledReason}</small>}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
