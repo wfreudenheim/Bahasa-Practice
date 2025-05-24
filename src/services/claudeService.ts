@@ -21,12 +21,20 @@ export class ClaudeService {
   }
 
   private getApiKey(): string {
-    const apiKey = process.env.NEXT_PUBLIC_CLAUDE_API_KEY;
-    console.log('Available env vars:', process.env);
-    console.log('Claude API Key available:', !!apiKey);
+    // In Create React App, environment variables are prefixed with REACT_APP_
+    const apiKey = process.env.REACT_APP_CLAUDE_API_KEY;
+    
+    console.log('Environment Debug:');
+    console.log('Available env vars:', Object.keys(process.env).filter(key => key.startsWith('REACT_APP_')));
+    console.log('API Key exists:', !!apiKey);
     
     if (!apiKey) {
-      throw new Error('Claude API key not found. Please set NEXT_PUBLIC_CLAUDE_API_KEY in your environment variables or Vercel project settings.');
+      throw new Error(
+        'Claude API key not found. Please ensure:\n' +
+        '1. REACT_APP_CLAUDE_API_KEY is set in .env file\n' +
+        '2. The environment variable starts with REACT_APP_\n' +
+        '3. You have restarted the development server after adding the environment variable'
+      );
     }
     return apiKey;
   }
@@ -75,22 +83,26 @@ export class ClaudeService {
       hard: 'advanced'
     };
 
-    let prompt = `Use these Indonesian words: ${vocabList}\n\n`;
+    let prompt = `Create a conversation using these Indonesian words: ${vocabList}\n\n`;
     
     if (config.customPrompt) {
-      prompt += `Task: ${config.customPrompt}\n\n`;
-    } else {
-      prompt += 'Task: Create a short story\n\n';
+      prompt += `Context: ${config.customPrompt}\n\n`;
     }
 
-    prompt += `Level: ${difficultyMap[config.difficulty]}\n`;
-    prompt += `Paragraphs: ${config.paragraphs}\n\n`;
-    prompt += `Formatting Instructions:
-- Start each new line of dialogue on a new line
-- Add a blank line between different speakers
-- Keep proper spacing around punctuation marks
-- Ensure consistent paragraph breaks\n\n`;
-    prompt += `[INDONESIAN]\n[ENGLISH]\n[USED_VOCABULARY]`;
+    prompt += `Guidelines:
+- Write ${config.paragraphs} exchanges between speakers
+- Level: ${difficultyMap[config.difficulty]}
+- Format the response in exactly this structure:
+[INDONESIAN]
+(Full Indonesian conversation here)
+
+[ENGLISH]
+(Full English translation here)
+
+[USED_VOCABULARY]
+(List of used words)
+
+Do not include any section markers or vocabulary lists within the conversation text itself.`;
 
     return prompt;
   }
@@ -101,34 +113,36 @@ export class ClaudeService {
     }
 
     const content = response.content[0].text;
-    console.log('Raw Claude response:', content); // Add logging to debug
+    console.log('Raw Claude response:', content);
 
-    // More flexible section parsing
-    const sections = content.split(/\[(INDONESIAN|ENGLISH|USED_VOCABULARY)\]/i).filter(Boolean);
-    
-    if (sections.length < 3) {
-      throw new Error('Response missing required sections');
-    }
+    // Extract the main sections with more flexible matching
+    const indonesianMatch = content.match(/\[INDONESIAN\]\s*([\s\S]*?)(?=\s*\[ENGLISH\]|$)/);
+    const englishMatch = content.match(/\[ENGLISH\]\s*([\s\S]*?)(?=\s*\[USED_VOCABULARY\]|$)/);
 
-    // Find the relevant sections, allowing for more flexible ordering
-    let indonesian = '', english = '', usedVocabulary: string[] = [];
-    
-    for (let i = 0; i < sections.length; i++) {
-      const section = sections[i].trim();
-      const nextSection = sections[i + 1]?.trim() || '';
-      
-      if (section.toUpperCase() === 'INDONESIAN') {
-        indonesian = nextSection;
-      } else if (section.toUpperCase() === 'ENGLISH') {
-        english = nextSection;
-      } else if (section.toUpperCase() === 'USED_VOCABULARY') {
-        usedVocabulary = nextSection.split('\n').map((word: string) => word.trim()).filter(Boolean);
-      }
-    }
-
-    if (!indonesian || !english || !usedVocabulary.length) {
-      console.error('Parsed sections:', { indonesian, english, usedVocabulary });
+    if (!indonesianMatch || !englishMatch) {
+      console.error('Failed to parse sections. Content:', content);
       throw new Error('Failed to parse one or more required sections from Claude response');
+    }
+
+    const indonesian = indonesianMatch[1].trim();
+    const english = englishMatch[1].trim();
+
+    // Extract vocabulary from the content itself since the [USED_VOCABULARY] section might be missing
+    const usedVocabulary = Array.from(
+      new Set(
+        (content.match(/\b\w+\b/g) || [])
+          .filter((word: string) => word.length > 2) // Filter out short words
+          .filter((word: string) => {
+            // Only include words that appear in both Indonesian and English sections
+            const wordRegex = new RegExp(`\\b${word}\\b`, 'i');
+            return indonesian.match(wordRegex) && english.match(wordRegex);
+          })
+      )
+    ) as string[];
+
+    if (!indonesian || !english) {
+      console.error('Parsed sections:', { indonesian, english, usedVocabulary });
+      throw new Error('One or more required sections are empty');
     }
 
     return {
