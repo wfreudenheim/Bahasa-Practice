@@ -13,75 +13,83 @@ export interface GeneratedContent {
 }
 
 export class ClaudeService {
-  private static readonly API_KEY = process.env.NEXT_PUBLIC_CLAUDE_API_KEY;
   private baseUrl = 'https://api.anthropic.com/v1/messages';
-  private cache = new Map<string, GeneratedContent>();
-
-  constructor() {
-    if (!ClaudeService.API_KEY) {
-      throw new Error('Claude API key not found in environment variables');
-    }
-  }
 
   private calculateMaxTokens(paragraphs: number): number {
-    // Ensure enough tokens for both languages and formatting
-    return Math.min(400 + (paragraphs * 200), 1000);
+    // Estimate ~100 tokens per paragraph for each language, plus overhead
+    return Math.min(300 + (paragraphs * 200), 1000);
   }
 
-  private getCacheKey(vocabulary: VocabItem[], config: ClaudeConfig): string {
-    const vocabKey = vocabulary.map(v => v.indonesian).sort().join(',');
-    return `${vocabKey}-${config.paragraphs}-${config.difficulty}-${config.customPrompt || ''}`;
+  private getApiKey(): string {
+    const apiKey = process.env.NEXT_PUBLIC_CLAUDE_API_KEY;
+    if (!apiKey) {
+      throw new Error('Claude API key not found. Please set NEXT_PUBLIC_CLAUDE_API_KEY in your environment variables or Vercel project settings.');
+    }
+    return apiKey;
+  }
+
+  async generateStory(vocabulary: VocabItem[], config: ClaudeConfig): Promise<GeneratedContent> {
+    const prompt = this.buildPrompt(vocabulary, config);
+    
+    try {
+      const response = await fetch(this.baseUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': this.getApiKey(),
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-3-haiku-20240307',
+          max_tokens: this.calculateMaxTokens(config.paragraphs),
+          messages: [{
+            role: 'user',
+            content: prompt
+          }],
+          system: "Generate educational Indonesian language content with English translations."
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        throw new Error(`API request failed: ${response.statusText}${errorData ? ` - ${JSON.stringify(errorData)}` : ''}`);
+      }
+
+      const data = await response.json();
+      return this.parseResponse(data);
+    } catch (error) {
+      console.error('Error generating story:', error);
+      throw error;
+    }
   }
 
   private buildPrompt(vocabulary: VocabItem[], config: ClaudeConfig): string {
     const vocabList = vocabulary.map(v => v.indonesian).join(', ');
-    const level = { easy: 'basic', medium: 'intermediate', hard: 'advanced' }[config.difficulty];
+    const difficultyMap = {
+      easy: 'beginner',
+      medium: 'intermediate',
+      hard: 'advanced'
+    };
 
-    return `Create ${config.paragraphs} ${level} paragraphs using: ${vocabList}${config.customPrompt ? '\nContext: ' + config.customPrompt : ''}\n\nFormat the output with proper dialogue spacing - each new speaker should start on a new line. Add blank lines between paragraphs.\n\n[INDONESIAN]\n[ENGLISH]\n[USED_VOCABULARY]`;
-  }
-
-  async generateStory(vocabulary: VocabItem[], config: ClaudeConfig): Promise<GeneratedContent> {
-    const cacheKey = this.getCacheKey(vocabulary, config);
+    let prompt = `Use these Indonesian words: ${vocabList}\n\n`;
     
-    // Check cache first
-    const cached = this.cache.get(cacheKey);
-    if (cached) return cached;
-
-    if (!ClaudeService.API_KEY) {
-      throw new Error('Claude API key not found');
+    if (config.customPrompt) {
+      prompt += `Task: ${config.customPrompt}\n\n`;
+    } else {
+      prompt += 'Task: Create a short story\n\n';
     }
 
-    const response = await fetch(this.baseUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ClaudeService.API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      } as const,
-      body: JSON.stringify({
-        model: 'claude-3-7-sonnet-20250219',
-        max_tokens: this.calculateMaxTokens(config.paragraphs),
-        messages: [{
-          role: 'user',
-          content: this.buildPrompt(vocabulary, config)
-        }],
-        system: "Generate Indonesian educational content."
-      })
-    });
+    prompt += `Level: ${difficultyMap[config.difficulty]}\n`;
+    prompt += `Paragraphs: ${config.paragraphs}\n\n`;
+    prompt += `Formatting Instructions:
+- Start each new line of dialogue on a new line
+- Add a blank line between different speakers
+- Keep proper spacing around punctuation marks
+- Ensure consistent paragraph breaks\n\n`;
+    prompt += `[INDONESIAN]\n[ENGLISH]\n[USED_VOCABULARY]`;
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => null);
-      throw new Error(`API request failed: ${response.statusText}${errorData ? ` - ${JSON.stringify(errorData)}` : ''}`);
-    }
-
-    const data = await response.json();
-    const result = this.parseResponse(data);
-    
-    // Cache the result
-    this.cache.set(cacheKey, result);
-    
-    return result;
+    return prompt;
   }
 
   private parseResponse(response: any): GeneratedContent {
@@ -90,68 +98,34 @@ export class ClaudeService {
     }
 
     const content = response.content[0].text;
-    console.log('Raw Claude response:', content);
+    console.log('Raw Claude response:', content); // Add logging to debug
 
-    // Split into sections more reliably
-    const sections = content.split(/\[([^\]]+)\]/g).filter(Boolean);
+    // More flexible section parsing
+    const sections = content.split(/\[(INDONESIAN|ENGLISH|USED_VOCABULARY)\]/i).filter(Boolean);
     
-    // Initialize with empty values
-    let indonesian = '';
-    let english = '';
-    let usedVocabulary: string[] = [];
+    if (sections.length < 3) {
+      throw new Error('Response missing required sections');
+    }
+
+    // Find the relevant sections, allowing for more flexible ordering
+    let indonesian = '', english = '', usedVocabulary: string[] = [];
     
-    // Process each section
     for (let i = 0; i < sections.length; i++) {
-      const currentSection = sections[i].trim();
+      const section = sections[i].trim();
       const nextSection = sections[i + 1]?.trim() || '';
       
-      switch (currentSection.toUpperCase()) {
-        case 'INDONESIAN':
-          indonesian = nextSection
-            .split('\n')
-            .map((line: string) => line.trim())
-            .filter((line: string) => line.length > 0)
-            .join('\n');
-          break;
-          
-        case 'ENGLISH':
-          english = nextSection
-            .split('\n')
-            .map((line: string) => line.trim())
-            .filter((line: string) => line.length > 0)
-            .join('\n');
-          break;
-          
-        case 'USED_VOCABULARY':
-          // Extract vocabulary words more reliably
-          usedVocabulary = nextSection
-            .split(/[,\n]/) // Split by comma or newline
-            .map((word: string) => word.trim())
-            .filter((word: string) => word.length > 0);
-          
-          // If no vocabulary was explicitly listed, extract from Indonesian text
-          if (usedVocabulary.length === 0 && indonesian) {
-            usedVocabulary = indonesian
-              .split(/[\s,.!?()"\n]+/) // Split by various delimiters
-              .map((word: string) => word.trim())
-              .filter((word: string) => word.length > 0);
-          }
-          break;
+      if (section.toUpperCase() === 'INDONESIAN') {
+        indonesian = nextSection;
+      } else if (section.toUpperCase() === 'ENGLISH') {
+        english = nextSection;
+      } else if (section.toUpperCase() === 'USED_VOCABULARY') {
+        usedVocabulary = nextSection.split('\n').map((word: string) => word.trim()).filter(Boolean);
       }
     }
 
-    // Validate the parsed content
-    if (!indonesian || !english) {
+    if (!indonesian || !english || !usedVocabulary.length) {
       console.error('Parsed sections:', { indonesian, english, usedVocabulary });
-      throw new Error('Failed to parse Indonesian or English sections from response');
-    }
-
-    // Ensure we have some vocabulary
-    if (usedVocabulary.length === 0) {
-      usedVocabulary = indonesian
-        .split(/[\s,.!?()"\n]+/)
-        .map((word: string) => word.trim())
-        .filter((word: string) => word.length > 0);
+      throw new Error('Failed to parse one or more required sections from Claude response');
     }
 
     return {

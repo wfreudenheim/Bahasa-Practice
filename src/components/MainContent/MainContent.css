@@ -147,4 +147,17 @@
 
 .setup-test p {
   color: #283593;
+}
+
+.game-button.claude-test {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+}
+
+.game-button.claude-test:hover {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+}
+
+.game-button.claude-test:disabled {
+  background: #e5e7eb;
+  cursor: not-allowed;
 } 

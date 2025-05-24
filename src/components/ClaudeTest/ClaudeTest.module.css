@@ -1,0 +1,204 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+.configSection {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.configSection > div:first-child {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.configSection label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.configSection select,
+.configSection input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.customPromptLabel {
+  flex-direction: column !important;
+  width: 100%;
+}
+
+.customPromptLabel textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.promptExamples {
+  width: 100%;
+}
+
+.promptExamples p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.exampleButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.exampleButton {
+  padding: 8px 12px;
+  background: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #90caf9;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.exampleButton:hover {
+  background: #bbdefb;
+  border-color: #64b5f6;
+}
+
+.generateButton {
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  align-self: flex-start;
+  transition: all 0.2s ease;
+}
+
+.generateButton:hover:not(:disabled) {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.generateButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #dc3545;
+  margin-top: 10px;
+  padding: 10px;
+  background: #f8d7da;
+  border-radius: 4px;
+}
+
+.content {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.translationToggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+}
+
+.toggleButton {
+  padding: 8px 16px;
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.toggleButton:hover {
+  background: #e0e0e0;
+}
+
+.textColumns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.paragraph {
+  line-height: 1.4;
+  margin: 0;
+}
+
+.column {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.column.hidden {
+  display: none;
+}
+
+.textColumns:has(.hidden) {
+  grid-template-columns: 1fr;
+}
+
+.column h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.column strong {
+  background-color: #e6f3ff;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.vocabWord {
+  font-weight: 600;
+  margin: 0 1px;
+  display: inline;
+}
+
+.vocabWord.indonesian {
+  color: #0066cc;
+  background-color: rgba(230, 243, 255, 0.5);
+}
+
+.vocabWord.english {
+  color: #006600;
+  background-color: rgba(230, 255, 230, 0.5);
+} 

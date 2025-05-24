@@ -190,3 +190,35 @@ When creating a new game, follow these guidelines:
    - Implement proper cleanup
 
 For detailed implementation examples, see the GameSetupTest component in the source code.
+
+# Environment Setup
+
+## Claude API Configuration
+
+This application uses the Claude API for generating Indonesian language content. To set up your environment:
+
+1. Get your Claude API key from Anthropic
+2. Run the setup script:
+   ```bash
+   chmod +x scripts/setup-env.sh
+   ./scripts/setup-env.sh
+   ```
+   Or manually create a `.env` file with:
+   ```
+   CLAUDE_API_KEY=your_api_key_here
+   ```
+3. Never commit your `.env` file to version control
+
+The application will automatically use the API key from your environment variables.
+
+## Token Usage and Optimization
+
+The application uses Claude 3 Haiku for efficient, cost-effective content generation:
+
+- Base tokens: 300
+- Additional tokens per paragraph: 200
+- Maximum cap: 1000
+- Optimized prompt structure
+- Minimal formatting instructions
+
+This configuration balances quality and cost, typically using about 1-2 cents per request.

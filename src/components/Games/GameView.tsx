@@ -2,10 +2,11 @@ import React from 'react';
 import { FlashcardGame } from './FlashcardGame/FlashcardGame';
 import { MatchingGame } from './MatchingGame/MatchingGame';
 import { GameSetupTest } from '../GameSetupTest/GameSetupTest';
+import { ClaudeTest } from '../ClaudeTest/ClaudeTest';
 import { VocabItem } from '../../interfaces/vocab';
 import './GameView.css';
 
-export type GameType = 'flashcards' | 'matching' | 'setup-test';
+export type GameType = 'flashcards' | 'matching' | 'setup-test' | 'claude-test';
 
 interface GameViewProps {
   gameType: GameType;
@@ -54,6 +55,8 @@ export const GameView: React.FC<GameViewProps> = ({
           onComplete={handleGameComplete}
         />
       );
+    case 'claude-test':
+      return <ClaudeTest selectedVocabulary={selectedWords} />;
     default:
       return (
         <div className="game-view">
