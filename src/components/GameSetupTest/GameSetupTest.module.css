@@ -1,0 +1,72 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.backButton {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f1f5f9;
+    color: #475569;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.backButton:hover {
+    background-color: #e2e8f0;
+    transform: translateY(-1px);
+}
+
+.header h2 {
+    margin: 0;
+    color: #1e293b;
+    font-size: 1.8rem;
+}
+
+.setupSection {
+    background-color: white;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.gameSection {
+    position: relative;
+    min-height: 400px;
+}
+
+.gameStats {
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 24px;
+}
+
+.gameStats p {
+    margin: 8px 0;
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.timerSection {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 100;
+    background-color: white;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+} 

@@ -63,6 +63,18 @@ export const MainContent: React.FC<MainContentProps> = ({ selectedWords }) => {
             </button>
           </div>
 
+          <h3>Development & Testing</h3>
+          <div className="game-grid">
+            <button 
+              className="game-button setup-test"
+              onClick={() => handleGameSelect('setup-test')}
+              disabled={selectedWords.length === 0}
+            >
+              <h4>Game Setup Test</h4>
+              <p>Test new game configuration</p>
+            </button>
+          </div>
+
           <h3>AI-Generated Games</h3>
           <div className="game-grid">
             <button 

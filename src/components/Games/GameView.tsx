@@ -1,9 +1,10 @@
 import React from 'react';
 import { FlashcardGame } from './FlashcardGame/FlashcardGame';
+import { GameSetupTest } from '../GameSetupTest/GameSetupTest';
 import { VocabItem } from '../../interfaces/vocab';
 import './GameView.css';
 
-export type GameType = 'flashcards' | 'matching' | 'quiz';
+export type GameType = 'flashcards' | 'matching' | 'quiz' | 'setup-test';
 
 interface GameViewProps {
   gameType: GameType;
@@ -31,27 +32,41 @@ export const GameView: React.FC<GameViewProps> = ({
   switch (gameType) {
     case 'flashcards':
       return <FlashcardGame words={selectedWords} onBack={onBack} />;
+    case 'setup-test':
+      return <GameSetupTest onBack={onBack} selectedWords={selectedWords} />;
     case 'matching':
       return (
         <div className="game-view">
-          <h2>Matching Game</h2>
-          <p>Coming soon!</p>
-          <button onClick={onBack}>Back</button>
+          <div className="game-header">
+            <button onClick={onBack} className="back-button">← Back</button>
+            <div className="game-info">
+              <h2>Matching Game</h2>
+              <p>Coming soon!</p>
+            </div>
+          </div>
         </div>
       );
     case 'quiz':
       return (
         <div className="game-view">
-          <h2>Quiz Game</h2>
-          <p>Coming soon!</p>
-          <button onClick={onBack}>Back</button>
+          <div className="game-header">
+            <button onClick={onBack} className="back-button">← Back</button>
+            <div className="game-info">
+              <h2>Quiz Game</h2>
+              <p>Coming soon!</p>
+            </div>
+          </div>
         </div>
       );
     default:
       return (
         <div className="game-view">
-          <h2>Unknown Game Type</h2>
-          <button onClick={onBack}>Back</button>
+          <div className="game-header">
+            <button onClick={onBack} className="back-button">← Back</button>
+            <div className="game-info">
+              <h2>Unknown Game Type</h2>
+            </div>
+          </div>
         </div>
       );
   }

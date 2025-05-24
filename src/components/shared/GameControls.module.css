@@ -1,0 +1,45 @@
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.controlButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #4a90e2;
+  color: white;
+  min-width: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.controlButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.controlButton:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.paused {
+  background-color: #47b881;
+}
+
+.reset {
+  background-color: #d73a49;
+}
+
+/* Disabled state */
+.controlButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+} 

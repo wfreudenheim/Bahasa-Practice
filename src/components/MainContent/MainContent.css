@@ -135,4 +135,16 @@
 
 .fill-blanks p {
   color: #37474f;
+}
+
+.setup-test {
+  background-color: #e8eaf6;
+}
+
+.setup-test h4 {
+  color: #3f51b5;
+}
+
+.setup-test p {
+  color: #283593;
 } 
