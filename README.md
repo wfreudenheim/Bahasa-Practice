@@ -92,3 +92,101 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - [Project Roadmap](ROADMAP.md)
 - [Documentation](docs/)
+
+## Game Development Guide
+
+### Game Setup Component
+
+The GameSetup component provides a standardized configuration interface for all games. Here's how to use it:
+
+```typescript
+interface GameConfig {
+    wordCount: number;
+    timeLimit: number;
+    numberOfParagraphs?: number;
+    storyComplexity?: 'easy' | 'medium' | 'hard';
+}
+
+// Example usage in your game component:
+const YourGame: React.FC = () => {
+    const handleConfigSubmit = (config: GameConfig) => {
+        // Initialize your game with the config
+    };
+
+    return (
+        <GameSetup
+            onConfigSubmit={handleConfigSubmit}
+            defaultConfig={{
+                wordCount: 20,
+                timeLimit: 120,
+                numberOfParagraphs: 1,
+                storyComplexity: 'medium'
+            }}
+            maxWordCount={selectedWords.length} // Respects available words
+            showStoryOptions={true} // Optional for story-based games
+        />
+    );
+};
+```
+
+### Timer Component
+
+The Timer component provides a standardized timer interface with consistent positioning and styling:
+
+```typescript
+interface TimerProps {
+    duration: number;
+    mode?: 'countdown' | 'stopwatch';
+    onComplete?: () => void;
+    onTick?: (time: number) => void;
+    autoStart?: boolean;
+}
+
+// Example usage in your game component:
+const YourGame: React.FC = () => {
+    return (
+        <div className="game-container">
+            <div className="timer-section">
+                <Timer
+                    duration={120}
+                    mode="countdown"
+                    onComplete={() => handleGameComplete()}
+                    onTick={(time) => handleTimeTick(time)}
+                    autoStart={true}
+                />
+            </div>
+            {/* Your game content */}
+        </div>
+    );
+};
+```
+
+### Game Component Guidelines
+
+When creating a new game, follow these guidelines:
+
+1. Game Setup:
+   - Use the GameSetup component for configuration
+   - Respect the selected vocabulary count
+   - Provide sensible default values
+   - Include game-specific options when needed
+
+2. Timer Integration:
+   - Place timer in top-right corner
+   - Use the standard Timer component
+   - Handle timer events appropriately
+   - Implement pause/resume logic
+
+3. Layout Structure:
+   - Maintain consistent header with back navigation
+   - Keep timer visible during scrolling
+   - Use responsive design patterns
+   - Follow established styling conventions
+
+4. State Management:
+   - Track game progress
+   - Handle configuration changes
+   - Manage timer state
+   - Implement proper cleanup
+
+For detailed implementation examples, see the GameSetupTest component in the source code.
