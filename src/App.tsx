@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { VocabSet } from './interfaces/vocab';
+import { VocabSet, VocabItem } from './interfaces/vocab';
 import { Layout } from './components/Layout/Layout';
 import { VocabularySidebar } from './components/VocabularySidebar/VocabularySidebar';
 import { MainContent } from './components/MainContent/MainContent';
@@ -22,8 +22,8 @@ function App() {
     setSelectedSets(newSelectedSets);
   };
 
-  // Calculate total selected words
-  const selectedWordCount = selectedSets.reduce((sum, set) => sum + set.wordCount, 0);
+  // Get all words from selected sets
+  const selectedWords: VocabItem[] = selectedSets.flatMap(set => set.items);
 
   return (
     <div className="App">
@@ -40,7 +40,7 @@ function App() {
         }
         main={
           <MainContent 
-            selectedWordCount={selectedWordCount}
+            selectedWords={selectedWords}
           />
         }
       />

@@ -6,7 +6,19 @@ A modular, browser-based vocabulary practice application for Indonesian language
 
 - Organized vocabulary management with folder hierarchy
 - Multiple vocabulary selection and combination
-- Interactive learning games and exercises
+- Interactive learning games and exercises:
+  - Flashcard Practice Game:
+    - Randomized vocabulary presentation
+    - Toggle between Indonesian-first and English-first display
+    - Progress tracking with "Got it" / "Need practice" buttons
+    - Automatic removal of mastered words from practice set
+    - Reset functionality to restore full word set
+    - Simple card-flip animations for smooth learning experience
+    - Mobile-responsive design
+  - More games coming soon:
+    - Matching Game (Connect words)
+    - Quiz Game (Multiple choice)
+    - AI-Generated Practice Games
 - Progress tracking and spaced repetition
 - Modern, responsive user interface
 
