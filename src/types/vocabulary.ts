@@ -23,4 +23,19 @@ export interface VocabularyStructure {
     folders: VocabularyFolder[];
     totalFiles: number;
     lastLoaded: Date;
+}
+
+export interface VocabItem {
+    indonesian: string;
+    english: string;
+    source?: string;
+    id?: string;
+}
+
+export interface VocabSet {
+    name: string;
+    filename: string;
+    items: VocabItem[];
+    lastModified: Date;
+    selected: boolean;
 } 
