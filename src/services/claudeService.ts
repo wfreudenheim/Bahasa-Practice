@@ -22,7 +22,7 @@ export class ClaudeService {
 
   private getApiKey(): string {
     // In Create React App, environment variables are prefixed with REACT_APP_
-    const apiKey = process.env.REACT_APP_CLAUDE_API_KEY;
+    const apiKey = process.env.REACT_APP_CLAUDE_API;
     
     console.log('Environment Debug:');
     console.log('Available env vars:', Object.keys(process.env).filter(key => key.startsWith('REACT_APP_')));
@@ -31,7 +31,7 @@ export class ClaudeService {
     if (!apiKey) {
       throw new Error(
         'Claude API key not found. Please ensure:\n' +
-        '1. REACT_APP_CLAUDE_API_KEY is set in .env file\n' +
+        '1. REACT_APP_CLAUDE_API is set in .env file\n' +
         '2. The environment variable starts with REACT_APP_\n' +
         '3. You have restarted the development server after adding the environment variable'
       );
