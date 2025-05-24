@@ -22,6 +22,9 @@ export class ClaudeService {
 
   private getApiKey(): string {
     const apiKey = process.env.NEXT_PUBLIC_CLAUDE_API_KEY;
+    console.log('Available env vars:', process.env);
+    console.log('Claude API Key available:', !!apiKey);
+    
     if (!apiKey) {
       throw new Error('Claude API key not found. Please set NEXT_PUBLIC_CLAUDE_API_KEY in your environment variables or Vercel project settings.');
     }
