@@ -53,14 +53,6 @@ export const MainContent: React.FC<MainContentProps> = ({ selectedWords }) => {
               <h4>Matching</h4>
               <p>Connect words</p>
             </button>
-            <button 
-              className="game-button quiz"
-              onClick={() => handleGameSelect('quiz')}
-              disabled={selectedWords.length === 0}
-            >
-              <h4>Quiz</h4>
-              <p>Multiple choice</p>
-            </button>
           </div>
 
           <h3>Development & Testing</h3>

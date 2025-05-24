@@ -7,10 +7,18 @@ export const Timer: React.FC<TimerProps> = ({
     mode = 'countdown',
     onComplete,
     onTick,
-    autoStart = false
+    autoStart = false,
+    shouldStop = false
 }) => {
     const [time, setTime] = useState(mode === 'countdown' ? duration : 0);
     const [isRunning, setIsRunning] = useState(autoStart);
+
+    // Stop timer when shouldStop becomes true
+    useEffect(() => {
+        if (shouldStop && isRunning) {
+            setIsRunning(false);
+        }
+    }, [shouldStop]);
 
     const formatTime = (seconds: number): string => {
         const minutes = Math.floor(seconds / 60);
@@ -59,7 +67,7 @@ export const Timer: React.FC<TimerProps> = ({
     useEffect(() => {
         let intervalId: NodeJS.Timeout;
 
-        if (isRunning) {
+        if (isRunning && !shouldStop) {
             intervalId = setInterval(tick, 1000);
         }
 
@@ -68,10 +76,12 @@ export const Timer: React.FC<TimerProps> = ({
                 clearInterval(intervalId);
             }
         };
-    }, [isRunning, tick]);
+    }, [isRunning, shouldStop, tick]);
 
     const toggleTimer = () => {
-        setIsRunning(prev => !prev);
+        if (!shouldStop) {
+            setIsRunning(prev => !prev);
+        }
     };
 
     const resetTimer = () => {
@@ -91,12 +101,14 @@ export const Timer: React.FC<TimerProps> = ({
                 <button 
                     className={`${styles.controlButton} ${isRunning ? styles.pause : styles.play}`}
                     onClick={toggleTimer}
+                    disabled={shouldStop}
                 >
                     {isRunning ? 'Pause' : 'Resume'}
                 </button>
                 <button 
                     className={`${styles.controlButton} ${styles.reset}`}
                     onClick={resetTimer}
+                    disabled={shouldStop}
                 >
                     Reset
                 </button>

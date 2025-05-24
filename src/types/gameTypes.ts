@@ -15,6 +15,13 @@ export interface GameSetupProps {
     maxTimeLimit?: number;
 }
 
+export interface GameResult {
+    score: number;
+    matches: number;
+    attempts: number;
+    timeUsed: number;
+}
+
 export type TimerMode = 'countdown' | 'stopwatch';
 
 export interface TimerProps {
@@ -23,6 +30,7 @@ export interface TimerProps {
     onComplete?: () => void;
     onTick?: (remainingTime: number) => void;
     autoStart?: boolean;
+    shouldStop?: boolean; // Whether the timer should be forcibly stopped
 }
 
 // Update the GameType to include our test
