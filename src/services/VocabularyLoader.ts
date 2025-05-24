@@ -1,34 +1,48 @@
 import { VocabularyStructure, VocabularyFolder, VocabularyFile, VocabularyWord } from '../types/vocabulary';
 
-// Predefined structure for initial development
-const VOCABULARY_STRUCTURE = {
-    'week01': ['basic_greetings.txt', 'numbers_1_10.txt'],
-    'themes': ['beach_vacation.txt'],
-};
-
 export class VocabularyLoader {
     private structure: VocabularyStructure | null = null;
+
+    private async fetchDirectoryStructure(path: string): Promise<string[]> {
+        try {
+            const response = await fetch(`${path}/index.json`);
+            if (!response.ok) {
+                throw new Error(`Failed to load directory structure: ${path}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error loading directory structure:', error);
+            return [];
+        }
+    }
 
     async scanVocabularyStructure(): Promise<VocabularyStructure> {
         const folders: VocabularyFolder[] = [];
         let totalFiles = 0;
 
-        for (const [folderName, files] of Object.entries(VOCABULARY_STRUCTURE)) {
-            const folder: VocabularyFolder = {
-                name: folderName,
-                path: `/vocabulary/${folderName}`,
-                files: files.map(filename => ({
-                    name: filename,
-                    path: `/vocabulary/${folderName}/${filename}`,
-                    words: [],
-                    wordCount: 0,
-                    loaded: false
-                })),
-                subfolders: []
-            };
+        // Known folder names
+        const knownFolders = ['week01', 'week02', 'themes', 'advanced'];
+
+        for (const folderName of knownFolders) {
+            const files = await this.fetchDirectoryStructure(`/vocabulary/${folderName}`);
             
-            totalFiles += files.length;
-            folders.push(folder);
+            if (files.length > 0) {
+                const folder: VocabularyFolder = {
+                    name: folderName,
+                    path: `/vocabulary/${folderName}`,
+                    files: files.map(filename => ({
+                        name: filename,
+                        path: `/vocabulary/${folderName}/${filename}`,
+                        words: [],
+                        wordCount: 0,
+                        loaded: false
+                    })),
+                    subfolders: []
+                };
+                
+                totalFiles += files.length;
+                folders.push(folder);
+            }
         }
 
         this.structure = {

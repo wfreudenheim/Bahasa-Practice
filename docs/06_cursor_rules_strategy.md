@@ -511,3 +511,274 @@ metadata:
    - Use callback props for navigation
    - Maintain consistent prop naming
    - Handle edge cases (no words selected, etc.)
+
+## Environment Variables and API Integration Lessons
+
+### Environment Variable Rules
+1. **Naming Conventions**
+   - Use platform-appropriate prefixes (e.g., `REACT_APP_` for Create React App)
+   - Avoid problematic terms like "KEY" in variable names on certain platforms
+   - Keep names simple and clear
+   - Maintain exact name matching between local and deployment environments
+
+2. **Debugging Strategy**
+   - Start with environment variable availability check
+   - Log both existence and type of variables
+   - Use environment-specific error messages
+   - Include platform-specific troubleshooting steps
+
+### Claude API Integration Rules
+1. **Prompt Structure**
+   - Always provide explicit formatting instructions
+   - Include examples of desired output format
+   - Specify what NOT to do
+   - Use clear section markers
+
+2. **Response Parsing**
+   - Use non-greedy regex patterns for section extraction
+   - Implement fallback strategies for optional sections
+   - Validate both input and output formats
+   - Handle edge cases gracefully
+
+3. **Error Handling**
+   - Log raw responses before parsing
+   - Include actionable error messages
+   - Add debugging checkpoints
+   - Consider environment-specific scenarios
+
+### Best Practices Checklist
+- [ ] Environment variables properly prefixed
+- [ ] Variable names platform-compatible
+- [ ] Debugging logs implemented
+- [ ] Structured prompt format defined
+- [ ] Response parsing handles edge cases
+- [ ] Error messages are actionable
+- [ ] Fallback strategies implemented
+- [ ] Local and deployment environments matched
+
+## Claude API Prompt Engineering Rules
+
+### Prompt Structure Rule
+```markdown
+---
+description: Claude API Prompt Structure
+globs: src/services/**/*claude*.ts, src/services/**/*ai*.ts
+---
+# Claude API Prompt Engineering
+
+Enforces consistent and reliable prompt structures for Claude API interactions.
+
+<rule>
+name: claude_prompt_structure
+description: Standard prompt structure for Claude API
+filters:
+  - type: content
+    pattern: "buildPrompt|generatePrompt|claude"
+
+actions:
+  - type: enforce_structure
+    template: |
+      // Always structure prompts with these sections:
+      const prompt = `
+      Context:
+      ${contextData}
+
+      Task Description:
+      ${taskDescription}
+
+      Output Format:
+      ${formatExample}
+
+      ${examples ? `Examples:\n${examples}\n` : ''}
+      
+      Requirements:
+      ${requirements.map(r => `- ${r}`).join('\n')}
+
+      Important Notes:
+      - Keep section markers exactly as shown: [SECTION_NAME]
+      - Do not include section markers within content
+      - Maintain consistent formatting
+      `;
+
+  - type: suggest
+    message: |
+      Prompts must follow this structure:
+      1. Context first - set the stage
+      2. Clear task description
+      3. Exact output format with examples
+      4. Explicit requirements
+      5. Important notes/constraints
+
+metadata:
+  priority: critical
+  version: 1.0
+</rule>
+```
+
+### Response Parsing Rule
+```markdown
+---
+description: Claude API Response Parsing
+globs: src/services/**/*claude*.ts
+---
+# Claude Response Parsing
+
+Standardizes parsing of Claude API responses.
+
+<rule>
+name: claude_response_parsing
+description: Robust response parsing for Claude API
+filters:
+  - type: content
+    pattern: "parseResponse|extractContent"
+
+actions:
+  - type: enforce_pattern
+    template: |
+      // Use non-greedy patterns for section extraction
+      const sectionPattern = /\[${sectionName}\]\s*([\s\S]*?)(?=\s*\[|$)/;
+      
+      // Always include fallback strategies
+      const fallbackContent = content.match(/\b\w+\b/g)
+        ?.filter(word => isRelevant(word))
+        ?? defaultValue;
+      
+      // Validate and clean responses
+      const cleanedContent = content
+        .replace(/\[.*?\](?!\s*\n)/g, '')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+
+  - type: suggest
+    message: |
+      Response parsing must:
+      1. Use non-greedy regex patterns
+      2. Include fallback strategies
+      3. Clean and validate content
+      4. Handle missing sections gracefully
+
+metadata:
+  priority: high
+  version: 1.0
+</rule>
+```
+
+### Prompt Templates Rule
+```markdown
+---
+description: Claude API Prompt Templates
+globs: src/services/**/*prompt*.ts
+---
+# Prompt Templates System
+
+Maintains a library of tested prompt templates.
+
+<rule>
+name: prompt_templates
+description: Standard templates for common prompt types
+filters:
+  - type: file_path
+    pattern: ".*prompt.*\\.ts$"
+
+actions:
+  - type: enforce_templates
+    templates:
+      conversation: |
+        Context:
+        - Level: ${level}
+        - Style: Natural dialogue
+        - Speakers: ${speakers}
+        
+        Task:
+        Create a conversation using these words: ${vocabList}
+        
+        Format:
+        [INDONESIAN]
+        Speaker1: (text)
+        Speaker2: (response)
+        
+        [ENGLISH]
+        (Translations)
+        
+        Requirements:
+        - Natural flow
+        - Use required words
+        - Match translations
+        - Consistent difficulty
+
+      story: |
+        Context:
+        - Theme: ${theme}
+        - Length: ${paragraphs} paragraphs
+        - Style: Narrative
+        
+        Task:
+        Write a story incorporating: ${vocabList}
+        
+        Format:
+        [INDONESIAN]
+        (Story text)
+        
+        [ENGLISH]
+        (Translation)
+        
+        Requirements:
+        - Coherent narrative
+        - Use required words
+        - Aligned paragraphs
+        - Consistent style
+
+  - type: suggest
+    message: |
+      Use these template patterns for:
+      1. Conversation generation
+      2. Story creation
+      3. Exercise generation
+      4. Vocabulary practice
+
+metadata:
+  priority: high
+  version: 1.0
+</rule>
+```
+
+### Learned Best Practices
+
+1. **Prompt Structure**
+   - Start with clear context
+   - Provide explicit format instructions
+   - Include examples for complex formats
+   - List specific requirements
+   - State what NOT to do
+
+2. **Response Parsing**
+   - Use non-greedy regex patterns
+   - Implement fallback strategies
+   - Clean and validate responses
+   - Handle missing sections
+   - Log raw responses for debugging
+
+3. **Error Prevention**
+   - Validate input before sending
+   - Check response structure
+   - Clean malformed responses
+   - Provide fallback content
+   - Log parsing steps
+
+4. **Template Management**
+   - Create reusable templates
+   - Test templates thoroughly
+   - Version control templates
+   - Document template usage
+   - Include example outputs
+
+### Implementation Checklist
+
+- [ ] Use PromptBuilder for consistent structure
+- [ ] Implement ResponseValidator
+- [ ] Create template library
+- [ ] Add fallback strategies
+- [ ] Include debugging logs
+- [ ] Test edge cases
+- [ ] Document prompt patterns
+- [ ] Version control templates

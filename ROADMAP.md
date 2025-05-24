@@ -36,10 +36,13 @@ A modular, browser-based vocabulary practice application for Indonesian language
   - [x] Automatic file discovery and loading
   - [x] Folder hierarchy display
   - [x] File preview and selection
+  - [x] Automated vocabulary processing on startup
+  - [x] Dynamic index generation for vocabulary files
 - [x] Implement vocabulary loading service
   - [x] File parsing and validation
   - [x] Error handling
   - [x] Word count tracking
+  - [x] Automatic public directory synchronization
 - [x] Create game framework interface
   - [x] Implement GameView component base
   - [x] Add game state management
@@ -159,18 +162,28 @@ A modular, browser-based vocabulary practice application for Indonesian language
    - Use clear folder hierarchy
    - Follow naming conventions
    - Include metadata in files
+   - Files automatically processed on server start
 
 2. File Format
    - Use tab-separated values
    - One word pair per line
    - UTF-8 encoding required
    - No empty lines or comments
+   - Files must be .txt format
 
 3. Folder Structure
-   - Organize by difficulty level
+   - Organize by difficulty level (week01, week02, etc.)
    - Group by themes
    - Support nested categories
    - Clear naming scheme
+   - Automatic index generation for each directory
+
+4. Automated Processing
+   - Files automatically copied to public directory
+   - Index files generated on server start
+   - Dynamic loading of new vocabulary files
+   - No manual file copying required
+   - Instant updates via npm run update-vocab
 
 ### State Management
 1. Controlled Components

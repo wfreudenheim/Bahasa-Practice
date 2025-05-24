@@ -1,0 +1,25 @@
+mandi	to bathe
+sikat gigi	to brush teeth
+sabun	soap
+shampo	shampoo
+handuk	towel
+pasta gigi	toothpaste
+sikat	brush
+sisir	comb
+cermin	mirror
+tissue	tissue
+parfum	perfume
+deodorant	deodorant
+lotion	lotion
+sunscreen	sunscreen
+make up	makeup
+lipstik	lipstick
+bedak	powder
+kamar mandi	bathroom
+toilet	toilet
+wastafel	sink
+shower	shower
+air panas	hot water
+air dingin	cold water
+bersih	clean
+kotor	dirty

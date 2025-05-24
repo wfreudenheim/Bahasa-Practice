@@ -1,0 +1,25 @@
+sakit	sick/pain
+sehat	healthy
+obat	medicine
+dokter	doctor
+rumah sakit	hospital
+apotek	pharmacy
+demam	fever
+flu	flu
+batuk	cough
+pilek	cold/runny nose
+pusing	dizzy
+mual	nauseous
+lelah	tired
+lemah	weak
+kuat	strong
+fit	fit
+olahraga	exercise
+istirahat	rest
+tidur	sleep
+bangun	wake up
+vitamin	vitamin
+periksa	check/examine
+alergi	allergy
+luka	wound
+sakit kepala	headache

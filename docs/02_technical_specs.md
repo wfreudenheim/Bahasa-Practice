@@ -322,6 +322,211 @@ CLAUDE_API_KEY=your_claude_api_key_here
 - Optimized prompt structure for minimal token usage
 - Proper formatting instructions for consistent output
 
+## Claude API Prompt Engineering
+
+### Prompt Structure Best Practices
+```typescript
+interface PromptConfig {
+  format: string;
+  examples?: string[];
+  constraints: string[];
+  contextData: any;
+}
+
+class PromptBuilder {
+  static buildStructuredPrompt(config: PromptConfig): string {
+    return `
+${config.contextData ? `Context:\n${JSON.stringify(config.contextData, null, 2)}\n\n` : ''}
+Task Description:
+${config.format}
+
+Output Format:
+[SECTION1]
+(Content for section 1)
+
+[SECTION2]
+(Content for section 2)
+
+${config.examples ? `Examples:\n${config.examples.join('\n\n')}\n\n` : ''}
+Requirements:
+${config.constraints.map(c => `- ${c}`).join('\n')}
+
+Important:
+- Keep section markers exactly as shown
+- Do not nest section markers
+- Do not include metadata within content
+- Maintain consistent formatting
+`;
+  }
+}
+
+// Example Usage:
+const prompt = PromptBuilder.buildStructuredPrompt({
+  format: "Create a conversation using these Indonesian words: ${vocabList}",
+  examples: [
+    "[INDONESIAN]\nHalo, apa kabar?\n\n[ENGLISH]\nHello, how are you?"
+  ],
+  constraints: [
+    "Use natural, conversational language",
+    "Include all required vocabulary words",
+    "Maintain consistent difficulty level",
+    "Keep sections clearly separated"
+  ],
+  contextData: {
+    difficulty: "beginner",
+    requiredWords: ["laut", "pantai"],
+    style: "casual conversation"
+  }
+});
+```
+
+### Response Format Guidelines
+```typescript
+interface SectionConfig {
+  name: string;
+  required: boolean;
+  pattern: RegExp;
+  fallback?: (content: string) => string[];
+}
+
+const sectionConfigs: SectionConfig[] = [
+  {
+    name: 'INDONESIAN',
+    required: true,
+    pattern: /\[INDONESIAN\]\s*([\s\S]*?)(?=\s*\[|$)/,
+  },
+  {
+    name: 'ENGLISH',
+    required: true,
+    pattern: /\[ENGLISH\]\s*([\s\S]*?)(?=\s*\[|$)/,
+  },
+  {
+    name: 'USED_VOCABULARY',
+    required: false,
+    pattern: /\[USED_VOCABULARY\]\s*([\s\S]*?)(?=\s*\[|$)/,
+    fallback: (content: string) => {
+      // Extract words that appear in both languages
+      const words = content.match(/\b\w+\b/g) || [];
+      return words.filter(word => 
+        content.toLowerCase().includes(word.toLowerCase())
+      );
+    }
+  }
+];
+```
+
+### Prompt Templates by Use Case
+
+#### 1. Conversation Generation
+```typescript
+const conversationPrompt = `
+Context:
+- Vocabulary Level: ${level}
+- Required Words: ${vocabList}
+- Style: Natural dialogue
+- Speakers: Tourist and Local
+
+Format your response exactly like this:
+[INDONESIAN]
+Speaker1: (Indonesian text)
+Speaker2: (Indonesian response)
+
+[ENGLISH]
+Speaker1: (English translation)
+Speaker2: (English translation)
+
+[USED_VOCABULARY]
+word1, word2, word3
+
+Requirements:
+- Use natural conversational flow
+- Include all required vocabulary
+- Keep translations accurately matched
+- Maintain consistent difficulty
+- Do not include section markers in the content
+`;
+```
+
+#### 2. Story Generation
+```typescript
+const storyPrompt = `
+Context:
+- Theme: ${theme}
+- Required Words: ${vocabList}
+- Length: ${paragraphCount} paragraphs
+- Style: Descriptive narrative
+
+Format your response exactly like this:
+[INDONESIAN]
+(Full Indonesian story text)
+
+[ENGLISH]
+(Full English translation)
+
+[USED_VOCABULARY]
+word1, word2, word3
+
+Requirements:
+- Create a coherent narrative
+- Use descriptive language
+- Include all required vocabulary
+- Keep paragraphs aligned between languages
+- Maintain consistent formatting
+`;
+```
+
+### Error Recovery Strategies
+```typescript
+class ResponseValidator {
+  static validateResponse(content: string, configs: SectionConfig[]): boolean {
+    return configs.every(config => {
+      if (!config.required) return true;
+      const match = content.match(config.pattern);
+      return match && match[1].trim().length > 0;
+    });
+  }
+
+  static recoverMissingSection(content: string, config: SectionConfig): string {
+    if (config.fallback) {
+      return config.fallback(content).join(', ');
+    }
+    throw new Error(`Required section [${config.name}] is missing`);
+  }
+
+  static cleanupResponse(content: string): string {
+    return content
+      .replace(/\[.*?\](?!\s*\n)/g, '') // Remove inline markers
+      .replace(/\n{3,}/g, '\n\n')      // Normalize spacing
+      .trim();
+  }
+}
+```
+
+### Prompt Optimization Tips
+1. **Clear Section Boundaries**
+   - Use distinct markers: [SECTION_NAME]
+   - Add newlines between sections
+   - Avoid nested markers
+   - Use consistent capitalization
+
+2. **Error Prevention**
+   - Explicitly state what NOT to do
+   - Provide example formats
+   - Include validation requirements
+   - Specify exact marker syntax
+
+3. **Content Structure**
+   - Start with context/requirements
+   - Show exact format expected
+   - Include examples if complex
+   - List specific constraints
+
+4. **Recovery Mechanisms**
+   - Implement fallback strategies
+   - Include content validation
+   - Clean up malformed responses
+   - Handle missing sections gracefully
+
 ## Styling Guidelines
 
 ### CSS Module Structure
@@ -545,3 +750,61 @@ describe('FlashcardGame', () => {
 - Optimize imports (avoid importing entire libraries)
 - Use production builds for deployment
 - Implement code splitting at game level
+
+## Environment Variables and API Integration
+
+### Create React App Environment Variables
+- Always use `REACT_APP_` prefix for all environment variables
+- Avoid using "KEY" in environment variable names when deploying to Vercel
+- Use simple, clear names (e.g., `REACT_APP_CLAUDE_API` instead of `REACT_APP_CLAUDE_API_KEY`)
+- Local `.env` file must exactly match Vercel environment variables
+
+### Environment Variable Debugging
+```typescript
+// Effective debugging in services
+console.log('Environment Debug:');
+console.log('Available env vars:', Object.keys(process.env).filter(key => key.startsWith('REACT_APP_')));
+console.log('API exists:', !!process.env.REACT_APP_CLAUDE_API);
+console.log('API type:', typeof process.env.REACT_APP_CLAUDE_API);
+```
+
+### Claude API Integration Best Practices
+
+#### Structured Response Format
+```typescript
+// Example prompt structure
+const prompt = `Guidelines:
+- Write ${config.paragraphs} exchanges between speakers
+- Level: ${difficultyMap[config.difficulty]}
+- Format the response in exactly this structure:
+[INDONESIAN]
+(Full Indonesian content here)
+
+[ENGLISH]
+(Full English translation here)
+
+[USED_VOCABULARY]
+(List of used words)
+
+Do not include any section markers or metadata within the content itself.`;
+```
+
+#### Response Parsing
+```typescript
+// Robust section extraction
+const indonesianMatch = content.match(/\[INDONESIAN\]\s*([\s\S]*?)(?=\s*\[ENGLISH\]|$)/);
+const englishMatch = content.match(/\[ENGLISH\]\s*([\s\S]*?)(?=\s*\[USED_VOCABULARY\]|$)/);
+
+// Handle optional sections gracefully
+const vocabMatch = content.match(/\[USED_VOCABULARY\]\s*([\s\S]*?)$/);
+const usedVocabulary = vocabMatch 
+  ? vocabMatch[1].split(/[,\n]/).map(word => word.trim()).filter(Boolean)
+  : extractVocabFromContent(content); // Fallback strategy
+```
+
+### Error Handling
+- Include descriptive error messages with specific fix instructions
+- Add debugging checkpoints for complex operations
+- Consider environment-specific error messages
+- Validate both input and output formats
+- Handle edge cases (missing sections, incomplete responses)

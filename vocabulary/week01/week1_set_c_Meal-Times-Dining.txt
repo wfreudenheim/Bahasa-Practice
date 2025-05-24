@@ -1,0 +1,25 @@
+sarapan	breakfast
+makan siang	lunch
+makan malam	dinner
+makan	to eat
+lapar	hungry
+kenyang	full/satisfied
+restoran	restaurant
+warung	food stall
+rumah makan	eating house
+cafe	cafe
+menu	menu
+pesan	to order
+bayar	to pay
+harga	price
+murah	cheap
+mahal	expensive
+enak	delicious
+lezat	tasty
+pedas	spicy
+gurih	savory
+pelayan	waiter/waitress
+meja	table
+kursi	chair
+piring	plate
+sendok	spoon
