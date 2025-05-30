@@ -4,6 +4,7 @@ import { MatchingGame } from '../components/Games/MatchingGame/MatchingGame';
 import { FillInStoryGame } from '../components/Games/FillInStory/FillInStoryGame';
 import { GameSetupTest } from '../components/GameSetupTest/GameSetupTest';
 import { ClaudeTest } from '../components/ClaudeTest/ClaudeTest';
+import { ExternalFillBlanks } from '../components/Games/ExternalFillBlanks/ExternalFillBlanks';
 
 export interface Game {
   id: string;
@@ -13,7 +14,8 @@ export interface Game {
   requiresAI?: boolean;
   minWords?: number;
   maxWords?: number;
-  category: 'static' | 'ai-generated' | 'hybrid' | 'development';
+  category: 'static' | 'ai-generated' | 'hybrid' | 'development' | 'external';
+  requiresVocabulary?: boolean;
 }
 
 class GameRegistry {
@@ -107,6 +109,17 @@ GameRegistry.register({
   category: 'development',
   minWords: 1,
   requiresAI: true
+});
+
+// Register external content game
+GameRegistry.register({
+  id: 'external-fill-blanks',
+  name: 'Fill in the Blanks',
+  description: 'Practice with custom fill-in-the-blank exercises',
+  component: ExternalFillBlanks,
+  category: 'external',
+  minWords: 0,
+  requiresVocabulary: false
 });
 
 export default GameRegistry; 

@@ -36,4 +36,4 @@ export interface TimerProps {
 }
 
 // Update the GameType to include all registered games
-export type GameType = 'flashcards' | 'matching' | 'fill-in-story' | 'setup-test' | 'claude-test'; 
+export type GameType = 'flashcards' | 'matching' | 'fill-in-story' | 'setup-test' | 'claude-test' | 'external-fill-blanks'; 

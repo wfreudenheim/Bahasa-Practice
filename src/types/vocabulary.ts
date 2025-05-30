@@ -1,7 +1,8 @@
 export interface VocabItem {
     indonesian: string;
     english: string;
-    notes?: string;
+    source?: string;
+    id?: string;
 }
 
 export interface VocabularyWord {
@@ -32,12 +33,11 @@ export interface VocabularyStructure {
 }
 
 export interface VocabSet {
-    id: string;
+    name: string;
     filename: string;
     items: VocabItem[];
-    wordCount: number;
-    dateAdded: Date;
-    path?: string;
+    lastModified: Date;
+    selected: boolean;
 }
 
 export interface VocabFolder {

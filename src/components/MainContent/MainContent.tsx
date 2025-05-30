@@ -21,6 +21,10 @@ export const MainContent: React.FC<MainContentProps> = ({ selectedWords }) => {
   };
 
   const getGameDisabledReason = (game: Game): string | null => {
+    // If the game doesn't require vocabulary, it's always enabled
+    if (game.requiresVocabulary === false) return null;
+    
+    // For all other games, check vocabulary requirements
     if (selectedWords.length === 0) return 'Select vocabulary words to play';
     if (game.minWords && selectedWords.length < game.minWords) {
       return `Requires at least ${game.minWords} words`;
@@ -46,6 +50,7 @@ export const MainContent: React.FC<MainContentProps> = ({ selectedWords }) => {
   const staticGames = allGames.filter(game => game.category === 'static');
   const aiGames = allGames.filter(game => game.category === 'ai-generated');
   const devGames = allGames.filter(game => game.category === 'development');
+  const externalGames = allGames.filter(game => game.category === 'external');
 
   return (
     <div className="main-content">
@@ -79,6 +84,30 @@ export const MainContent: React.FC<MainContentProps> = ({ selectedWords }) => {
               <h3>AI-Generated Games</h3>
               <div className="game-grid">
                 {aiGames.map(game => {
+                  const disabledReason = getGameDisabledReason(game);
+                  return (
+                    <button 
+                      key={game.id}
+                      className={`game-button ${game.id} ${disabledReason ? 'disabled' : ''}`}
+                      onClick={() => handleGameSelect(game.id as GameType)}
+                      disabled={!!disabledReason}
+                      title={disabledReason || ''}
+                    >
+                      <h4>{game.name}</h4>
+                      <p>{game.description}</p>
+                      {disabledReason && <small className="disabled-reason">{disabledReason}</small>}
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          )}
+
+          {externalGames.length > 0 && (
+            <>
+              <h3>External Content Games</h3>
+              <div className="game-grid">
+                {externalGames.map(game => {
                   const disabledReason = getGameDisabledReason(game);
                   return (
                     <button 

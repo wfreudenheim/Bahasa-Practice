@@ -1,5 +1,5 @@
 import React from 'react';
-import { VocabItem } from '../../interfaces/vocab';
+import { VocabItem } from '../../types/vocabulary';
 import GameRegistry from '../../services/gameRegistry';
 import './GameView.css';
 
@@ -19,7 +19,22 @@ export const GameView: React.FC<GameViewProps> = ({
   selectedWords,
   config = { wordCount: 10, timeLimit: 120 }
 }) => {
-  if (selectedWords.length === 0) {
+  const game = GameRegistry.getGame(gameType);
+  if (!game) {
+    return (
+      <div className="game-view">
+        <div className="game-header">
+          <button onClick={onBack} className="back-button">← Back</button>
+          <div className="game-info">
+            <h2>Unknown Game Type</h2>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Only show the "no words selected" message if the game requires vocabulary
+  if (game.requiresVocabulary !== false && selectedWords.length === 0) {
     return (
       <div className="game-view empty-state">
         <h2>No Words Selected</h2>
@@ -35,20 +50,6 @@ export const GameView: React.FC<GameViewProps> = ({
     console.log('Game completed:', result);
     // TODO: Handle game completion, save stats, etc.
   };
-
-  const game = GameRegistry.getGame(gameType);
-  if (!game) {
-    return (
-      <div className="game-view">
-        <div className="game-header">
-          <button onClick={onBack} className="back-button">← Back</button>
-          <div className="game-info">
-            <h2>Unknown Game Type</h2>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   const GameComponent = game.component;
   return (

@@ -138,6 +138,48 @@ A modular, browser-based vocabulary practice application for Indonesian language
 - [ ] Progress tracking
 - [ ] Statistics visualization
 
+## External Content Fill-in-the-Blanks Game Implementation
+
+### Phase 1: Setup and Parsing ✅
+- [x] Create new game category "external" in game registry
+- [x] Create ExternalFillBlanks component file structure
+- [x] Implement content parsing logic
+- [x] Test parsing with sample data
+
+### Phase 2: Game Setup Interface (In Progress)
+- [ ] Create content input textarea
+- [ ] Add time-per-question configuration
+- [ ] Implement preview functionality
+- [ ] Test setup flow completely
+
+### Phase 3: Game Logic Implementation (Pending)
+- [ ] Implement continuous timer
+- [ ] Create question navigation
+- [ ] Add answer input handling
+- [ ] Test game flow thoroughly
+
+### Phase 4: Results and Integration (Pending)
+- [ ] Implement scoring by total blanks
+- [ ] Create results display
+- [ ] Register with game system
+- [ ] Full integration testing
+
+### Technical Requirements
+- Support for numbered lists with [[answer]] format
+- Case-insensitive answer matching
+- Continuous timer for entire question set
+- Score tracking by individual blanks
+- Preview mode for content validation
+- No vocabulary requirement (minWords: 0)
+
+### Success Criteria
+- Game appears in launcher under "External" category
+- Content parsing works reliably with numbered lists
+- Timer runs continuously for calculated total time
+- Scoring reflects correct blanks out of total blanks
+- Results show detailed breakdown of performance
+- No existing game functionality is affected
+
 ## Technical Debt & Optimization
 
 ### Code Quality ⏳
