@@ -184,6 +184,131 @@ GameRegistry.register({
    - Clear error messages
    - Smooth transitions
 
+## Key Learnings from Retrieval Rush Implementation
+
+### 1. Multi-Phase Prompt Engineering
+
+#### Best Practices
+- Split complex game flows into distinct prompt types (e.g., generation, analysis)
+- Use separate system prompts for each phase
+- Include example outputs in prompts
+- Make cultural context optional and only when relevant
+- Structure prompts for consistent JSON responses
+
+```typescript
+// Example: Structured prompt with clear sections
+const buildAnalysisPrompt = (prompt: string, response: string) => `
+Analyze this response with these sections:
+1. Strengths (with specific examples)
+2. Grammar Corrections (with explanations)
+3. Areas for Improvement (actionable suggestions)
+4. Cultural Tips (only if relevant)
+5. Suggested Vocabulary (with context)
+
+Format as JSON:
+{
+  "strengths": ["specific examples"],
+  "grammarCorrections": [{
+    "original": "text",
+    "corrected": "text",
+    "explanation": "text"
+  }],
+  // ... other sections
+}`;
+```
+
+### 2. Response Validation & Error Handling
+
+#### Improved Validation Strategy
+- Validate both structure and content of AI responses
+- Implement retry mechanisms with enhanced prompts
+- Use type checking for response parsing
+- Handle optional sections gracefully
+
+```typescript
+const validateResponse = (response: any): AnalysisResponse => {
+  // Required sections
+  if (!response.strengths || !Array.isArray(response.strengths)) {
+    throw new Error('Invalid strengths format');
+  }
+  
+  // Optional sections
+  if (response.culturalTips && !Array.isArray(response.culturalTips)) {
+    throw new Error('Invalid cultural tips format');
+  }
+  
+  return response;
+};
+```
+
+### 3. Progressive Enhancement
+
+#### Implementation Pattern
+- Start with core functionality
+- Add complexity progressively
+- Maintain fallback options
+- Use feature flags for experimental features
+
+```typescript
+interface GameState {
+  phase: GamePhase;
+  features: {
+    culturalTips: boolean;
+    audioRecording?: boolean;
+    timerEnabled: boolean;
+  };
+  // ... other state
+}
+```
+
+### 4. User Experience Considerations
+
+#### Feedback Loop Design
+- Provide immediate feedback during generation
+- Show clear loading states
+- Handle errors gracefully with retry options
+- Maintain context between game phases
+
+```typescript
+const handleGeneratePrompts = async () => {
+  setGameState(prev => ({ ...prev, loading: true }));
+  try {
+    const prompts = await generatePrompts();
+    setGameState(prev => ({
+      ...prev,
+      prompts,
+      phase: 'selection',
+      loading: false
+    }));
+  } catch (error) {
+    setGameState(prev => ({
+      ...prev,
+      error: 'Failed to generate prompts',
+      loading: false,
+      retryAvailable: true
+    }));
+  }
+};
+```
+
+## Best Practices Established
+
+### 3. AI Integration Patterns
+- Use structured JSON for all AI responses
+- Implement robust parsing with fallbacks
+- Cache responses when appropriate
+- Handle rate limiting gracefully
+- Provide specific examples in prompts
+- Make cultural context optional
+- Focus on actionable feedback
+
+### 4. Error Recovery
+- Implement retry mechanisms
+- Enhance prompts on retry
+- Maintain state during retries
+- Provide clear error messages
+- Log errors for debugging
+
 ## Future Game Development Checklist
 
 1. [ ] Review this guide

@@ -1,4 +1,5 @@
 import { VocabItem } from '../types/vocabulary';
+import { GeneratedPrompt } from '../types/gameTypes';
 
 export interface ClaudeConfig {
   paragraphs: number;
@@ -37,7 +38,7 @@ export class ClaudeService {
   }
 
   private getApiKey(): string {
-    // In Create React App, environment variables are prefixed with REACT_APP_
+    // IMPORTANT: Changed from REACT_APP_CLAUDE_API_KEY to REACT_APP_CLAUDE_API to match existing code
     const apiKey = process.env.REACT_APP_CLAUDE_API;
     
     console.log('Environment Debug:');
@@ -53,6 +54,122 @@ export class ClaudeService {
       );
     }
     return apiKey;
+  }
+
+  async generatePrompts(
+    difficulty: 'beginner' | 'intermediate' | 'advanced',
+    promptLanguage: 'english' | 'indonesian'
+  ): Promise<GeneratedPrompt[]> {
+    const prompt = this.buildPromptGenerationPrompt(difficulty, promptLanguage);
+    
+    try {
+      console.log('Making Claude API request with difficulty:', difficulty, 'language:', promptLanguage);
+      
+      const response = await fetch(this.baseUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': this.getApiKey(),
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-3-haiku-20240307',
+          max_tokens: 1000,
+          messages: [{
+            role: 'user',
+            content: prompt
+          }],
+          system: "Generate educational Indonesian language prompts."
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => null);
+        console.error('Claude API error response:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorData
+        });
+        throw new Error(`API request failed: ${response.statusText}${errorData ? ` - ${JSON.stringify(errorData)}` : ''}`);
+      }
+
+      const data = await response.json();
+      console.log('Claude API response:', data);
+
+      if (!data.content || !Array.isArray(data.content) || !data.content[0]) {
+        console.error('Unexpected response format:', data);
+        throw new Error('Unexpected response format from Claude API');
+      }
+
+      const contentBlock = data.content[0];
+      console.log('Content block:', contentBlock);
+
+      if (contentBlock.type !== 'text') {
+        console.error('Unexpected content type:', contentBlock.type);
+        throw new Error('Unexpected content type in Claude response');
+      }
+
+      const content = contentBlock.text;
+      console.log('Raw content text:', content);
+
+      try {
+        const result = JSON.parse(content);
+        console.log('Parsed result:', result);
+        
+        if (!result.prompts || !Array.isArray(result.prompts)) {
+          console.error('Invalid prompts format in response:', result);
+          throw new Error('Invalid prompts format in Claude response');
+        }
+
+        return result.prompts;
+      } catch (error) {
+        console.error('Error parsing JSON from Claude response:', error);
+        console.error('Raw content that failed to parse:', content);
+        throw new Error('Failed to parse JSON from Claude response');
+      }
+    } catch (error) {
+      console.error('Error in generatePrompts:', error);
+      if (error instanceof Error) {
+        throw new Error(`Failed to generate prompts: ${error.message}`);
+      }
+      throw new Error('Failed to generate prompts. Please try again.');
+    }
+  }
+
+  private buildPromptGenerationPrompt(
+    difficulty: string,
+    promptLanguage: 'english' | 'indonesian'
+  ): string {
+    return `
+Generate 5 engaging speaking prompts for ${difficulty} level Indonesian language learners. The prompts should be in ${promptLanguage.toUpperCase()}.
+
+Requirements:
+1. Mix of topics from different categories (daily life, opinions, experiences, etc.)
+2. Appropriate complexity for ${difficulty} level
+3. Culturally relevant to Indonesia when possible
+4. Each prompt should encourage 2-3 minute responses
+5. Include clear context or scenario
+${promptLanguage === 'indonesian' ? '6. Use natural, conversational Indonesian' : ''}
+
+Format your response as JSON:
+{
+  "prompts": [
+    {
+      "id": "unique_string",
+      "text": "prompt text in ${promptLanguage}",
+      "category": "category name",
+      "difficulty": "${difficulty}",
+      "estimatedTime": time_in_seconds
+    }
+  ]
+}
+
+Example prompt structure:
+- Beginner: "${promptLanguage === 'indonesian' ? 'Ceritakan tentang rutinitas pagi Anda' : 'Describe your daily morning routine'}"
+- Intermediate: "${promptLanguage === 'indonesian' ? 'Bagaimana pendapat Anda tentang pengaruh media sosial?' : 'What do you think about the influence of social media?'}"
+- Advanced: "${promptLanguage === 'indonesian' ? 'Jelaskan dampak perubahan iklim terhadap Indonesia' : 'Explain the impact of climate change on Indonesia'}"
+`;
   }
 
   async generateStory(vocabulary: VocabItem[], config: ClaudeConfig): Promise<GeneratedContent> {
@@ -291,5 +408,131 @@ Do not include any section markers or vocabulary lists within the conversation t
     }
 
     throw new Error('Unexpected end of generation attempts');
+  }
+
+  async analyzeResponse(
+    prompt: { text: string; category: string },
+    userResponse: string,
+    promptLanguage: 'english' | 'indonesian'
+  ) {
+    try {
+      const analysisPrompt = `
+Analyze this Indonesian language response. The original prompt was in ${promptLanguage}:
+
+PROMPT:
+${prompt.text}
+
+RESPONSE:
+${userResponse}
+
+Provide a detailed analysis focusing on specific, actionable feedback. For each point, be concrete and give examples:
+
+1. Strengths - Be specific about what was done well. Instead of general statements like "good vocabulary", point out exactly what was used effectively. For example:
+- Effective use of time expressions like "setelah itu" to sequence events
+- Good incorporation of formal language when discussing work/school
+- Appropriate use of specific verbs like "mengerjakan" instead of generic ones
+
+2. Grammar Corrections - List specific corrections with clear explanations:
+{
+  "original": "incorrect phrase",
+  "corrected": "correct phrase",
+  "explanation": "detailed explanation of the grammar rule and why the correction improves the sentence"
+}
+
+3. Areas for Improvement - Provide specific, actionable suggestions. Instead of "use more varied vocabulary", suggest exact phrases or structures that could enhance the response. For example:
+- "When describing morning activities, you could use 'bersiap-siap' instead of just 'siap' to sound more natural"
+- "Try incorporating time connectors like 'sebelum', 'sesudah', 'ketika' to better structure your routine"
+- "Consider using more descriptive verbs like 'menyiapkan' instead of just 'membuat' for breakfast preparation"
+
+4. Cultural Tips (ONLY if directly relevant to the response content - omit this section if not applicable):
+- Must be specific to the context and add meaningful insight
+- Should relate directly to language usage or cultural practices mentioned in the response
+- Omit generic observations
+
+5. Suggested New Vocabulary - Focus on practical, context-appropriate words and phrases that would enhance this specific response:
+{
+  "indonesian": "word/phrase",
+  "english": "translation with usage context"
+}
+
+Format your response in JSON. Ensure all arrays have proper comma separation and no trailing commas:
+{
+  "strengths": ["specific strength with example"],
+  "grammarCorrections": [
+    {
+      "original": "incorrect phrase",
+      "corrected": "correct phrase",
+      "explanation": "detailed explanation"
+    }
+  ],
+  "improvementAreas": ["specific, actionable suggestion with example"],
+  "culturalTips": ["specific, relevant cultural insight"] (omit if not relevant),
+  "suggestedVocabulary": [
+    {
+      "indonesian": "word/phrase",
+      "english": "translation with context"
+    }
+  ]
+}`;
+
+      const apiResponse = await fetch(this.baseUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': this.getApiKey(),
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-3-haiku-20240307',
+          max_tokens: 1000,
+          messages: [{
+            role: 'user',
+            content: analysisPrompt
+          }],
+          system: "You are an experienced Indonesian language teacher providing detailed, specific, and actionable feedback. Focus on concrete examples and avoid generic advice. If cultural tips aren't directly relevant to the response, omit them."
+        })
+      });
+
+      if (!apiResponse.ok) {
+        const errorData = await apiResponse.json().catch(() => null);
+        throw new Error(`API request failed: ${apiResponse.statusText}${errorData ? ` - ${JSON.stringify(errorData)}` : ''}`);
+      }
+
+      const data = await apiResponse.json();
+      
+      if (!data.content || !Array.isArray(data.content) || !data.content[0] || data.content[0].type !== 'text') {
+        throw new Error('Unexpected response format from Claude API');
+      }
+
+      const content = data.content[0].text;
+      
+      try {
+        // Try to parse the JSON response
+        const parsedContent = JSON.parse(content);
+        
+        // Validate the structure
+        if (!parsedContent.strengths || !Array.isArray(parsedContent.strengths) ||
+            !parsedContent.grammarCorrections || !Array.isArray(parsedContent.grammarCorrections) ||
+            !parsedContent.improvementAreas || !Array.isArray(parsedContent.improvementAreas) ||
+            !parsedContent.suggestedVocabulary || !Array.isArray(parsedContent.suggestedVocabulary)) {
+          throw new Error('Invalid analysis structure');
+        }
+        
+        // Cultural tips are optional
+        if (parsedContent.culturalTips && !Array.isArray(parsedContent.culturalTips)) {
+          throw new Error('Invalid cultural tips format');
+        }
+        
+        return parsedContent;
+      } catch (error) {
+        console.error('JSON Parse Error:', error);
+        console.error('Raw content:', content);
+        throw new Error(`Failed to parse analysis response: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      }
+    } catch (error) {
+      console.error('Error analyzing response:', error);
+      throw error;
+    }
   }
 } 

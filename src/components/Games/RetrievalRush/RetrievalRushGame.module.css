@@ -1,0 +1,573 @@
+.gameContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.gameHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.backButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.backButton:hover {
+  background-color: #e0e0e0;
+}
+
+.phaseContainer {
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.loadingState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.errorState {
+  color: #d32f2f;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: #ffebee;
+  margin: 20px 0;
+}
+
+/* Timer positioning */
+.timerContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+/* Setup Phase Styles */
+.setupOptions {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.difficultySelector {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.difficultySelector label {
+  font-weight: 500;
+  color: #333;
+  font-size: 16px;
+}
+
+.difficultySelector select {
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.difficultySelector select:hover:not(:disabled) {
+  border-color: #2196f3;
+}
+
+.difficultySelector select:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+.generateButton {
+  padding: 14px 28px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.generateButton:hover:not(:disabled) {
+  background-color: #1976d2;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+.generateButton:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.generateButton:disabled {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Add some typography styles */
+.phaseContainer h3 {
+  color: #1976d2;
+  font-size: 24px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.phaseContainer p {
+  color: #666;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+/* Prompt Selection Phase Styles */
+.promptList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.promptCard {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.promptCard:hover {
+  border-color: #2196f3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.promptContent {
+  flex: 1;
+}
+
+.promptText {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.promptMeta {
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.promptCategory {
+  color: #1976d2;
+  background: rgba(33, 150, 243, 0.1);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.promptTime {
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.selectPromptButton {
+  padding: 10px 20px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.selectPromptButton:hover {
+  background-color: #1976d2;
+  transform: translateY(-1px);
+}
+
+.selectPromptButton:active {
+  transform: translateY(0);
+}
+
+/* Prompt Selection Controls */
+.promptControls {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin-bottom: 32px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.controlGroup label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+}
+
+.timeSelect,
+.languageSelect {
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  min-width: 120px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.timeSelect:hover,
+.languageSelect:hover {
+  border-color: #2196f3;
+}
+
+.timeSelect:focus,
+.languageSelect:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+/* Response Phase Styles */
+.responseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.timer {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1976d2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.completeButton {
+  padding: 10px 24px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.completeButton:hover:not(:disabled) {
+  background-color: #43a047;
+  transform: translateY(-1px);
+}
+
+.completeButton:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.promptDisplay, .responseDisplay {
+  margin-bottom: 32px;
+}
+
+.promptDisplay h3, .responseDisplay h3 {
+  color: #1976d2;
+  font-size: 16px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.promptCard, .responseCard {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.promptText, .responseText {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  font-family: system-ui, -apple-system, sans-serif;
+  white-space: pre-wrap;
+  min-height: 100px;
+}
+
+.promptSection,
+.responseSection {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  color: #1976d2;
+  font-size: 16px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  min-height: 100px;
+  white-space: pre-wrap;
+}
+
+.responseInput {
+  width: 100%;
+  min-height: 200px;
+  padding: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.responseInput:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.responseInput:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+}
+
+.timeUpMessage {
+  text-align: center;
+  color: #d32f2f;
+  padding: 12px;
+  background-color: #ffebee;
+  border-radius: 6px;
+  margin-top: 16px;
+  font-weight: 500;
+}
+
+/* Analysis Phase Styles */
+.analysisContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.analysisColumns {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.analysisColumn {
+  background: white;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-height: 600px;
+  overflow-y: auto;
+}
+
+.analysisColumn h3 {
+  color: #1976d2;
+  font-size: 20px;
+  margin-bottom: 32px;
+  font-weight: 600;
+}
+
+.responseDisplay {
+  margin-top: 32px;
+}
+
+.responseDisplay h3 {
+  color: #1976d2;
+  font-size: 20px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.responseText {
+  white-space: pre-wrap;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  color: #333;
+}
+
+.analysisSection {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.analysisSection:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.analysisSection h4 {
+  color: #1976d2;
+  font-size: 18px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.analysisSection ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.analysisSection li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+  padding-left: 20px;
+  position: relative;
+}
+
+.analysisSection li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #1976d2;
+}
+
+.correction {
+  margin-bottom: 16px;
+}
+
+.correctionText {
+  font-family: monospace;
+  margin-bottom: 8px;
+}
+
+.original {
+  color: #d32f2f;
+  text-decoration: line-through;
+}
+
+.corrected {
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.explanation {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.vocabList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.vocabItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.indonesian {
+  color: #1976d2;
+  font-weight: 500;
+}
+
+.english {
+  color: #666;
+}
+
+.analysisActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.startOverButton {
+  padding: 12px 24px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.startOverButton:hover {
+  background-color: #1976d2;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+.startOverButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+} 

@@ -123,42 +123,45 @@
   color: #0d47a1;
 }
 
-.quiz {
-  background-color: #fff3e0;
-}
-
-.quiz h4 {
-  color: #e65100;
-}
-
-.quiz p {
-  color: #bf360c;
-}
-
-.story {
+/* AI-Generated Games */
+.fill-in-story {
   background-color: #f3e5f5;
 }
 
-.story h4 {
+.fill-in-story h4 {
   color: #6a1b9a;
 }
 
-.story p {
+.fill-in-story p {
   color: #4a148c;
 }
 
-.fill-blanks {
-  background-color: #eceff1;
+.retrieval-rush {
+  background-color: #e8eaf6;
 }
 
-.fill-blanks h4 {
-  color: #263238;
+.retrieval-rush h4 {
+  color: #3f51b5;
 }
 
-.fill-blanks p {
-  color: #37474f;
+.retrieval-rush p {
+  color: #283593;
 }
 
+/* External Content Games */
+.external-fill-blanks {
+  background-color: #fce4ec;
+}
+
+.external-fill-blanks h4 {
+  color: #c2185b;
+}
+
+.external-fill-blanks p {
+  color: #880e4f;
+}
+
+/* Development & Testing */
 .setup-test {
   background-color: #e8eaf6;
 }
@@ -171,15 +174,43 @@
   color: #283593;
 }
 
+/* Override the old gradient styles with our new color scheme */
 .game-button.claude-test {
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  background-color: #fff8e1;
+}
+
+.game-button.claude-test h4 {
+  color: #ff8f00;
+}
+
+.game-button.claude-test p {
+  color: #ef6c00;
 }
 
 .game-button.claude-test:hover:not(:disabled) {
-  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
+  background-color: #ffecb3;
+  border-color: #ff8f00;
 }
 
 .game-button.claude-test:disabled {
-  background: #e5e7eb;
+  background: #f5f5f5;
   cursor: not-allowed;
+}
+
+/* Remove unused styles */
+.claude-test {
+  display: none;
+}
+
+.claude-story-generator {
+  display: none;
+}
+
+/* Remove the old incorrect class names */
+.fill-in-blanks {
+  display: none;
+}
+
+.claude-story-generator {
+  display: none;
 } 

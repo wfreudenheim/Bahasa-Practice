@@ -35,5 +35,13 @@ export interface TimerProps {
     shouldStop?: boolean; // Whether the timer should be forcibly stopped
 }
 
+export interface GeneratedPrompt {
+    id: string;
+    text: string;
+    category: string;
+    difficulty: 'beginner' | 'intermediate' | 'advanced';
+    estimatedTime: number;
+}
+
 // Update the GameType to include all registered games
-export type GameType = 'flashcards' | 'matching' | 'fill-in-story' | 'setup-test' | 'claude-test' | 'external-fill-blanks'; 
+export type GameType = 'flashcards' | 'matching' | 'fill-in-story' | 'setup-test' | 'claude-test' | 'external-fill-blanks' | 'retrieval-rush'; 

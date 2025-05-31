@@ -5,6 +5,7 @@ import { FillInStoryGame } from '../components/Games/FillInStory/FillInStoryGame
 import { GameSetupTest } from '../components/GameSetupTest/GameSetupTest';
 import { ClaudeTest } from '../components/ClaudeTest/ClaudeTest';
 import { ExternalFillBlanks } from '../components/Games/ExternalFillBlanks/ExternalFillBlanks';
+import { RetrievalRushGame } from '../components/Games/RetrievalRush/RetrievalRushGame';
 
 export interface Game {
   id: string;
@@ -118,6 +119,18 @@ GameRegistry.register({
   description: 'Practice with custom fill-in-the-blank exercises',
   component: ExternalFillBlanks,
   category: 'external',
+  minWords: 0,
+  requiresVocabulary: false
+});
+
+// Register Retrieval Rush game
+GameRegistry.register({
+  id: 'retrieval-rush',
+  name: 'Retrieval Rush',
+  description: 'Practice Indonesian speaking with AI-generated prompts and feedback',
+  component: RetrievalRushGame,
+  category: 'ai-generated',
+  requiresAI: true,
   minWords: 0,
   requiresVocabulary: false
 });

@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { VocabSet, VocabItem } from './interfaces/vocab';
 import { Layout } from './components/Layout/Layout';
 import { VocabularySidebar } from './components/VocabularySidebar/VocabularySidebar';
-import { MainContent } from './components/MainContent/MainContent';
+import { MainContent, MainContentHandle } from './components/MainContent/MainContent';
+import { Header } from './components/Header/Header';
 import './App.css';
 
 function App() {
   const [vocabSets, setVocabSets] = useState<VocabSet[]>([]);
   const [selectedSets, setSelectedSets] = useState<VocabSet[]>([]);
+  const [isInGame, setIsInGame] = useState(false);
+  const mainContentRef = useRef<MainContentHandle>(null);
 
   const handleVocabLoaded = (newVocabSet: VocabSet) => {
     setVocabSets(prev => {
@@ -22,14 +25,16 @@ function App() {
     setSelectedSets(newSelectedSets);
   };
 
+  const handleHomeClick = () => {
+    mainContentRef.current?.handleBackToGames();
+  };
+
   // Get all words from selected sets
   const selectedWords: VocabItem[] = selectedSets.flatMap(set => set.items);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Bahasa Indonesia Vocabulary Practice</h1>
-      </header>
+      <Header isInGame={isInGame} onHomeClick={handleHomeClick} />
       <Layout 
         sidebar={
           <VocabularySidebar 
@@ -40,9 +45,12 @@ function App() {
         }
         main={
           <MainContent 
+            ref={mainContentRef}
             selectedWords={selectedWords}
+            onGameStateChange={setIsInGame}
           />
         }
+        hideSidebar={isInGame}
       />
     </div>
   );

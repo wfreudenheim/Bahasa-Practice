@@ -29,20 +29,6 @@ body {
   }
 }
 
-.App-header {
-  background-color: #2e7d32;
-  color: white;
-  padding: 15px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-}
-
-.App-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-
 .App-main {
   display: flex;
   flex-direction: column;
