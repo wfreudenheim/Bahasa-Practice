@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { VocabSet, VocabItem } from '../../interfaces/vocab';
+import React, { useEffect, useState, useCallback } from 'react';
+import { VocabSet, VocabFolder } from '../../interfaces/vocab';
 import { VocabList } from '../VocabList/VocabList';
 import { VocabularyLoader } from '../../services/VocabularyLoader';
 import './VocabularySidebar.css';
@@ -35,6 +35,34 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
 }) => {
   const [selectedSets, setSelectedSets] = useState<VocabSet[]>([]);
   const [loading, setLoading] = useState(false);
+  const [folderStructure, setFolderStructure] = useState<VocabFolder[]>([]);
+
+  const handleSelectionChange = useCallback((newSelectedSets: VocabSet[]) => {
+    // Filter out any dummy sets used for bulk operations
+    const validSets = newSelectedSets.filter(set => set.id !== 'bulk-deselect');
+    setSelectedSets(validSets);
+    onSelectionChange(validSets);
+  }, [onSelectionChange]);
+
+  const handleFolderToggle = useCallback((toggledFolder: VocabFolder) => {
+    setFolderStructure(prevStructure => {
+      const updateFolders = (folders: VocabFolder[]): VocabFolder[] => {
+        return folders.map(folder => {
+          if (folder.path === toggledFolder.path) {
+            return {
+              ...folder,
+              isExpanded: !folder.isExpanded
+            };
+          }
+          return {
+            ...folder,
+            subfolders: updateFolders(folder.subfolders)
+          };
+        });
+      };
+      return updateFolders(prevStructure);
+    });
+  }, []);
 
   // Load vocabulary structure on mount
   useEffect(() => {
@@ -43,33 +71,45 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
         setLoading(true);
         const structure = await loader.scanVocabularyStructure();
         
-        // Keep track of existing vocab sets to prevent duplicates
-        const existingPaths = new Set(vocabSets.map(set => set.id));
-        
-        // Load each file in the structure
-        for (const folder of structure.folders) {
-          for (const file of folder.files) {
-            // Skip if already loaded
-            if (existingPaths.has(file.path)) continue;
+        // Convert the structure to our VocabFolder format
+        const convertFolder = (folder: any, parentPath: string = ''): VocabFolder => {
+          const currentPath = parentPath ? `${parentPath}/${folder.name}` : folder.name;
+          
+          // Convert files to VocabSets
+          const sets = folder.files.map((file: any) => {
+            const vocabSet: VocabSet = {
+              id: file.path,
+              filename: formatDisplayName(file.name),
+              items: file.words.map((word: any) => ({
+                indonesian: word.indonesian,
+                english: word.english
+              })),
+              wordCount: file.words.length,
+              dateAdded: new Date(),
+              path: currentPath
+            };
+            // Also notify parent component about the new vocab set
+            onVocabLoaded(vocabSet);
+            return vocabSet;
+          });
 
-            const loadedFile = await loader.loadVocabularyFile(file.path);
-            if (loadedFile.loaded && loadedFile.words.length > 0) {
-              // Convert to VocabSet format with formatted filename
-              const vocabSet: VocabSet = {
-                id: loadedFile.path,
-                filename: formatDisplayName(loadedFile.name),
-                items: loadedFile.words.map(word => ({
-                  indonesian: word.indonesian,
-                  english: word.english
-                })),
-                wordCount: loadedFile.words.length,
-                dateAdded: new Date(),
-                path: formatDisplayName(folder.name)
-              };
-              onVocabLoaded(vocabSet);
-            }
-          }
-        }
+          // Convert subfolders recursively
+          const subfolders = folder.subfolders.map((subfolder: any) => 
+            convertFolder(subfolder, currentPath)
+          );
+
+          return {
+            name: folder.name,
+            path: currentPath,
+            sets,
+            subfolders,
+            isExpanded: false // Start with folders collapsed
+          };
+        };
+
+        // Convert all top-level folders
+        const folders = structure.folders.map(folder => convertFolder(folder));
+        setFolderStructure(folders);
       } catch (error) {
         console.error('Failed to load vocabulary structure:', error);
       } finally {
@@ -78,12 +118,7 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
     };
 
     loadVocabularyStructure();
-  }, [onVocabLoaded, vocabSets]);
-
-  const handleSelectionChange = (newSelectedSets: VocabSet[]) => {
-    setSelectedSets(newSelectedSets);
-    onSelectionChange(newSelectedSets);
-  };
+  }, [onVocabLoaded]);
 
   const handleClearSelection = () => {
     setSelectedSets([]);
@@ -101,11 +136,17 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
         {/* FileUpload component will go here */}
       </div>
       <div className="available-sets">
-        <VocabList 
-          vocabSets={vocabSets}
-          selectedSets={selectedSets}
-          onSelectionChange={handleSelectionChange}
-        />
+        {loading ? (
+          <div>Loading vocabulary sets...</div>
+        ) : (
+          <VocabList 
+            vocabSets={vocabSets}
+            selectedSets={selectedSets}
+            onSelectionChange={handleSelectionChange}
+            folders={folderStructure}
+            onFolderToggle={handleFolderToggle}
+          />
+        )}
       </div>
       <div className="selection-summary">
         <button 
