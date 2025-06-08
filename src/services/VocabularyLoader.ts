@@ -32,6 +32,39 @@ export class VocabularyLoader {
     }
   }
 
+  public async loadMultipleFiles(files: File[]): Promise<VocabularyFile[]> {
+    const loadedFiles: VocabularyFile[] = [];
+
+    for (const file of files) {
+      try {
+        const content = await file.text();
+        const words = content
+          .split('\n')
+          .filter(line => line.trim())
+          .map(line => {
+            const [indonesian, english] = line.split('\t').map(s => s.trim());
+            if (!indonesian || !english) {
+              console.warn(`Invalid line in ${file.name}: ${line}`);
+              return null;
+            }
+            return { indonesian, english };
+          })
+          .filter((word): word is VocabularyWord => word !== null);
+
+        loadedFiles.push({
+          path: file.name,
+          name: file.name,
+          words,
+          loaded: true
+        });
+      } catch (error) {
+        console.error(`Error loading file ${file.name}:`, error);
+      }
+    }
+
+    return loadedFiles;
+  }
+
   private async scanFolder(folderPath: string): Promise<VocabularyFolder> {
     try {
       const response = await fetch(`${folderPath}/index.json`);
