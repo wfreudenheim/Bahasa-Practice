@@ -63,6 +63,7 @@ export class VocabularyLoader {
           path: fileName,
           name: fileName,
           words,
+          wordCount: words.length,
           loaded: true
         });
       } catch (error) {
@@ -92,6 +93,7 @@ export class VocabularyLoader {
             path: `${folderPath}/${file.name}`,
             name: file.name,
             words,
+            wordCount: words.length,
             loaded: words.length > 0
           });
         }
