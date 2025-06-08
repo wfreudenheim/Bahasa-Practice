@@ -39,6 +39,7 @@ function App() {
         sidebar={
           <VocabularySidebar 
             vocabSets={vocabSets}
+            selectedSets={selectedSets}
             onVocabLoaded={handleVocabLoaded}
             onSelectionChange={handleSelectionChange}
           />

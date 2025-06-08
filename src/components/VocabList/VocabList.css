@@ -6,6 +6,7 @@
   height: 100%;
   overflow-y: auto;
   position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
 .vocab-list-header {
@@ -222,37 +223,69 @@
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
-  .vocab-set-header {
-    padding: 10px 12px;
-  }
-
-  .vocab-set-label input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-  }
-
-  .folder-header {
+  .vocab-list {
+    height: calc(100vh - 260px); /* Account for header, search, and footer */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     padding: 8px;
-  }
-
-  .search-container {
-    margin: 0 0 8px 0;
-    padding: 8px;
-    background: white;
-    border-bottom: 1px solid #e0e0e0;
-    position: sticky;
-    top: 0;
+    position: relative;
     z-index: 1;
   }
 
+  .search-container {
+    position: sticky;
+    top: 0;
+    margin: 0;
+    padding: 8px;
+    background: white;
+    border-bottom: 1px solid #e0e0e0;
+    z-index: 2;
+  }
+
   .search-input {
-    padding: 10px 36px 10px 12px;
-    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 12px 36px 12px 12px;
+    font-size: 16px;
+    height: 48px;
   }
 
   .clear-search {
-    width: 32px;
-    height: 32px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .folder-content {
+    padding: 8px;
+    padding-left: 24px;
+  }
+
+  /* Prevent folder collapse on selection */
+  .folder-checkbox,
+  .folder-title,
+  .vocab-set-label {
+    touch-action: manipulation;
+  }
+
+  /* Improve touch targets */
+  .folder-checkbox input[type="checkbox"],
+  .vocab-set-label input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+  }
+
+  .folder-header,
+  .vocab-set-header {
+    padding: 12px;
+  }
+
+  /* Prevent text selection on mobile */
+  .folder-title,
+  .vocab-set-title {
+    user-select: none;
+    -webkit-user-select: none;
   }
 }
 

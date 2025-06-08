@@ -1,15 +1,21 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState, cloneElement, isValidElement } from 'react';
 import { MobileMenu } from './MobileMenu';
+import { VocabularySidebar } from '../VocabularySidebar/VocabularySidebar';
 import './Layout.css';
 
 interface LayoutProps {
-  sidebar: ReactNode;
+  sidebar: React.ReactElement<{ onClose?: () => void }>;
   main: ReactNode;
   hideSidebar?: boolean;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ sidebar, main, hideSidebar = false }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Clone sidebar element with onClose prop
+  const sidebarWithClose = cloneElement(sidebar, { 
+    onClose: () => setIsMobileMenuOpen(false)
+  });
 
   return (
     <div className="layout">
@@ -29,7 +35,7 @@ export const Layout: React.FC<LayoutProps> = ({ sidebar, main, hideSidebar = fal
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
       >
-        {sidebar}
+        {sidebarWithClose}
       </MobileMenu>
 
       {/* Desktop Sidebar */}

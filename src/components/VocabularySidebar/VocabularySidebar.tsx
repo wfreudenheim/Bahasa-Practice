@@ -6,8 +6,10 @@ import './VocabularySidebar.css';
 
 interface VocabularySidebarProps {
   vocabSets: VocabSet[];
+  selectedSets: VocabSet[];
   onVocabLoaded: (vocabSet: VocabSet) => void;
   onSelectionChange: (selectedSets: VocabSet[]) => void;
+  onClose?: () => void;
 }
 
 // Simple X icon component
@@ -30,15 +32,15 @@ const formatDisplayName = (filename: string): string => {
 
 export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({ 
   vocabSets, 
+  selectedSets: externalSelectedSets,
   onVocabLoaded,
-  onSelectionChange 
+  onSelectionChange,
+  onClose
 }) => {
-  const [selectedSets, setSelectedSets] = useState<VocabSet[]>([]);
   const [loading, setLoading] = useState(false);
   const [folderStructure, setFolderStructure] = useState<VocabFolder[]>([]);
 
   const handleSelectionChange = (newSelectedSets: VocabSet[]) => {
-    setSelectedSets(newSelectedSets);
     onSelectionChange(newSelectedSets);
   };
 
@@ -118,17 +120,14 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
     loadVocabularyStructure();
   }, [onVocabLoaded]);
 
-  const handleClearSelection = () => {
-    setSelectedSets([]);
-    onSelectionChange([]);
-  };
-
-  // Calculate total selected words
-  const totalWords = selectedSets.reduce((sum, set) => sum + set.wordCount, 0);
-
   return (
     <div className="vocabulary-sidebar">
-      <h2>Vocabulary Sets</h2>
+      <div className="mobile-header">
+        <h2>Vocabulary Sets</h2>
+        <button className="close-button" onClick={onClose} aria-label="Close sidebar">
+          ×
+        </button>
+      </div>
       <div className="upload-section">
         <h3>Upload Vocabulary Files</h3>
         {/* FileUpload component will go here */}
@@ -139,7 +138,7 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
         ) : (
           <VocabList 
             vocabSets={vocabSets}
-            selectedSets={selectedSets}
+            selectedSets={externalSelectedSets}
             onSelectionChange={handleSelectionChange}
             folders={folderStructure}
             onFolderToggle={handleFolderToggle}
@@ -149,13 +148,13 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
       <div className="selection-summary">
         <button 
           className="clear-selection"
-          onClick={handleClearSelection}
-          disabled={selectedSets.length === 0}
+          onClick={() => onSelectionChange([])}
+          disabled={externalSelectedSets.length === 0}
         >
           <XIcon /> Clear selection
         </button>
-        <p>Selected: {selectedSets.length} sets</p>
-        <p>{totalWords} words total</p>
+        <p>Selected: {externalSelectedSets.length} sets</p>
+        <p>{externalSelectedSets.reduce((sum, set) => sum + set.wordCount, 0)} words total</p>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from 'react';
+import React, { useState, useCallback, memo, useEffect } from 'react';
 import { VocabSet, VocabFolder } from '../../interfaces/vocab';
 import './VocabList.css';
 
@@ -21,7 +21,7 @@ const VocabSetItem = memo(({
   set: VocabSet;
   isSelected: boolean;
   isExpanded: boolean;
-  onSelect: (set: VocabSet) => void;
+  onSelect: (setOrSets: VocabSet | VocabSet[]) => void;
   onToggleExpand: (id: string) => void;
   highlightText: (text: string) => React.ReactNode;
 }) => (
@@ -87,7 +87,7 @@ const FolderItem = memo(({
   selectedSets: VocabSet[];
   expandedSets: Set<string>;
   onFolderToggle: (folder: VocabFolder, e: React.MouseEvent) => void;
-  onSetSelect: (set: VocabSet) => void;
+  onSetSelect: (setOrSets: VocabSet | VocabSet[]) => void;
   onSetExpand: (id: string) => void;
   highlightText: (text: string) => React.ReactNode;
 }) => {
@@ -109,12 +109,21 @@ const FolderItem = memo(({
 
   const handleFolderSelect = () => {
     if (isAllSelected) {
-      onSetSelect(folderSets[0]); // This will trigger deselection of all sets
+      // Deselect all sets in this folder and its subfolders
+      const setsToRemove = folderSets.filter(set => 
+        selectedSets.some(s => s.id === set.id)
+      );
+      const newSelectedSets = selectedSets.filter(set => 
+        !setsToRemove.some(s => s.id === set.id)
+      );
+      onSetSelect(newSelectedSets);
     } else {
+      // Select all sets in this folder and its subfolders
       const setsToAdd = folderSets.filter(set => 
         !selectedSets.some(s => s.id === set.id)
       );
-      setsToAdd.forEach(set => onSetSelect(set));
+      const newSelectedSets = [...selectedSets, ...setsToAdd];
+      onSetSelect(newSelectedSets);
     }
   };
 
@@ -185,6 +194,51 @@ export const VocabList: React.FC<VocabListProps> = memo(({
 }) => {
   const [expandedSets, setExpandedSets] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
+
+  // Helper function to check if a set matches the search query
+  const matchesSearch = useCallback((set: VocabSet): boolean => {
+    if (!searchQuery.trim()) return true;
+    const query = searchQuery.toLowerCase();
+    
+    // Check filename
+    if (set.filename.toLowerCase().includes(query)) return true;
+    
+    // Check words
+    return set.items.some(item => 
+      item.indonesian.toLowerCase().includes(query) ||
+      item.english.toLowerCase().includes(query)
+    );
+  }, [searchQuery]);
+
+  // Helper function to check if a folder contains any matching sets
+  const folderContainsMatch = useCallback((folder: VocabFolder): boolean => {
+    // Check direct sets
+    if (folder.sets.some(matchesSearch)) return true;
+    
+    // Check subfolders recursively
+    return folder.subfolders.some(subfolder => folderContainsMatch(subfolder));
+  }, [matchesSearch]);
+
+  // Update expanded folders when search query changes
+  useEffect(() => {
+    if (!searchQuery.trim()) {
+      setExpandedFolders(new Set());
+      return;
+    }
+
+    const newExpandedFolders = new Set<string>();
+    
+    const expandMatchingFolders = (folder: VocabFolder) => {
+      if (folderContainsMatch(folder)) {
+        newExpandedFolders.add(folder.path);
+        folder.subfolders.forEach(expandMatchingFolders);
+      }
+    };
+
+    folders.forEach(expandMatchingFolders);
+    setExpandedFolders(newExpandedFolders);
+  }, [searchQuery, folders, folderContainsMatch]);
 
   const toggleSet = useCallback((id: string) => {
     setExpandedSets(prev => {
@@ -198,18 +252,32 @@ export const VocabList: React.FC<VocabListProps> = memo(({
     });
   }, []);
 
-  const handleSetSelect = useCallback((set: VocabSet) => {
-    const isSelected = selectedSets.some(s => s.id === set.id);
-    const newSelectedSets = isSelected
-      ? selectedSets.filter(s => s.id !== set.id)
-      : [...selectedSets, set];
-    onSelectionChange(newSelectedSets);
+  const handleSetSelect = useCallback((setOrSets: VocabSet | VocabSet[]) => {
+    if (Array.isArray(setOrSets)) {
+      onSelectionChange(setOrSets);
+    } else {
+      const isSelected = selectedSets.some(s => s.id === setOrSets.id);
+      const newSelectedSets = isSelected
+        ? selectedSets.filter(s => s.id !== setOrSets.id)
+        : [...selectedSets, setOrSets];
+      onSelectionChange(newSelectedSets);
+    }
   }, [selectedSets, onSelectionChange]);
 
   const handleFolderToggle = useCallback((folder: VocabFolder, e: React.MouseEvent) => {
     e.stopPropagation();
     if (onFolderToggle) {
       onFolderToggle(folder);
+      // Update expanded folders state
+      setExpandedFolders(prev => {
+        const newExpanded = new Set(prev);
+        if (folder.isExpanded) {
+          newExpanded.delete(folder.path);
+        } else {
+          newExpanded.add(folder.path);
+        }
+        return newExpanded;
+      });
     }
   }, [onFolderToggle]);
 
@@ -227,6 +295,27 @@ export const VocabList: React.FC<VocabListProps> = memo(({
       </>
     );
   }, [searchQuery]);
+
+  const renderFilteredFolders = useCallback((folders: VocabFolder[]) => {
+    return folders
+      .filter(folder => !searchQuery.trim() || folderContainsMatch(folder))
+      .map(folder => (
+        <FolderItem
+          key={folder.path}
+          folder={{
+            ...folder,
+            isExpanded: folder.isExpanded || expandedFolders.has(folder.path),
+            sets: folder.sets.filter(set => !searchQuery.trim() || matchesSearch(set))
+          }}
+          selectedSets={selectedSets}
+          expandedSets={expandedSets}
+          onFolderToggle={handleFolderToggle}
+          onSetSelect={handleSetSelect}
+          onSetExpand={toggleSet}
+          highlightText={highlightText}
+        />
+      ));
+  }, [searchQuery, folderContainsMatch, expandedFolders, selectedSets, expandedSets, handleFolderToggle, handleSetSelect, toggleSet, highlightText, matchesSearch]);
 
   if (!folders.length && !vocabSets.length) {
     return <div className="no-vocab">No vocabulary sets available</div>;
@@ -252,18 +341,7 @@ export const VocabList: React.FC<VocabListProps> = memo(({
           </button>
         )}
       </div>
-      {folders.map(folder => (
-        <FolderItem
-          key={folder.path}
-          folder={folder}
-          selectedSets={selectedSets}
-          expandedSets={expandedSets}
-          onFolderToggle={handleFolderToggle}
-          onSetSelect={handleSetSelect}
-          onSetExpand={toggleSet}
-          highlightText={highlightText}
-        />
-      ))}
+      {renderFilteredFolders(folders)}
     </div>
   );
 }); 
