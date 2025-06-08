@@ -1,0 +1,143 @@
+pasar	market
+supermarket	supermarket
+toko kelontong	grocery store
+warung	small shop/stall
+kios	kiosk/small stall
+pedagang	vendor/seller
+penjual	seller
+pembeli	buyer/customer
+pelanggan	customer
+kasir	cashier
+antrian	queue/line
+keranjang belanja	shopping basket
+troli	shopping cart
+kantong plastik	plastic bag
+tas belanja	shopping bag
+daftar belanja	shopping list
+harga	price
+mahal	expensive
+murah	cheap
+diskon	discount
+promo	promotion
+potongan harga	price reduction
+gratis	free
+bayar	pay
+kembalian	change (money)
+uang pas	exact money
+bon	receipt
+struk	receipt
+cash	cash
+tunai	cash
+kartu kredit	credit card
+kartu debit	debit card
+transfer	bank transfer
+beli	buy
+jual	sell
+tawar	bargain
+nego	negotiate
+pilih	choose
+cari	look for/search
+timbang	weigh
+kilogram	kilogram
+gram	gram
+ons	100 grams
+liter	liter
+potong	piece/cut
+bungkus	pack/wrap
+ikat	bundle/tie
+lembar	sheet
+botol	bottle
+kaleng	can
+kemasan	packaging
+plastik	plastic
+kardus	cardboard
+segar	fresh
+basi	stale/spoiled
+busuk	rotten
+bagus	good quality
+jelek	poor quality
+baru	new/fresh
+lama	old
+organik	organic
+lokal	local
+impor	imported
+buah-buahan	fruits
+sayur-sayuran	vegetables
+daging	meat
+ikan	fish
+ayam	chicken
+telur	eggs
+susu	milk
+roti	bread
+beras	rice
+minyak goreng	cooking oil
+gula	sugar
+garam	salt
+tepung	flour
+mie	noodles
+keju	cheese
+yogurt	yogurt
+mentega	butter
+sabun	soap
+sampo	shampoo
+pasta gigi	toothpaste
+tisu	tissue
+deterjen	detergent
+obat	medicine
+vitamin	vitamin
+minuman	drinks
+jus	juice
+air mineral	mineral water
+kopi	coffee
+teh	tea
+cemilan	snacks
+permen	candy
+cokelat	chocolate
+kue	cake/cookies
+es krim	ice cream
+frozen food	frozen food
+makanan kaleng	canned food
+bumbu	spices
+cabai	chili
+bawang	onion
+bawang putih	garlic
+tomat	tomato
+wortel	carrot
+kentang	potato
+jagung	corn
+timun	cucumber
+selada	lettuce
+apel	apple
+pisang	banana
+jeruk	orange
+anggur	grapes
+mangga	mango
+nanas	pineapple
+semangka	watermelon
+alpukat	avocado
+kelapa	coconut
+durian	durian
+habis	sold out/finished
+kosong	empty/out of stock
+tersedia	available
+ada	have/available
+tidak ada	don't have/unavailable
+cukup	enough
+kurang	not enough/less
+lebih	more
+sedikit	a little
+banyak	a lot/many
+semuanya	everything
+berapa	how much/how many
+total	total
+jumlah	amount/quantity
+ukuran	size
+besar	big
+kecil	small
+sedang	medium
+panjang	long
+pendek	short
+tebal	thick
+tipis	thin
+berat	heavy
+ringan	light
