@@ -41,7 +41,8 @@ export const FileUpload: React.FC<FileUploadProps> = ({ onVocabLoaded }) => {
           filename: file.name,
           items,
           wordCount: items.length,
-          dateAdded: new Date()
+          dateAdded: new Date(),
+          path: 'Uploaded'
         };
         onVocabLoaded(vocabSet);
       } catch (err) {

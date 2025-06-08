@@ -21,11 +21,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "copy-vocab": "node scripts/copy-vocabulary.js",
-    "generate-vocab-index": "node scripts/generate-vocab-index.js",
-    "update-vocab": "npm run copy-vocab && npm run generate-vocab-index",
-    "prestart": "npm run update-vocab",
-    "prebuild": "npm run update-vocab",
+    "build-vocabulary": "node scripts/generate-indexes.js",
+    "prestart": "node scripts/generate-indexes.js",
+    "prebuild": "node scripts/generate-indexes.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

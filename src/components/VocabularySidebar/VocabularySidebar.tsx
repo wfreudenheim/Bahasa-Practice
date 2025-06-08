@@ -37,12 +37,10 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
   const [loading, setLoading] = useState(false);
   const [folderStructure, setFolderStructure] = useState<VocabFolder[]>([]);
 
-  const handleSelectionChange = useCallback((newSelectedSets: VocabSet[]) => {
-    // Filter out any dummy sets used for bulk operations
-    const validSets = newSelectedSets.filter(set => set.id !== 'bulk-deselect');
-    setSelectedSets(validSets);
-    onSelectionChange(validSets);
-  }, [onSelectionChange]);
+  const handleSelectionChange = (newSelectedSets: VocabSet[]) => {
+    setSelectedSets(newSelectedSets);
+    onSelectionChange(newSelectedSets);
+  };
 
   const handleFolderToggle = useCallback((toggledFolder: VocabFolder) => {
     setFolderStructure(prevStructure => {

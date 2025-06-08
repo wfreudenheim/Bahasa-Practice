@@ -11,12 +11,11 @@ export interface VocabularyWord {
 }
 
 export interface VocabularyFile {
-    name: string;
     path: string;
+    name: string;
     words: VocabularyWord[];
-    wordCount: number;
     loaded: boolean;
-    error?: string;
+    wordCount?: number;  // Optional for backward compatibility
 }
 
 export interface VocabularyFolder {
@@ -24,20 +23,24 @@ export interface VocabularyFolder {
     path: string;
     files: VocabularyFile[];
     subfolders: VocabularyFolder[];
+    totalFiles?: number;  // Optional for backward compatibility
 }
 
 export interface VocabularyStructure {
     folders: VocabularyFolder[];
     totalFiles: number;
-    lastLoaded: Date;
+    lastLoaded: string;
 }
 
+// Legacy interfaces maintained for backward compatibility
 export interface VocabSet {
-    name: string;
+    id: string;
     filename: string;
     items: VocabItem[];
-    lastModified: Date;
-    selected: boolean;
+    wordCount: number;
+    dateAdded: Date;
+    path: string;
+    selected?: boolean;
 }
 
 export interface VocabFolder {

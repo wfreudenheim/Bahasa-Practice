@@ -1,5 +1,0 @@
-selamat datang	welcome
-apa kabar	how are you
-baik	good
-terima kasih	thank you
-sama-sama	you're welcome 

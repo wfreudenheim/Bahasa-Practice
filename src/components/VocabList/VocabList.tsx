@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { VocabSet, VocabFolder } from '../../interfaces/vocab';
 import './VocabList.css';
 
@@ -10,7 +10,173 @@ interface VocabListProps {
   onFolderToggle?: (folder: VocabFolder) => void;
 }
 
-export const VocabList: React.FC<VocabListProps> = ({
+const VocabSetItem = memo(({ 
+  set, 
+  isSelected, 
+  isExpanded,
+  onSelect,
+  onToggleExpand,
+  highlightText
+}: { 
+  set: VocabSet;
+  isSelected: boolean;
+  isExpanded: boolean;
+  onSelect: (set: VocabSet) => void;
+  onToggleExpand: (id: string) => void;
+  highlightText: (text: string) => React.ReactNode;
+}) => (
+  <div
+    key={set.id}
+    className={`vocab-set ${isSelected ? 'selected' : ''}`}
+  >
+    <div className="vocab-set-header">
+      <div className="vocab-set-label">
+        <div className="checkbox-container">
+          <input
+            type="checkbox"
+            checked={isSelected}
+            onChange={() => onSelect(set)}
+          />
+        </div>
+        <div className="title-container">
+          <span className="vocab-set-title">{highlightText(set.filename)}</span>
+          <span className="word-count">({set.wordCount} words)</span>
+        </div>
+        <button 
+          className="expand-button"
+          onClick={() => onToggleExpand(set.id)}
+          aria-label={isExpanded ? "Collapse" : "Expand"}
+        >
+          {isExpanded ? '▼' : '▶'}
+        </button>
+      </div>
+    </div>
+    {isExpanded && (
+      <div className="vocab-preview">
+        <table className="vocab-table">
+          <thead>
+            <tr>
+              <th>Indonesian</th>
+              <th>English</th>
+            </tr>
+          </thead>
+          <tbody>
+            {set.items.map((item, index) => (
+              <tr key={index}>
+                <td>{highlightText(item.indonesian)}</td>
+                <td>{highlightText(item.english)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+  </div>
+));
+
+const FolderItem = memo(({ 
+  folder,
+  selectedSets,
+  expandedSets,
+  onFolderToggle,
+  onSetSelect,
+  onSetExpand,
+  highlightText
+}: {
+  folder: VocabFolder;
+  selectedSets: VocabSet[];
+  expandedSets: Set<string>;
+  onFolderToggle: (folder: VocabFolder, e: React.MouseEvent) => void;
+  onSetSelect: (set: VocabSet) => void;
+  onSetExpand: (id: string) => void;
+  highlightText: (text: string) => React.ReactNode;
+}) => {
+  const getAllSets = (folder: VocabFolder): VocabSet[] => {
+    const sets = [...folder.sets];
+    folder.subfolders.forEach(subfolder => {
+      sets.push(...getAllSets(subfolder));
+    });
+    return sets;
+  };
+
+  const folderSets = getAllSets(folder);
+  const isAllSelected = folderSets.length > 0 && folderSets.every(set => 
+    selectedSets.some(s => s.id === set.id)
+  );
+  const isPartiallySelected = !isAllSelected && folderSets.some(set => 
+    selectedSets.some(s => s.id === set.id)
+  );
+
+  const handleFolderSelect = () => {
+    if (isAllSelected) {
+      onSetSelect(folderSets[0]); // This will trigger deselection of all sets
+    } else {
+      const setsToAdd = folderSets.filter(set => 
+        !selectedSets.some(s => s.id === set.id)
+      );
+      setsToAdd.forEach(set => onSetSelect(set));
+    }
+  };
+
+  return (
+    <div key={folder.path} className="folder">
+      <div className="folder-header">
+        <div className="folder-checkbox">
+          <input
+            type="checkbox"
+            checked={isAllSelected}
+            ref={el => {
+              if (el) {
+                el.indeterminate = isPartiallySelected;
+              }
+            }}
+            onChange={handleFolderSelect}
+            onClick={e => e.stopPropagation()}
+          />
+        </div>
+        <div 
+          className="folder-title" 
+          onClick={(e) => onFolderToggle(folder, e)}
+        >
+          <span className="folder-icon">{folder.isExpanded ? '▼' : '▶'}</span>
+          <span className="folder-name">{highlightText(folder.name)}</span>
+          <span className="folder-count">
+            ({folderSets.length} {folderSets.length === 1 ? 'set' : 'sets'})
+          </span>
+        </div>
+      </div>
+      {folder.isExpanded && (
+        <div className="folder-content">
+          {folder.sets.map(set => (
+            <VocabSetItem
+              key={set.id}
+              set={set}
+              isSelected={selectedSets.some(s => s.id === set.id)}
+              isExpanded={expandedSets.has(set.id)}
+              onSelect={onSetSelect}
+              onToggleExpand={onSetExpand}
+              highlightText={highlightText}
+            />
+          ))}
+          {folder.subfolders.map(subfolder => (
+            <FolderItem
+              key={subfolder.path}
+              folder={subfolder}
+              selectedSets={selectedSets}
+              expandedSets={expandedSets}
+              onFolderToggle={onFolderToggle}
+              onSetSelect={onSetSelect}
+              onSetExpand={onSetExpand}
+              highlightText={highlightText}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+});
+
+export const VocabList: React.FC<VocabListProps> = memo(({
   vocabSets,
   selectedSets,
   onSelectionChange,
@@ -31,37 +197,6 @@ export const VocabList: React.FC<VocabListProps> = ({
       return newExpanded;
     });
   }, []);
-
-  const getAllSets = (folder: VocabFolder): VocabSet[] => {
-    const sets = [...folder.sets];
-    folder.subfolders.forEach(subfolder => {
-      sets.push(...getAllSets(subfolder));
-    });
-    return sets;
-  };
-
-  const handleFolderSelect = (folder: VocabFolder, e: React.MouseEvent) => {
-    e.stopPropagation();
-    const folderSets = getAllSets(folder);
-    const isAllSelected = folderSets.every(set => 
-      selectedSets.some(s => s.id === set.id)
-    );
-
-    let newSelectedSets: VocabSet[];
-    if (isAllSelected) {
-      // Deselect all sets in this folder
-      newSelectedSets = selectedSets.filter(set => 
-        !folderSets.some(fs => fs.id === set.id)
-      );
-    } else {
-      // Select all sets in this folder
-      const setsToAdd = folderSets.filter(set => 
-        !selectedSets.some(s => s.id === set.id)
-      );
-      newSelectedSets = [...selectedSets, ...setsToAdd];
-    }
-    onSelectionChange(newSelectedSets);
-  };
 
   const handleSetSelect = useCallback((set: VocabSet) => {
     const isSelected = selectedSets.some(s => s.id === set.id);
@@ -93,100 +228,6 @@ export const VocabList: React.FC<VocabListProps> = ({
     );
   }, [searchQuery]);
 
-  const renderFolder = (folder: VocabFolder) => {
-    const folderSets = getAllSets(folder);
-    const isAllSelected = folderSets.length > 0 && folderSets.every(set => 
-      selectedSets.some(s => s.id === set.id)
-    );
-    const isPartiallySelected = !isAllSelected && folderSets.some(set => 
-      selectedSets.some(s => s.id === set.id)
-    );
-
-    return (
-      <div key={folder.path} className="folder">
-        <div className="folder-header">
-          <div className="folder-checkbox">
-            <input
-              type="checkbox"
-              checked={isAllSelected}
-              ref={el => {
-                if (el) {
-                  el.indeterminate = isPartiallySelected;
-                }
-              }}
-              onChange={() => {}} // Required for controlled component
-              onClick={(e) => handleFolderSelect(folder, e)}
-            />
-          </div>
-          <div 
-            className="folder-title" 
-            onClick={(e) => handleFolderToggle(folder, e)}
-          >
-            <span className="folder-icon">{folder.isExpanded ? '▼' : '▶'}</span>
-            <span className="folder-name">{highlightText(folder.name)}</span>
-            <span className="folder-count">
-              ({folderSets.length} {folderSets.length === 1 ? 'set' : 'sets'})
-            </span>
-          </div>
-        </div>
-        {folder.isExpanded && (
-          <div className="folder-content">
-            {folder.sets.map(set => (
-              <div
-                key={set.id}
-                className={`vocab-set ${selectedSets.some(s => s.id === set.id) ? 'selected' : ''}`}
-              >
-                <div className="vocab-set-header">
-                  <div className="vocab-set-label">
-                    <div className="checkbox-container">
-                      <input
-                        type="checkbox"
-                        checked={selectedSets.some(s => s.id === set.id)}
-                        onChange={() => handleSetSelect(set)}
-                      />
-                    </div>
-                    <div className="title-container">
-                      <span className="vocab-set-title">{highlightText(set.filename)}</span>
-                      <span className="word-count">({set.wordCount} words)</span>
-                    </div>
-                    <button 
-                      className="expand-button"
-                      onClick={() => toggleSet(set.id)}
-                      aria-label={expandedSets.has(set.id) ? "Collapse" : "Expand"}
-                    >
-                      {expandedSets.has(set.id) ? '▼' : '▶'}
-                    </button>
-                  </div>
-                </div>
-                {expandedSets.has(set.id) && (
-                  <div className="vocab-preview">
-                    <table className="vocab-table">
-                      <thead>
-                        <tr>
-                          <th>Indonesian</th>
-                          <th>English</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {set.items.map((item, index) => (
-                          <tr key={index}>
-                            <td>{highlightText(item.indonesian)}</td>
-                            <td>{highlightText(item.english)}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </div>
-            ))}
-            {folder.subfolders.map(renderFolder)}
-          </div>
-        )}
-      </div>
-    );
-  };
-
   if (!folders.length && !vocabSets.length) {
     return <div className="no-vocab">No vocabulary sets available</div>;
   }
@@ -211,7 +252,18 @@ export const VocabList: React.FC<VocabListProps> = ({
           </button>
         )}
       </div>
-      {folders.map(renderFolder)}
+      {folders.map(folder => (
+        <FolderItem
+          key={folder.path}
+          folder={folder}
+          selectedSets={selectedSets}
+          expandedSets={expandedSets}
+          onFolderToggle={handleFolderToggle}
+          onSetSelect={handleSetSelect}
+          onSetExpand={toggleSet}
+          highlightText={highlightText}
+        />
+      ))}
     </div>
   );
-}; 
+}); 

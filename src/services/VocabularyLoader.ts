@@ -136,10 +136,28 @@ export class VocabularyLoader {
         folders.push(folder);
       }
 
-      return { folders };
+      // Calculate total files
+      const totalFiles = folders.reduce((sum, folder) => {
+        const countFilesInFolder = (f: VocabularyFolder): number => {
+          return f.files.length + f.subfolders.reduce((subSum, subFolder) => 
+            subSum + countFilesInFolder(subFolder), 0
+          );
+        };
+        return sum + countFilesInFolder(folder);
+      }, 0);
+
+      return { 
+        folders,
+        totalFiles,
+        lastLoaded: new Date().toISOString()
+      };
     } catch (error) {
       console.error('Error scanning vocabulary structure:', error);
-      return { folders: [] };
+      return { 
+        folders: [],
+        totalFiles: 0,
+        lastLoaded: new Date().toISOString()
+      };
     }
   }
 } 
