@@ -14,6 +14,11 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, childre
     onClose();
   };
 
+  const handleClose = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onClose();
+  };
+
   return (
     <>
       <div 
@@ -21,7 +26,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, childre
         onClick={handleOverlayClick}
       />
       <div className={`mobile-menu ${isOpen ? 'open' : ''}`}>
-        <button className="close-button" onClick={onClose}>×</button>
+        <button className="close-button" onClick={handleClose}>×</button>
         <div className="mobile-menu-content">
           {children}
         </div>
