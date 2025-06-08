@@ -14,51 +14,59 @@ export class VocabularyLoader {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const content = await response.text();
-      return content
-        .split('\n')
-        .filter(line => line.trim())
-        .map(line => {
-          const [indonesian, english] = line.split('\t').map(s => s.trim());
-          if (!indonesian || !english) {
-            console.warn(`Invalid line in ${filePath}: ${line}`);
-            return null;
-          }
-          return { indonesian, english };
-        })
-        .filter((word): word is VocabularyWord => word !== null);
+      return this.parseVocabContent(content, filePath);
     } catch (error) {
       console.error(`Error reading vocab file ${filePath}:`, error);
       return [];
     }
   }
 
-  public async loadMultipleFiles(files: File[]): Promise<VocabularyFile[]> {
+  private parseVocabContent(content: string, source: string): VocabularyWord[] {
+    return content
+      .split('\n')
+      .filter(line => line.trim())
+      .map(line => {
+        const [indonesian, english] = line.split('\t').map(s => s.trim());
+        if (!indonesian || !english) {
+          console.warn(`Invalid line in ${source}: ${line}`);
+          return null;
+        }
+        return { indonesian, english };
+      })
+      .filter((word): word is VocabularyWord => word !== null);
+  }
+
+  public async loadMultipleFiles(files: (File | string)[]): Promise<VocabularyFile[]> {
     const loadedFiles: VocabularyFile[] = [];
 
     for (const file of files) {
       try {
-        const content = await file.text();
-        const words = content
-          .split('\n')
-          .filter(line => line.trim())
-          .map(line => {
-            const [indonesian, english] = line.split('\t').map(s => s.trim());
-            if (!indonesian || !english) {
-              console.warn(`Invalid line in ${file.name}: ${line}`);
-              return null;
-            }
-            return { indonesian, english };
-          })
-          .filter((word): word is VocabularyWord => word !== null);
+        let content: string;
+        let fileName: string;
 
+        if (typeof file === 'string') {
+          // Handle file path
+          const response = await fetch(file);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          content = await response.text();
+          fileName = file.split('/').pop() || file;
+        } else {
+          // Handle File object
+          content = await file.text();
+          fileName = file.name;
+        }
+
+        const words = this.parseVocabContent(content, fileName);
         loadedFiles.push({
-          path: file.name,
-          name: file.name,
+          path: fileName,
+          name: fileName,
           words,
           loaded: true
         });
       } catch (error) {
-        console.error(`Error loading file ${file.name}:`, error);
+        console.error(`Error loading file ${typeof file === 'string' ? file : file.name}:`, error);
       }
     }
 
