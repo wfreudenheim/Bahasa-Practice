@@ -24,13 +24,15 @@
   left: -100%;
   width: 85%;
   max-width: 400px;
-  height: 100vh;
+  height: 100%;
+  height: -webkit-fill-available;
   background-color: white;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
   transition: left 0.3s ease;
   z-index: 999;
   overflow-y: auto;
   visibility: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-menu.open {
@@ -42,10 +44,10 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: none;
-  background: none;
+  background: rgba(0, 0, 0, 0.05);
   font-size: 24px;
   cursor: pointer;
   color: #333;
@@ -53,6 +55,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  z-index: 1000;
   transition: background-color 0.2s ease;
 }
 

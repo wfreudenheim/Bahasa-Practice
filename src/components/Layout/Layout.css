@@ -1,7 +1,8 @@
 .layout {
   display: flex;
   width: 100%;
-  height: calc(100vh - 60px); /* Adjust based on header height */
+  height: 100%;
+  min-height: -webkit-fill-available;
   background-color: #f5f5f5;
   position: relative;
 }
@@ -59,6 +60,11 @@
 
 /* Mobile Styles */
 @media (max-width: 768px) {
+  .layout {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
   .layout-sidebar {
     display: none;
   }
@@ -66,13 +72,30 @@
   .layout-main {
     margin-left: 0;
     padding-top: 40px;
+    -webkit-overflow-scrolling: touch;
   }
 
   .mobile-menu-button {
     display: flex;
+    position: fixed;
+    top: calc(70px + env(safe-area-inset-top));
+    left: 20px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 997;
+    cursor: pointer;
+    padding: 8px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .layout-main.full-width {
     padding-left: 20px;
+    padding-bottom: env(safe-area-inset-bottom);
   }
 } 
