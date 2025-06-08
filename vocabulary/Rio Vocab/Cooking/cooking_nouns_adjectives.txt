@@ -1,0 +1,71 @@
+sosis	sausage
+garam	salt
+nasi	cooked rice
+harum	fragrant
+rata	evenly mixed
+aroma	aroma/smell
+sedap	delicious/tasty
+bahan	ingredients
+siung	clove
+halus	fine/smooth
+butir	piece/grain
+batang	stalk/piece
+penyedap rasa	flavor enhancer
+kecap ikan	fish sauce
+merica	pepper
+matang	cooked/done
+mentah	raw
+panas	hot
+dingin	cold
+asin	salty
+manis	sweet
+asam	sour
+pedas	spicy
+pahit	bitter
+gurih	savory
+renyah	crispy
+lembut	soft
+keras	hard
+kenyal	chewy
+creamy	creamy
+kental	thick
+encer	thin/watery
+wajan	pan
+panci	pot
+spatula	spatula
+sendok	spoon
+pisau	knife
+talenan	cutting board
+kompor	stove
+oven	oven
+blender	blender
+piring	plate
+mangkuk	bowl
+gelas	glass
+cangkir	cup
+sendok makan	tablespoon
+sendok teh	teaspoon
+sejumput	pinch
+secukupnya	to taste
+sampai	until
+selama	for/during
+kemudian	then
+lalu	then
+sebelum	before
+sesudah	after
+sambil	while
+hingga	until
+menit	minute
+jam	hour
+derajat	degree
+celsius	celsius
+api kecil	low heat
+api sedang	medium heat
+api besar	high heat
+minyak	oil
+mentega	butter
+margarin	margarine
+santan	coconut milk
+kaldu	broth/stock
+bumbu	spice/seasoning
+rempah	spice
