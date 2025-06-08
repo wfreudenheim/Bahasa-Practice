@@ -11,28 +11,43 @@
   font-size: 1.5rem;
 }
 
-.vocabulary-sidebar h3 {
-  margin: 0 0 10px 0;
-  color: #333;
-  font-size: 1.1rem;
-}
-
 .upload-section {
   padding: 15px;
-  background-color: #f8f8f8;
+  background: #f8f8f8;
   border-radius: 8px;
+}
+
+.upload-section h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  color: #333;
 }
 
 .available-sets {
   flex: 1;
   overflow-y: auto;
+  padding: 0 4px;
+}
+
+/* Folder structure styling */
+.folder-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.folder-item {
+  margin: 4px 0;
+}
+
+.folder-content {
+  margin-left: 16px; /* Standard indentation for nested items */
 }
 
 .selection-summary {
-  padding: 12px;
-  background-color: #f8f8f8;
-  border-radius: 4px;
-  margin-top: auto;
+  padding: 15px;
+  background: #f8f8f8;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -40,29 +55,73 @@
 
 .selection-summary p {
   margin: 0;
-  color: #2e7d32;
-  font-weight: 500;
+  color: #666;
   font-size: 0.9rem;
 }
 
 .clear-selection {
-  background: none;
-  border: none;
-  color: #666;
-  font-size: 0.85rem;
-  padding: 4px 0;
-  cursor: pointer;
-  text-align: left;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
+  padding: 6px 12px;
+  border: none;
+  background: #ffebee;
+  color: #c62828;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  align-self: flex-start;
 }
 
-.clear-selection:hover {
-  color: #d32f2f;
+.clear-selection:hover:not(:disabled) {
+  background: #ffcdd2;
 }
 
-.clear-selection svg {
-  width: 14px;
-  height: 14px;
+.clear-selection:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .vocabulary-sidebar {
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 60px;
+  }
+
+  .upload-section {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .available-sets {
+    padding: 0 15px;
+  }
+
+  .selection-summary {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    border-radius: 0;
+    padding: 12px 20px;
+    z-index: 10;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .selection-summary p {
+    font-size: 0.85rem;
+  }
+
+  .clear-selection {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    width: auto;
+  }
 } 
