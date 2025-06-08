@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const vocabRoot = path.join(__dirname, '..', 'vocabulary');
+const vocabRoot = path.join(__dirname, '..', 'public', 'vocabulary');
 const outputDir = path.join(__dirname, '..', 'src', 'data');
 
 // Create output directory if it doesn't exist

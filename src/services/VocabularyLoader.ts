@@ -1,99 +1,102 @@
 import { VocabularyStructure, VocabularyFolder, VocabularyFile, VocabularyWord } from '../types/vocabulary';
 
 export class VocabularyLoader {
-    private structure: VocabularyStructure | null = null;
+  private vocabularyPath: string;
 
-    private async fetchDirectoryStructure(path: string): Promise<string[]> {
-        try {
-            const response = await fetch(`${path}/index.json`);
-            if (!response.ok) {
-                throw new Error(`Failed to load directory structure: ${path}`);
-            }
-            return await response.json();
-        } catch (error) {
-            console.error('Error loading directory structure:', error);
-            return [];
+  constructor() {
+    this.vocabularyPath = '/vocabulary'; // Path relative to public directory
+  }
+
+  private async readVocabFile(filePath: string): Promise<VocabularyWord[]> {
+    try {
+      const response = await fetch(filePath);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const content = await response.text();
+      return content
+        .split('\n')
+        .filter(line => line.trim())
+        .map(line => {
+          const [indonesian, english] = line.split('\t').map(s => s.trim());
+          if (!indonesian || !english) {
+            console.warn(`Invalid line in ${filePath}: ${line}`);
+            return null;
+          }
+          return { indonesian, english };
+        })
+        .filter((word): word is VocabularyWord => word !== null);
+    } catch (error) {
+      console.error(`Error reading vocab file ${filePath}:`, error);
+      return [];
+    }
+  }
+
+  private async scanFolder(folderPath: string): Promise<VocabularyFolder> {
+    try {
+      const response = await fetch(`${folderPath}/index.json`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const folderData = await response.json();
+      
+      const files: VocabularyFile[] = [];
+      const subfolders: VocabularyFolder[] = [];
+
+      // Process files
+      for (const file of folderData.files || []) {
+        if (file.name.endsWith('.txt')) {
+          const words = await this.readVocabFile(`${folderPath}/${file.name}`);
+          files.push({
+            path: `${folderPath}/${file.name}`,
+            name: file.name,
+            words,
+            loaded: words.length > 0
+          });
         }
+      }
+
+      // Process subfolders recursively
+      for (const subfolder of folderData.folders || []) {
+        const subfolderData = await this.scanFolder(`${folderPath}/${subfolder}`);
+        subfolders.push(subfolderData);
+      }
+
+      return {
+        name: folderPath.split('/').pop() || '',
+        path: folderPath,
+        files,
+        subfolders
+      };
+    } catch (error) {
+      console.error(`Error scanning folder ${folderPath}:`, error);
+      return {
+        name: folderPath.split('/').pop() || '',
+        path: folderPath,
+        files: [],
+        subfolders: []
+      };
     }
+  }
 
-    async scanVocabularyStructure(): Promise<VocabularyStructure> {
-        const folders: VocabularyFolder[] = [];
-        let totalFiles = 0;
+  public async scanVocabularyStructure(): Promise<VocabularyStructure> {
+    try {
+      const response = await fetch(`${this.vocabularyPath}/index.json`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      
+      const folders: VocabularyFolder[] = [];
+      for (const folderName of data.folders || []) {
+        const folder = await this.scanFolder(`${this.vocabularyPath}/${folderName}`);
+        folders.push(folder);
+      }
 
-        // Known folder names
-        const knownFolders = ['week01', 'week02', 'themes', 'advanced'];
-
-        for (const folderName of knownFolders) {
-            const files = await this.fetchDirectoryStructure(`/vocabulary/${folderName}`);
-            
-            if (files.length > 0) {
-                const folder: VocabularyFolder = {
-                    name: folderName,
-                    path: `/vocabulary/${folderName}`,
-                    files: files.map(filename => ({
-                        name: filename,
-                        path: `/vocabulary/${folderName}/${filename}`,
-                        words: [],
-                        wordCount: 0,
-                        loaded: false
-                    })),
-                    subfolders: []
-                };
-                
-                totalFiles += files.length;
-                folders.push(folder);
-            }
-        }
-
-        this.structure = {
-            folders,
-            totalFiles,
-            lastLoaded: new Date()
-        };
-
-        return this.structure;
+      return { folders };
+    } catch (error) {
+      console.error('Error scanning vocabulary structure:', error);
+      return { folders: [] };
     }
-
-    async loadVocabularyFile(path: string): Promise<VocabularyFile> {
-        try {
-            const response = await fetch(path);
-            if (!response.ok) {
-                throw new Error(`Failed to load file: ${path}`);
-            }
-
-            const content = await response.text();
-            const words: VocabularyWord[] = content
-                .trim()
-                .split('\n')
-                .map(line => {
-                    const [indonesian, english] = line.trim().split('\t');
-                    return { indonesian, english };
-                });
-
-            return {
-                name: path.split('/').pop() || '',
-                path,
-                words,
-                wordCount: words.length,
-                loaded: true
-            };
-        } catch (error) {
-            return {
-                name: path.split('/').pop() || '',
-                path,
-                words: [],
-                wordCount: 0,
-                loaded: false,
-                error: error instanceof Error ? error.message : 'Unknown error'
-            };
-        }
-    }
-
-    async loadMultipleFiles(paths: string[]): Promise<VocabularyFile[]> {
-        return Promise.all(paths.map(path => this.loadVocabularyFile(path)));
-    }
-
-    async refreshStructure(): Promise<VocabularyStructure> {
-        return this.scanVocabularyStructure();
-    }
+  }
 } 
