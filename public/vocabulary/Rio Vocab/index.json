@@ -1,6 +1,10 @@
 {
   "files": [
     {
+      "name": "emotions_feelings_vocab.txt",
+      "size": 381
+    },
+    {
       "name": "street_vocabulary.txt",
       "size": 459
     }

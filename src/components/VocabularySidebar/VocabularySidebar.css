@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 20px;
   position: relative;
+  overflow: hidden;
 }
 
 .vocabulary-sidebar h2 {
@@ -62,6 +63,7 @@
   margin: 0;
   color: #666;
   font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .clear-selection {
