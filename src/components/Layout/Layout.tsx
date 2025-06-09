@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, cloneElement } from 'react';
+import React, { ReactNode, useState, useCallback, cloneElement, memo } from 'react';
 import { MobileMenu } from './MobileMenu';
 import './Layout.css';
 
@@ -8,16 +8,25 @@ interface LayoutProps {
   hideSidebar?: boolean;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ sidebar, main, hideSidebar = false }) => {
+export const Layout = memo(({ sidebar, main, hideSidebar = false }: LayoutProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Only show mobile menu button when sidebar should be visible
   const showMobileMenuButton = !hideSidebar;
 
+  const handleMobileMenuToggle = useCallback(() => {
+    setIsMobileMenuOpen(true);
+  }, []);
+
+  const handleMobileMenuClose = useCallback(() => {
+    setIsMobileMenuOpen(false);
+  }, []);
+
   // Clone sidebar element with onClose prop
-  const sidebarWithClose = cloneElement(sidebar, { 
-    onClose: () => setIsMobileMenuOpen(false)
-  });
+  const sidebarWithClose = React.useMemo(() => 
+    cloneElement(sidebar, { onClose: handleMobileMenuClose }),
+    [sidebar, handleMobileMenuClose]
+  );
 
   return (
     <div className="layout">
@@ -25,7 +34,7 @@ export const Layout: React.FC<LayoutProps> = ({ sidebar, main, hideSidebar = fal
       {showMobileMenuButton && (
         <button 
           className="mobile-menu-button"
-          onClick={() => setIsMobileMenuOpen(true)}
+          onClick={handleMobileMenuToggle}
           aria-label="Open menu"
         >
           <span></span>
@@ -38,7 +47,7 @@ export const Layout: React.FC<LayoutProps> = ({ sidebar, main, hideSidebar = fal
       {showMobileMenuButton && (
         <MobileMenu
           isOpen={isMobileMenuOpen}
-          onClose={() => setIsMobileMenuOpen(false)}
+          onClose={handleMobileMenuClose}
         >
           {sidebarWithClose}
         </MobileMenu>
@@ -57,4 +66,4 @@ export const Layout: React.FC<LayoutProps> = ({ sidebar, main, hideSidebar = fal
       </main>
     </div>
   );
-}; 
+}); 

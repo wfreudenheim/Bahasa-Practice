@@ -6,6 +6,11 @@ A modular, browser-based vocabulary practice application for Indonesian language
 
 - Organized vocabulary management with folder hierarchy
 - Multiple vocabulary selection and combination
+- Responsive design optimized for both desktop and mobile devices:
+  - Full iOS support with safe area insets
+  - Smooth mobile menu transitions
+  - Touch-optimized interface
+  - Consistent state management across screen sizes
 - Interactive learning games and exercises:
   - Flashcard Practice Game:
     - Randomized vocabulary presentation
@@ -21,6 +26,24 @@ A modular, browser-based vocabulary practice application for Indonesian language
     - AI-Generated Practice Games
 - Progress tracking and spaced repetition
 - Modern, responsive user interface
+
+## Recent Updates
+
+### Mobile Interface Improvements (Latest)
+- Enhanced mobile menu functionality with proper close button visibility
+- Added iOS-specific optimizations:
+  - Safe area insets for notches and home indicators
+  - Proper viewport height handling
+  - Smooth scrolling behavior
+- Improved selection state persistence between mobile and desktop views
+- Fixed vocabulary list scrolling issues on mobile
+- Enhanced search functionality with proper folder expansion
+
+### Desktop Interface
+- Maintained consistent layout and spacing
+- Fixed text cropping issues in selection summary
+- Optimized sidebar width and content display
+- Improved overall responsiveness
 
 ## Vocabulary System
 
@@ -222,3 +245,34 @@ The application uses Claude 3 Haiku for efficient, cost-effective content genera
 - Minimal formatting instructions
 
 This configuration balances quality and cost, typically using about 1-2 cents per request.
+
+## Mobile Development Guidelines
+
+When contributing to the mobile interface, follow these guidelines:
+
+1. iOS Safe Areas:
+   - Use `env(safe-area-inset-*)` for proper spacing
+   - Implement `-webkit-fill-available` for height calculations
+   - Handle notch and home indicator areas
+
+2. Touch Targets:
+   - Minimum size of 44x44px for interactive elements
+   - Proper spacing between touch targets
+   - Clear visual feedback on interaction
+
+3. Mobile Menu:
+   - Smooth transitions for opening/closing
+   - Proper z-index management
+   - Background overlay with pointer events
+   - Visible close button with adequate touch area
+
+4. Scrolling:
+   - Implement `-webkit-overflow-scrolling: touch`
+   - Handle momentum scrolling properly
+   - Maintain fixed elements during scroll
+
+5. Responsive Design:
+   - Use mobile-first approach
+   - Implement proper breakpoints
+   - Test on various screen sizes
+   - Ensure consistent behavior across devices

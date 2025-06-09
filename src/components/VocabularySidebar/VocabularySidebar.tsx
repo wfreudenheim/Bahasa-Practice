@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, memo } from 'react';
 import { VocabSet, VocabFolder } from '../../interfaces/vocab';
 import { VocabList } from '../VocabList/VocabList';
 import { VocabularyLoader } from '../../services/VocabularyLoader';
+import { SelectionManager } from '../../services/SelectionManager';
 import './VocabularySidebar.css';
 
 interface VocabularySidebarProps {
@@ -10,6 +11,7 @@ interface VocabularySidebarProps {
   onVocabLoaded: (vocabSet: VocabSet) => void;
   onSelectionChange: (selectedSets: VocabSet[]) => void;
   onClose?: () => void;
+  selectionManager: SelectionManager;
 }
 
 // Simple X icon component
@@ -30,37 +32,52 @@ const formatDisplayName = (filename: string): string => {
     .join(' '); // Join with spaces
 };
 
-export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({ 
+export const VocabularySidebar = memo(({ 
   vocabSets, 
   selectedSets: externalSelectedSets,
   onVocabLoaded,
   onSelectionChange,
-  onClose
-}) => {
+  onClose,
+  selectionManager
+}: VocabularySidebarProps) => {
   const [loading, setLoading] = useState(false);
   const [folderStructure, setFolderStructure] = useState<VocabFolder[]>([]);
 
-  const handleSelectionChange = (newSelectedSets: VocabSet[]) => {
+  const handleSelectionChange = useCallback((newSelectedSets: VocabSet[]) => {
     onSelectionChange(newSelectedSets);
-  };
+  }, [onSelectionChange]);
 
   const handleFolderToggle = useCallback((toggledFolder: VocabFolder) => {
+    console.log('Toggling folder:', toggledFolder.path);
     setFolderStructure(prevStructure => {
       const updateFolders = (folders: VocabFolder[]): VocabFolder[] => {
         return folders.map(folder => {
           if (folder.path === toggledFolder.path) {
+            console.log('Found folder to toggle:', folder.path, 'current state:', folder.isExpanded);
+            // Create a new folder object with updated isExpanded state
             return {
               ...folder,
-              isExpanded: !folder.isExpanded
+              isExpanded: !folder.isExpanded,
+              // Keep the same sets and subfolders
+              sets: [...folder.sets],
+              subfolders: folder.subfolders.map(sub => ({...sub}))
             };
           }
-          return {
-            ...folder,
-            subfolders: updateFolders(folder.subfolders)
-          };
+          if (folder.subfolders.length > 0) {
+            // Create a new folder object with updated subfolders
+            return {
+              ...folder,
+              sets: [...folder.sets],
+              subfolders: updateFolders(folder.subfolders)
+            };
+          }
+          // Create a new folder object for unchanged folders
+          return {...folder, sets: [...folder.sets], subfolders: [...folder.subfolders]};
         });
       };
-      return updateFolders(prevStructure);
+      const newStructure = updateFolders(prevStructure);
+      console.log('New structure:', JSON.stringify(newStructure, null, 2));
+      return newStructure;
     });
   }, []);
 
@@ -109,6 +126,7 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
 
         // Convert all top-level folders
         const folders = structure.folders.map(folder => convertFolder(folder));
+        console.log('Initial folder structure:', JSON.stringify(folders, null, 2));
         setFolderStructure(folders);
       } catch (error) {
         console.error('Failed to load vocabulary structure:', error);
@@ -119,6 +137,25 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
 
     loadVocabularyStructure();
   }, [onVocabLoaded]);
+
+  const handleClearSelection = useCallback(() => {
+    onSelectionChange(selectionManager.clearSelection());
+  }, [onSelectionChange, selectionManager]);
+
+  // Debug logging to track folder structure changes
+  useEffect(() => {
+    const logFolderState = (folders: VocabFolder[], level = 0) => {
+      folders.forEach(folder => {
+        console.log(
+          ' '.repeat(level * 2) + 
+          `${folder.name}: ${folder.isExpanded ? 'expanded' : 'collapsed'}`
+        );
+        logFolderState(folder.subfolders, level + 1);
+      });
+    };
+    console.log('Folder structure updated:');
+    logFolderState(folderStructure);
+  }, [folderStructure]);
 
   return (
     <div className="vocabulary-sidebar">
@@ -142,20 +179,31 @@ export const VocabularySidebar: React.FC<VocabularySidebarProps> = ({
             onSelectionChange={handleSelectionChange}
             folders={folderStructure}
             onFolderToggle={handleFolderToggle}
+            selectionManager={selectionManager}
           />
         )}
       </div>
       <div className="selection-summary">
         <button 
           className="clear-selection"
-          onClick={() => onSelectionChange([])}
+          onClick={handleClearSelection}
           disabled={externalSelectedSets.length === 0}
         >
           <XIcon /> Clear selection
         </button>
-        <p>Selected: {externalSelectedSets.length} sets</p>
-        <p>{externalSelectedSets.reduce((sum, set) => sum + set.wordCount, 0)} words total</p>
+        {externalSelectedSets.length > 0 && (
+          <>
+            <p>Selected: {externalSelectedSets.length} {externalSelectedSets.length === 1 ? 'set' : 'sets'}</p>
+            <p>{externalSelectedSets.reduce((sum, set) => sum + (set.wordCount || 0), 0)} words total</p>
+          </>
+        )}
       </div>
     </div>
   );
-}; 
+}, (prevProps, nextProps) => {
+  // Custom comparison function for memo
+  return prevProps.vocabSets === nextProps.vocabSets &&
+         prevProps.selectedSets === nextProps.selectedSets &&
+         prevProps.onVocabLoaded === nextProps.onVocabLoaded &&
+         prevProps.onSelectionChange === nextProps.onSelectionChange;
+}); 

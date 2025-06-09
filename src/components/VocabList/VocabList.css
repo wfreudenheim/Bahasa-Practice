@@ -1,12 +1,7 @@
 .vocab-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 16px;
-  height: 100%;
+  padding: 1rem;
   overflow-y: auto;
-  position: relative;
-  -webkit-overflow-scrolling: touch;
+  height: 100%;
 }
 
 .vocab-list-header {
@@ -28,9 +23,7 @@
 }
 
 .folder {
-  border: 1px solid #eee;
-  border-radius: 4px;
-  margin-bottom: 4px;
+  margin-bottom: 0.5rem;
 }
 
 .folder .folder {
@@ -40,11 +33,10 @@
 .folder-header {
   display: flex;
   align-items: center;
-  padding: 8px;
-  cursor: pointer;
-  user-select: none;
-  background: #f8f9fa;
-  border-radius: 4px 4px 0 0;
+  padding: 4px 8px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  margin-bottom: 2px;
 }
 
 .folder-checkbox {
@@ -53,9 +45,11 @@
   align-items: center;
 }
 
-.folder-checkbox input[type="checkbox"] {
+.folder-checkbox input[type="checkbox"],
+.checkbox-container input[type="checkbox"] {
   width: 16px;
   height: 16px;
+  margin: 0;
   cursor: pointer;
 }
 
@@ -63,110 +57,113 @@
   display: flex;
   align-items: center;
   flex: 1;
-  gap: 8px;
+  gap: 4px;
 }
 
 .folder-icon {
-  font-size: 12px;
+  font-size: 0.8rem;
   color: #666;
-  width: 16px;
-  text-align: center;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+}
+
+.folder-info {
+  flex: 1;
+  min-width: 0;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.folder-info:hover {
+  background-color: rgba(0, 0, 0, 0.02);
 }
 
 .folder-name {
   font-weight: 500;
-  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
 }
 
 .folder-count {
   color: #666;
-  font-size: 0.9em;
+  font-size: 0.75rem;
+  margin-top: 0.1rem;
 }
 
 .folder-content {
-  padding: 8px;
-  padding-left: 32px;
-  transform: translateZ(0);
-  transition: height 0.2s ease-out;
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
 }
 
 .vocab-set {
+  background: #fff;
   border: 1px solid #eee;
   border-radius: 4px;
-  margin-bottom: 4px;
-  background: white;
+  margin-bottom: 2px;
 }
 
 .vocab-set.selected {
-  border-color: #2196F3;
-  background-color: #e3f2fd;
+  background-color: #f8f9ff;
+  border-color: #e6e8f0;
 }
 
 .vocab-set-header {
-  padding: 8px;
+  padding: 2px 8px !important;
 }
 
 .vocab-set-label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.checkbox-container {
-  display: flex;
-  align-items: center;
-}
-
-.checkbox-container input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.title-container {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.vocab-set-title {
-  font-weight: 500;
-  color: #333;
-}
-
-.word-count {
-  color: #666;
-  font-size: 0.9em;
+  display: grid !important;
+  grid-template-columns: 20px 1fr 20px !important;
+  align-items: center !important;
+  gap: 4px !important;
+  height: 24px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: unset !important;
 }
 
 .expand-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px 8px;
-  color: #666;
-  font-size: 12px;
-}
-
-.expand-button:hover {
-  background: #f5f5f5;
-  border-radius: 4px;
+  width: 20px !important;
+  height: 20px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  border: none !important;
+  color: #666 !important;
+  cursor: pointer !important;
+  border-radius: 4px !important;
+  font-size: 0.8rem !important;
+  transition: background-color 0.2s !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
 }
 
 .vocab-preview {
-  padding: 8px;
+  padding: 0.75rem;
   border-top: 1px solid #eee;
+  background: #fafafa;
 }
 
 .vocab-table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 0.9rem;
 }
 
 .vocab-table th,
 .vocab-table td {
-  padding: 8px;
+  padding: 0.5rem;
   text-align: left;
   border-bottom: 1px solid #eee;
 }
@@ -174,38 +171,31 @@
 .vocab-table th {
   font-weight: 500;
   color: #666;
-  background: #f8f9fa;
 }
 
 .highlight {
   background-color: #fff3cd;
-  padding: 0 2px;
+  padding: 0.1rem 0.2rem;
   border-radius: 2px;
 }
 
-.no-vocab,
-.no-results {
+.no-vocab {
   text-align: center;
-  padding: 24px;
+  padding: 2rem;
   color: #666;
-  font-style: italic;
 }
 
 .search-container {
-  position: sticky;
-  top: 0;
-  background: white;
-  padding: 8px 0;
-  z-index: 10;
-  margin-bottom: 8px;
+  position: relative;
+  margin-bottom: 1rem;
 }
 
 .search-input {
   width: 100%;
-  padding: 8px 32px 8px 12px;
-  border: 1px solid #ddd;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 0.9rem;
 }
 
 .clear-search {
@@ -215,10 +205,11 @@
   transform: translateY(-50%);
   background: none;
   border: none;
-  cursor: pointer;
-  font-size: 18px;
   color: #666;
-  padding: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0;
+  line-height: 1;
 }
 
 /* Mobile optimizations */
@@ -287,9 +278,208 @@
     user-select: none;
     -webkit-user-select: none;
   }
+
+  .vocab-set-label {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .title-container {
+    min-width: 0;
+  }
 }
 
 /* Improve checkbox appearance */
 input[type="checkbox"] {
   accent-color: #2196F3;
+}
+
+.folder-icon-button {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+  min-width: 20px;
+  min-height: 20px;
+  margin-right: 4px;
+}
+
+.folder-icon-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.vocab-set-title {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+}
+
+.word-count {
+  color: #666;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .vocab-set-header {
+    padding: 12px !important;
+  }
+
+  .vocab-set-label {
+    min-height: 32px !important;
+  }
+
+  .checkbox-container input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+  }
+
+  .title-container {
+    gap: 4px;
+  }
+}
+
+.vocab-list .vocab-set .vocab-set-header {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 24px !important;
+}
+
+.vocab-list .vocab-set .vocab-set-label {
+  display: grid !important;
+  grid-template-columns: 20px 1fr 20px !important;
+  align-items: center !important;
+  gap: 4px !important;
+  height: 24px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: unset !important;
+}
+
+.vocab-list .vocab-set .checkbox-container {
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.vocab-list .vocab-set .checkbox-container input[type="checkbox"] {
+  width: 14px !important;
+  height: 14px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.vocab-list .vocab-set .expand-button {
+  width: 20px !important;
+  height: 20px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: none !important;
+  border: none !important;
+  color: #666 !important;
+  cursor: pointer !important;
+  border-radius: 4px !important;
+  font-size: 0.8rem !important;
+  transition: background-color 0.2s !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+}
+
+.vocab-list .vocab-set .title-container {
+  padding: 0;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.vocab-list .vocab-set .word-count {
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+/* Preserve mobile styles */
+@media (max-width: 768px) {
+  .vocab-list .vocab-set .vocab-set-header {
+    padding: 12px;
+  }
+
+  .vocab-list .vocab-set .vocab-set-label {
+    min-height: 32px;
+  }
+
+  .vocab-list .vocab-set .checkbox-container input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.checkbox-container {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.vocab-set-title {
+  line-height: 1.2;
+}
+
+.word-count {
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .vocab-set-header {
+    padding: 12px !important;
+  }
+
+  .vocab-set-label {
+    min-height: 32px !important;
+  }
+
+  .checkbox-container input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+  }
 } 
