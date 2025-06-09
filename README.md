@@ -248,31 +248,35 @@ This configuration balances quality and cost, typically using about 1-2 cents pe
 
 ## Mobile Development Guidelines
 
-When contributing to the mobile interface, follow these guidelines:
+When developing mobile features, follow these guidelines:
 
-1. iOS Safe Areas:
-   - Use `env(safe-area-inset-*)` for proper spacing
-   - Implement `-webkit-fill-available` for height calculations
-   - Handle notch and home indicator areas
+1. Touch Targets:
+   - Minimum size: 44x44px for iOS, 48x48px for Android
+   - Use grid-based layouts for consistent spacing
+   - Maintain adequate spacing between interactive elements (minimum 8px)
 
-2. Touch Targets:
-   - Minimum size of 44x44px for interactive elements
-   - Proper spacing between touch targets
-   - Clear visual feedback on interaction
+2. Layout Components:
+   - Implement grid-based layouts for complex UI elements
+   - Use flexbox for simpler, single-dimension layouts
+   - Set explicit sizes for interactive elements (buttons, checkboxes)
+   - Ensure proper text overflow handling with ellipsis
 
-3. Mobile Menu:
-   - Smooth transitions for opening/closing
-   - Proper z-index management
-   - Background overlay with pointer events
-   - Visible close button with adequate touch area
+3. Mobile-Specific Styling:
+   - Use media queries for mobile-specific adjustments
+   - Implement touch-friendly hover states
+   - Ensure proper contrast for outdoor visibility
+   - Test with various screen sizes and orientations
 
-4. Scrolling:
-   - Implement `-webkit-overflow-scrolling: touch`
-   - Handle momentum scrolling properly
-   - Maintain fixed elements during scroll
+4. Interactive Elements:
+   - Expand buttons: 24x24px minimum size
+   - Checkboxes: 20x20px minimum size
+   - Text containers: Proper padding and overflow handling
+   - Clear visual feedback for all interactions
 
-5. Responsive Design:
-   - Use mobile-first approach
-   - Implement proper breakpoints
-   - Test on various screen sizes
-   - Ensure consistent behavior across devices
+5. Performance Considerations:
+   - Optimize animations for mobile devices
+   - Minimize layout shifts during interactions
+   - Ensure smooth scrolling behavior
+   - Test on various mobile browsers and devices
+
+For implementation examples, see the VocabList component's mobile optimizations.

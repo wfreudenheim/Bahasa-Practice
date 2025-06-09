@@ -26,6 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Search functionality with folder expansion
 - iOS safe area insets for notches and home indicators
 - Viewport height calculations on mobile devices
+- Expand button sizing and positioning on mobile devices
+- Grid-based layout improvements for mobile vocabulary items
+- Consistent touch targets for checkboxes and buttons on mobile
 
 ## [1.0.0] - 2024-03-XX
 

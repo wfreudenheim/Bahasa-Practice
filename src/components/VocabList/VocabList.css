@@ -58,6 +58,14 @@
   align-items: center;
   flex: 1;
   gap: 4px;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.folder-title:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .folder-icon {
@@ -108,6 +116,7 @@
   border: 1px solid #eee;
   border-radius: 4px;
   margin-bottom: 2px;
+  overflow: hidden;
 }
 
 .vocab-set.selected {
@@ -116,61 +125,89 @@
 }
 
 .vocab-set-header {
-  padding: 2px 8px !important;
+  padding: 8px !important;
 }
 
 .vocab-set-label {
-  display: grid !important;
-  grid-template-columns: 20px 1fr 20px !important;
-  align-items: center !important;
-  gap: 4px !important;
-  height: 24px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  min-height: unset !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.title-container {
+  flex: 1;
+  min-width: 0;
+  padding: 2px 4px;
+}
+
+.vocab-set-title {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+}
+
+.vocab-set-count {
+  color: #666;
+  font-size: 0.75rem;
+  margin-top: 0.1rem;
 }
 
 .expand-button {
-  width: 20px !important;
-  height: 20px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  background: none !important;
-  border: none !important;
-  color: #666 !important;
-  cursor: pointer !important;
-  border-radius: 4px !important;
-  font-size: 0.8rem !important;
-  transition: background-color 0.2s !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  flex-shrink: 0 !important;
-  line-height: 1 !important;
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+  min-width: 20px;
+  min-height: 20px;
+  margin-left: auto;
+  font-size: 0.8rem;
+}
+
+.expand-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .vocab-preview {
-  padding: 0.75rem;
   border-top: 1px solid #eee;
+  padding: 8px;
   background: #fafafa;
 }
 
 .vocab-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 0.9em;
 }
 
 .vocab-table th,
 .vocab-table td {
-  padding: 0.5rem;
+  padding: 6px;
   text-align: left;
   border-bottom: 1px solid #eee;
 }
 
 .vocab-table th {
-  font-weight: 500;
+  font-weight: 600;
   color: #666;
+  background: #f5f5f5;
+}
+
+.vocab-table tr:last-child td {
+  border-bottom: none;
+}
+
+.vocab-table tr:hover td {
+  background-color: #f8f9ff;
 }
 
 .highlight {
@@ -215,7 +252,7 @@
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .vocab-list {
-    height: calc(100vh - 260px); /* Account for header, search, and footer */
+    height: calc(100vh - 260px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding: 8px;
@@ -223,68 +260,115 @@
     z-index: 1;
   }
 
-  .search-container {
-    position: sticky;
-    top: 0;
-    margin: 0;
-    padding: 8px;
-    background: white;
-    border-bottom: 1px solid #e0e0e0;
-    z-index: 2;
-  }
-
-  .search-input {
-    padding: 12px 36px 12px 12px;
-    font-size: 16px;
-    height: 48px;
-  }
-
-  .clear-search {
-    width: 48px;
-    height: 48px;
+  /* Adjust folder and vocab set layouts */
+  .folder-header {
     display: flex;
     align-items: center;
-    justify-content: center;
-  }
-
-  .folder-content {
     padding: 8px;
-    padding-left: 24px;
+    gap: 12px;
   }
 
-  /* Prevent folder collapse on selection */
-  .folder-checkbox,
-  .folder-title,
+  .folder-checkbox {
+    flex: 0 0 24px;
+    margin-right: 4px;
+  }
+
+  .folder-title {
+    flex: 1;
+    min-width: 0;
+    margin-left: 0;
+  }
+
+  /* Vocab set specific adjustments */
+  .vocab-set {
+    margin: 4px 0;
+  }
+
+  .vocab-set-header {
+    padding: 8px !important;
+  }
+
   .vocab-set-label {
-    touch-action: manipulation;
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 12px !important;
   }
 
-  /* Improve touch targets */
-  .folder-checkbox input[type="checkbox"],
   .vocab-set-label input[type="checkbox"] {
+    flex: 0 0 24px;
     width: 24px;
     height: 24px;
-    min-width: 24px;
-  }
-
-  .folder-header,
-  .vocab-set-header {
-    padding: 12px;
-  }
-
-  /* Prevent text selection on mobile */
-  .folder-title,
-  .vocab-set-title {
-    user-select: none;
-    -webkit-user-select: none;
-  }
-
-  .vocab-set-label {
-    grid-template-columns: auto 1fr auto;
+    margin: 0;
+    padding: 0;
   }
 
   .title-container {
+    flex: 1;
     min-width: 0;
+    margin: 0 8px;
+  }
+
+  .expand-button {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    margin-left: 4px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 12px !important;
+    background-color: transparent !important;
+  }
+
+  /* Ensure text doesn't overflow */
+  .vocab-set-title,
+  .folder-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+  }
+
+  .vocab-set-count,
+  .folder-count {
+    font-size: 12px;
+  }
+
+  /* Improve touch targets */
+  input[type="checkbox"],
+  .folder-icon-button,
+  .expand-button {
+    min-width: 24px;
+    min-height: 24px;
+    touch-action: manipulation;
+  }
+
+  /* Adjust nested content */
+  .folder-content {
+    padding-left: 16px;
+  }
+
+  .vocab-set-label {
+    display: grid !important;
+    grid-template-columns: 24px 1fr 24px !important;
+    gap: 8px !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 4px !important;
+  }
+
+  .title-container {
+    min-width: 0 !important;
+    padding: 0 4px !important;
+  }
+
+  input[type="checkbox"] {
+    width: 20px !important;
+    height: 20px !important;
+    margin: 0 !important;
   }
 }
 
@@ -311,14 +395,7 @@ input[type="checkbox"] {
 }
 
 .folder-icon-button:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
-.title-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  gap: 2px;
+  background-color: transparent; /* Remove hover effect since parent will handle it */
 }
 
 .vocab-set-title {
