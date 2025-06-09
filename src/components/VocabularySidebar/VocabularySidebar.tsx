@@ -42,6 +42,8 @@ export const VocabularySidebar = memo(({
 }: VocabularySidebarProps) => {
   const [loading, setLoading] = useState(false);
   const [folderStructure, setFolderStructure] = useState<VocabFolder[]>([]);
+  // New state for tracking expanded folders
+  const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
 
   const handleSelectionChange = useCallback((newSelectedSets: VocabSet[]) => {
     onSelectionChange(newSelectedSets);
@@ -49,35 +51,14 @@ export const VocabularySidebar = memo(({
 
   const handleFolderToggle = useCallback((toggledFolder: VocabFolder) => {
     console.log('Toggling folder:', toggledFolder.path);
-    setFolderStructure(prevStructure => {
-      const updateFolders = (folders: VocabFolder[]): VocabFolder[] => {
-        return folders.map(folder => {
-          if (folder.path === toggledFolder.path) {
-            console.log('Found folder to toggle:', folder.path, 'current state:', folder.isExpanded);
-            // Create a new folder object with updated isExpanded state
-            return {
-              ...folder,
-              isExpanded: !folder.isExpanded,
-              // Keep the same sets and subfolders
-              sets: [...folder.sets],
-              subfolders: folder.subfolders.map(sub => ({...sub}))
-            };
-          }
-          if (folder.subfolders.length > 0) {
-            // Create a new folder object with updated subfolders
-            return {
-              ...folder,
-              sets: [...folder.sets],
-              subfolders: updateFolders(folder.subfolders)
-            };
-          }
-          // Create a new folder object for unchanged folders
-          return {...folder, sets: [...folder.sets], subfolders: [...folder.subfolders]};
-        });
-      };
-      const newStructure = updateFolders(prevStructure);
-      console.log('New structure:', JSON.stringify(newStructure, null, 2));
-      return newStructure;
+    setExpandedFolders(prev => {
+      const next = new Set(prev);
+      if (next.has(toggledFolder.path)) {
+        next.delete(toggledFolder.path);
+      } else {
+        next.add(toggledFolder.path);
+      }
+      return next;
     });
   }, []);
 
@@ -119,8 +100,7 @@ export const VocabularySidebar = memo(({
             name: folder.name,
             path: currentPath,
             sets,
-            subfolders,
-            isExpanded: false // Start with folders collapsed
+            subfolders
           };
         };
 
@@ -142,20 +122,15 @@ export const VocabularySidebar = memo(({
     onSelectionChange(selectionManager.clearSelection());
   }, [onSelectionChange, selectionManager]);
 
-  // Debug logging to track folder structure changes
+  // Debug logging to track expanded folders
   useEffect(() => {
-    const logFolderState = (folders: VocabFolder[], level = 0) => {
-      folders.forEach(folder => {
-        console.log(
-          ' '.repeat(level * 2) + 
-          `${folder.name}: ${folder.isExpanded ? 'expanded' : 'collapsed'}`
-        );
-        logFolderState(folder.subfolders, level + 1);
-      });
-    };
-    console.log('Folder structure updated:');
-    logFolderState(folderStructure);
-  }, [folderStructure]);
+    console.log('Expanded folders:', Array.from(expandedFolders));
+  }, [expandedFolders]);
+
+  // Function to check if a folder is expanded
+  const isFolderExpanded = useCallback((folderPath: string) => {
+    return expandedFolders.has(folderPath);
+  }, [expandedFolders]);
 
   return (
     <div className="vocabulary-sidebar">
@@ -167,7 +142,6 @@ export const VocabularySidebar = memo(({
       </div>
       <div className="upload-section">
         <h3>Upload Vocabulary Files</h3>
-        {/* FileUpload component will go here */}
       </div>
       <div className="available-sets">
         {loading ? (
@@ -180,30 +154,26 @@ export const VocabularySidebar = memo(({
             folders={folderStructure}
             onFolderToggle={handleFolderToggle}
             selectionManager={selectionManager}
+            isFolderExpanded={isFolderExpanded}
           />
         )}
       </div>
-      <div className="selection-summary">
-        <button 
-          className="clear-selection"
-          onClick={handleClearSelection}
-          disabled={externalSelectedSets.length === 0}
-        >
-          <XIcon /> Clear selection
-        </button>
-        {externalSelectedSets.length > 0 && (
-          <>
-            <p>Selected: {externalSelectedSets.length} {externalSelectedSets.length === 1 ? 'set' : 'sets'}</p>
-            <p>{externalSelectedSets.reduce((sum, set) => sum + (set.wordCount || 0), 0)} words total</p>
-          </>
-        )}
-      </div>
+      {externalSelectedSets.length > 0 && (
+        <div className="selection-summary">
+          <div className="selection-info">
+            <span>{externalSelectedSets.length} {externalSelectedSets.length === 1 ? 'set' : 'sets'}</span>
+            <span>•</span>
+            <span>{externalSelectedSets.reduce((sum, set) => sum + (set.wordCount || 0), 0)} words</span>
+          </div>
+          <button 
+            className="clear-selection"
+            onClick={handleClearSelection}
+            aria-label="Clear selection"
+          >
+            Clear
+          </button>
+        </div>
+      )}
     </div>
   );
-}, (prevProps, nextProps) => {
-  // Custom comparison function for memo
-  return prevProps.vocabSets === nextProps.vocabSets &&
-         prevProps.selectedSets === nextProps.selectedSets &&
-         prevProps.onVocabLoaded === nextProps.onVocabLoaded &&
-         prevProps.onSelectionChange === nextProps.onSelectionChange;
 }); 

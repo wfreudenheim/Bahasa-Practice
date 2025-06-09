@@ -8,7 +8,10 @@ export interface VocabItem {
 export interface VocabSet {
   id: string;
   filename: string;
-  items: VocabItem[];
+  items: {
+    indonesian: string;
+    english: string;
+  }[];
   wordCount: number;
   dateAdded: Date;
   path: string;  // Full path to the set, e.g. "Aliyah Vocab/Week 1"
@@ -20,5 +23,4 @@ export interface VocabFolder {
   path: string;  // Full path to the folder, e.g. "Aliyah Vocab"
   sets: VocabSet[];
   subfolders: VocabFolder[];
-  isExpanded: boolean;
 } 
