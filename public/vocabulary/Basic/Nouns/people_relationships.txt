@@ -1,0 +1,111 @@
+orang	person
+manusia	human
+laki-laki	man
+perempuan	woman
+pria	male
+wanita	female
+anak	child
+bayi	baby
+balita	toddler
+remaja	teenager
+dewasa	adult
+lansia	elderly
+ayah	father
+ibu	mother
+orangtua	parents
+bapak	dad
+mama	mom
+anak laki-laki	son
+anak perempuan	daughter
+kakak	older sibling
+adik	younger sibling
+saudara	sibling
+kakek	grandfather
+nenek	grandmother
+cucu	grandchild
+paman	uncle
+bibi	aunt
+sepupu	cousin
+keponakan	nephew/niece
+mertua	in-law
+suami	husband
+istri	wife
+pasangan	partner
+tunangan	fiancé/fiancée
+janda	widow
+duda	widower
+keluarga	family
+kerabat	relative
+tetangga	neighbor
+teman	friend
+sahabat	best friend
+kawan	companion
+kenalan	acquaintance
+pacar	boyfriend/girlfriend
+kekasih	lover
+musuh	enemy
+lawan	opponent
+rival	rival
+guru	teacher
+murid	student
+siswa	pupil
+mahasiswa	university student
+dosen	lecturer
+profesor	professor
+direktur	director
+manajer	manager
+karyawan	employee
+pekerja	worker
+buruh	laborer
+petani	farmer
+dokter	doctor
+perawat	nurse
+polisi	police officer
+tentara	soldier
+pilot	pilot
+sopir	driver
+tukang	craftsman
+pedagang	merchant
+penjual	seller
+pembeli	buyer
+pelanggan	customer
+klien	client
+bos	boss
+atasan	superior
+bawahan	subordinate
+rekan	colleague
+partner	business partner
+pesaing	competitor
+pemimpin	leader
+raja	king
+ratu	queen
+presiden	president
+menteri	minister
+gubernur	governor
+bupati	regent
+walikota	mayor
+hakim	judge
+pengacara	lawyer
+wartawan	journalist
+artis	artist
+penyanyi	singer
+aktor	actor
+aktris	actress
+penulis	writer
+seniman	artist
+ilmuwan	scientist
+peneliti	researcher
+insinyur	engineer
+arsitek	architect
+chef	chef
+pengusaha	entrepreneur
+miliarder	billionaire
+jutawan	millionaire
+miskin	poor person
+kaya	rich person
+terkenal	celebrity
+tokoh	figure
+pahlawan	hero
+penjahat	criminal
+pencuri	thief
+perampok	robber

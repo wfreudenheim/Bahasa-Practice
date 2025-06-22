@@ -1,0 +1,111 @@
+transportasi	transportation
+kendaraan	vehicle
+mobil	car
+motor	motorcycle
+sepeda	bicycle
+bus	bus
+taksi	taxi
+ojek	motorcycle taxi
+angkot	public minivan
+kereta api	train
+kereta	train
+gerbong	train car
+lokomotif	locomotive
+pesawat	airplane
+helikopter	helicopter
+kapal	ship
+perahu	boat
+kapal selam	submarine
+kapal pesiar	cruise ship
+kapal terbang	aircraft
+truk	truck
+pickup	pickup truck
+van	van
+ambulans	ambulance
+mobil pemadam	fire truck
+mobil polisi	police car
+becak	pedicab
+dokar	horse cart
+delman	horse carriage
+jalan	road
+jalan raya	highway
+jalan tol	toll road
+gang	alley
+trotoar	sidewalk
+zebra cross	crosswalk
+jembatan	bridge
+terowongan	tunnel
+flyover	overpass
+rel kereta	railway track
+stasiun	station
+terminal	terminal
+bandara	airport
+pelabuhan	port
+dermaga	dock
+landasan	runway
+parkir	parking
+garasi	garage
+bengkel	workshop
+SPBU	gas station
+pompa bensin	gas pump
+perjalanan	journey
+wisata	tourism
+liburan	vacation
+piknik	picnic
+ekspedisi	expedition
+petualangan	adventure
+tur	tour
+kunjungan	visit
+penerbangan	flight
+keberangkatan	departure
+kedatangan	arrival
+transit	transit
+pemberangkatan	departure
+penjemputan	pickup
+pengantaran	delivery
+tiket	ticket
+paspor	passport
+visa	visa
+koper	suitcase
+tas	bag
+ransel	backpack
+kamera	camera
+peta	map
+kompas	compass
+panduan	guide
+buku panduan	guidebook
+hotel	hotel
+penginapan	accommodation
+reservasi	reservation
+check-in	check-in
+check-out	check-out
+kamar	room
+resepsionis	receptionist
+porter	porter
+sopir	driver
+pilot	pilot
+masinis	train conductor
+nahkoda	captain
+penumpang	passenger
+wisatawan	tourist
+pelancong	traveler
+rute	route
+tujuan	destination
+asal	origin
+jarak	distance
+kecepatan	speed
+bahan bakar	fuel
+bensin	gasoline
+solar	diesel
+oli	oil
+ban	tire
+mesin	engine
+kemudi	steering wheel
+rem	brake
+klakson	horn
+lampu	light
+speedometer	speedometer
+gps	GPS
+peta jalan	road map
+rambu lalu lintas	traffic sign
+lampu lalu lintas	traffic light

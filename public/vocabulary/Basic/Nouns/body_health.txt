@@ -1,0 +1,110 @@
+tubuh	body
+badan	body
+kepala	head
+wajah	face
+muka	face
+mata	eye
+hidung	nose
+mulut	mouth
+bibir	lips
+gigi	teeth
+lidah	tongue
+telinga	ear
+pipi	cheek
+dagu	chin
+dahi	forehead
+alis	eyebrow
+bulu mata	eyelash
+leher	neck
+tenggorokan	throat
+bahu	shoulder
+lengan	arm
+siku	elbow
+pergelangan tangan	wrist
+tangan	hand
+jari	finger
+ibu jari	thumb
+kuku	nail
+dada	chest
+payudara	breast
+perut	stomach
+pinggang	waist
+punggung	back
+tulang belakang	spine
+pantat	buttocks
+paha	thigh
+lutut	knee
+betis	calf
+kaki	foot/leg
+pergelangan kaki	ankle
+jari kaki	toe
+tumit	heel
+kulit	skin
+rambut	hair
+darah	blood
+jantung	heart
+paru-paru	lungs
+hati	liver
+ginjal	kidney
+otak	brain
+tulang	bone
+otot	muscle
+urat	vein
+saraf	nerve
+kesehatan	health
+penyakit	disease
+demam	fever
+flu	flu
+batuk	cough
+pilek	cold
+sakit kepala	headache
+sakit perut	stomachache
+sakit gigi	toothache
+nyeri	pain
+luka	wound
+cedera	injury
+patah tulang	broken bone/fracture
+memar	bruise
+bengkak	swelling
+gatal	itch
+alergi	allergy
+kanker	cancer
+diabetes	diabetes
+hipertensi	hypertension
+asma	asthma
+stroke	stroke
+serangan jantung	heart attack
+obesitas	obesity
+kelelahan	fatigue
+pusing	dizziness
+mual	nausea
+muntah	vomit
+diare	diarrhea
+sembelit	constipation
+insomnia	insomnia
+stres	stress
+depresi	depression
+kecemasan	anxiety
+obat	medicine
+vitamin	vitamin
+antibiotik	antibiotic
+vaksin	vaccine
+suntikan	injection
+operasi	surgery
+rumah sakit	hospital
+dokter	doctor
+perawat	nurse
+pasien	patient
+ambulans	ambulance
+keadaan darurat	emergency
+pertolongan pertama	first aid
+plester	band-aid
+perban	bandage
+termometer	thermometer
+stetoskop	stethoscope
+tekanan darah	blood pressure
+detak jantung	heartbeat
+napas	breath
+keringat	sweat
+air mata	tears
+ludah	saliva

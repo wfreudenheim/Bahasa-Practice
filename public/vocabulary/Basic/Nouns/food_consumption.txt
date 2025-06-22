@@ -1,0 +1,110 @@
+makanan	food
+minuman	drink
+nasi	rice
+roti	bread
+mie	noodles
+pasta	pasta
+daging	meat
+ayam	chicken
+sapi	beef
+babi	pork
+kambing	mutton
+ikan	fish
+udang	shrimp
+cumi-cumi	squid
+kepiting	crab
+telur	egg
+susu	milk
+keju	cheese
+yogurt	yogurt
+mentega	butter
+minyak	oil
+garam	salt
+gula	sugar
+merica	pepper
+cabai	chili
+bawang	onion
+bawang putih	garlic
+jahe	ginger
+kunyit	turmeric
+sayuran	vegetables
+wortel	carrot
+kentang	potato
+tomat	tomato
+timun	cucumber
+selada	lettuce
+bayam	spinach
+kangkung	water spinach
+kol	cabbage
+brokoli	broccoli
+jagung	corn
+kacang	beans
+tahu	tofu
+tempe	tempeh
+buah	fruit
+apel	apple
+pisang	banana
+jeruk	orange
+mangga	mango
+pepaya	papaya
+nanas	pineapple
+semangka	watermelon
+anggur	grapes
+strawberry	strawberry
+durian	durian
+rambutan	rambutan
+manggis	mangosteen
+air	water
+teh	tea
+kopi	coffee
+jus	juice
+soda	soda
+bir	beer
+wine	wine
+sarapan	breakfast
+makan siang	lunch
+makan malam	dinner
+camilan	snack
+makanan ringan	light meal
+hidangan	dish
+sup	soup
+salad	salad
+kue	cake
+biskuit	biscuit
+coklat	chocolate
+es krim	ice cream
+permen	candy
+garam	salt
+bumbu	spice
+saus	sauce
+kecap	soy sauce
+sambal	chili sauce
+mayones	mayonnaise
+mustard	mustard
+cuka	vinegar
+madu	honey
+sirup	syrup
+restoran	restaurant
+warung	food stall
+kafe	cafe
+rumah makan	restaurant
+dapur	kitchen
+meja	table
+kursi	chair
+piring	plate
+mangkuk	bowl
+gelas	glass
+cangkir	cup
+sendok	spoon
+garpu	fork
+pisau	knife
+sumpit	chopsticks
+serbet	napkin
+menu	menu
+pesanan	order
+tagihan	bill
+pelayan	waiter
+koki	cook
+chef	chef
+resep	recipe
+masakan	cooking

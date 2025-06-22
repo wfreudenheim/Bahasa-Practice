@@ -1,0 +1,111 @@
+rumah	house
+apartemen	apartment
+kamar	room
+ruang tamu	living room
+ruang keluarga	family room
+dapur	kitchen
+kamar tidur	bedroom
+kamar mandi	bathroom
+toilet	toilet
+ruang makan	dining room
+ruang kerja	office/study
+garasi	garage
+halaman	yard
+teras	terrace
+balkon	balcony
+pintu	door
+jendela	window
+dinding	wall
+lantai	floor
+atap	roof
+langit-langit	ceiling
+tangga	stairs
+meja	table
+kursi	chair
+sofa	sofa
+lemari	closet
+lemari es	refrigerator
+tempat tidur	bed
+kasur	mattress
+bantal	pillow
+selimut	blanket
+sprei	bed sheet
+kompor	stove
+oven	oven
+microwave	microwave
+kulkas	fridge
+mesin cuci	washing machine
+setrika	iron
+vacuum cleaner	vacuum cleaner
+AC	air conditioner
+kipas angin	fan
+televisi	television
+radio	radio
+komputer	computer
+laptop	laptop
+telepon	telephone
+handphone	cellphone
+lampu	lamp
+saklar	switch
+stop kontak	electrical outlet
+kabel	cable
+baterai	battery
+jam	clock
+jam tangan	watch
+cermin	mirror
+foto	photo
+lukisan	painting
+vas bunga	vase
+bunga	flower
+tanaman	plant
+pot	pot
+buku	book
+majalah	magazine
+koran	newspaper
+pena	pen
+pensil	pencil
+kertas	paper
+gunting	scissors
+lem	glue
+stapler	stapler
+penggaris	ruler
+kacamata	glasses
+tas	bag
+dompet	wallet
+kunci	key
+uang	money
+kartu	card
+perhiasan	jewelry
+cincin	ring
+kalung	necklace
+gelang	bracelet
+anting	earrings
+jam	watch
+sabun	soap
+sampo	shampoo
+pasta gigi	toothpaste
+sikat gigi	toothbrush
+handuk	towel
+sisir	comb
+parfum	perfume
+kosmetik	cosmetics
+obat	medicine
+piring	plate
+mangkuk	bowl
+gelas	glass
+cangkir	cup
+sendok	spoon
+garpu	fork
+pisau	knife
+teko	teapot
+botol	bottle
+kotak	box
+kantong	bag
+ember	bucket
+sapu	broom
+pel	mop
+kain	cloth
+detergen	detergent
+lilin	candle
+korek api	matches
+asbak	ashtray

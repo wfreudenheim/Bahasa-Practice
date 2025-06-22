@@ -1,0 +1,102 @@
+waktu	time
+jam	hour
+menit	minute
+detik	second
+hari	day
+minggu	week
+bulan	month
+tahun	year
+abad	century
+zaman	era
+masa	period
+saat	moment
+kesempatan	opportunity
+tanggal	date
+kalender	calendar
+jadwal	schedule
+agenda	agenda
+janji	appointment
+rencana	plan
+acara	event
+kegiatan	activity
+upacara	ceremony
+perayaan	celebration
+pesta	party
+festival	festival
+konser	concert
+pertunjukan	performance
+Senin	Monday
+Selasa	Tuesday
+Rabu	Wednesday
+Kamis	Thursday
+Jumat	Friday
+Sabtu	Saturday
+Minggu	Sunday
+Januari	January
+Februari	February
+Maret	March
+April	April
+Mei	May
+Juni	June
+Juli	July
+Agustus	August
+September	September
+Oktober	October
+November	November
+Desember	December
+musim	season
+musim hujan	rainy season
+musim kemarau	dry season
+musim semi	spring
+musim panas	summer
+musim gugur	autumn
+musim dingin	winter
+pagi	morning
+siang	noon
+sore	afternoon
+malam	evening
+malam hari	night
+tengah malam	midnight
+fajar	dawn
+senja	dusk
+kemarin	yesterday
+hari ini	today
+besok	tomorrow
+lusa	day after tomorrow
+kemarin lusa	day before yesterday
+masa lalu	past
+masa depan	future
+sekarang	present
+dulu	former time
+nanti	later
+sebentar	moment
+lama	long time
+sebentar lagi	soon
+tadi	earlier
+baru-baru ini	recently
+ulang tahun	birthday
+pernikahan	wedding
+pemakaman	funeral
+pembaptisan	baptism
+khitanan	circumcision
+wisuda	graduation
+konferensi	conference
+seminar	seminar
+workshop	workshop
+pertemuan	meeting
+rapat	meeting
+diskusi	discussion
+presentasi	presentation
+wawancara	interview
+audisi	audition
+kompetisi	competition
+lomba	contest
+turnamen	tournament
+pertandingan	match
+permainan	game
+liburan	holiday
+cuti	leave
+libur	vacation
+akhir pekan	weekend
+hari kerja	workday
+hari libur	holiday

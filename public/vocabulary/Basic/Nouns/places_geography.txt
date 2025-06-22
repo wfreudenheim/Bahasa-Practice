@@ -1,0 +1,108 @@
+tempat	place
+lokasi	location
+alamat	address
+negara	country
+provinsi	province
+kota	city
+kabupaten	regency
+kecamatan	district
+desa	village
+kampung	neighborhood
+ibu kota	capital city
+Jakarta	Jakarta
+Indonesia	Indonesia
+pulau	island
+benua	continent
+Asia	Asia
+dunia	world
+rumah	house
+gedung	building
+apartemen	apartment
+hotel	hotel
+motel	motel
+penginapan	inn
+rumah sakit	hospital
+sekolah	school
+universitas	university
+perpustakaan	library
+museum	museum
+teater	theater
+bioskop	cinema
+restoran	restaurant
+kafe	cafe
+toko	store
+pasar	market
+supermarket	supermarket
+mall	shopping mall
+bank	bank
+kantor	office
+kantor pos	post office
+stasiun	station
+bandara	airport
+pelabuhan	port
+terminal	terminal
+jalan	road
+jalan raya	highway
+gang	alley
+trotoar	sidewalk
+jembatan	bridge
+persimpangan	intersection
+lampu lalu lintas	traffic light
+taman	park
+kebun	garden
+hutan	forest
+gunung	mountain
+bukit	hill
+lembah	valley
+pantai	beach
+laut	sea
+samudra	ocean
+danau	lake
+sungai	river
+air terjun	waterfall
+gua	cave
+padang	field
+sawah	rice field
+ladang	farm
+kebun binatang	zoo
+lapangan	field
+stadion	stadium
+gereja	church
+masjid	mosque
+kuil	temple
+pura	Hindu temple
+vihara	Buddhist temple
+makam	cemetery
+rumah sakit	hospital
+klinik	clinic
+apotek	pharmacy
+salon	salon
+bengkel	workshop
+pabrik	factory
+kantor polisi	police station
+kantor pemerintah	government office
+kedutaan	embassy
+konsulat	consulate
+utara	north
+selatan	south
+timur	east
+barat	west
+tengah	center
+kiri	left
+kanan	right
+depan	front
+belakang	back
+atas	top
+bawah	bottom
+dalam	inside
+luar	outside
+dekat	near
+jauh	far
+sudut	corner
+sisi	side
+pinggir	edge
+tengah	middle
+arah	direction
+jarak	distance
+peta	map
+kompas	compass
