@@ -1,0 +1,106 @@
+saya	I
+aku	I (informal)
+gue	I (very informal)
+kamu	you
+anda	you (formal)
+kalian	you (plural)
+dia	he/she
+beliau	he/she (respectful)
+mereka	they
+kita	we (inclusive)
+kami	we (exclusive)
+ini	this
+itu	that
+tersebut	that (aforementioned)
+berikut	following
+tadi	earlier
+nanti	later
+sekarang	now
+dulu	before
+kemarin	yesterday
+besok	tomorrow
+sini	here
+sana	there
+mana	which
+siapa	who
+apa	what
+kapan	when
+dimana	where
+mengapa	why
+bagaimana	how
+berapa	how much/many
+beberapa	some
+sejumlah	a number of
+sebagian	part of
+semua	all
+seluruh	entire
+segala	all kinds of
+setiap	each
+tiap	every
+masing-masing	each one
+semuanya	everything
+apapun	anything
+siapapun	anyone
+kapanpun	anytime
+dimanapun	anywhere
+bagaimanapun	however
+satu	one
+dua	two
+tiga	three
+empat	four
+lima	five
+enam	six
+tujuh	seven
+delapan	eight
+sembilan	nine
+sepuluh	ten
+banyak	many
+sedikit	few
+lebih	more
+kurang	less
+paling	most
+ter-	most (prefix)
+sangat	very
+agak	somewhat
+cukup	enough
+terlalu	too
+amat	extremely
+sekali	very
+banget	very (informal)
+lumayan	quite
+rada	somewhat (informal)
+sendiri	alone/self
+bersama	together
+sama	same
+beda	different
+lain	other
+lainnya	others
+yang lain	the others
+satu sama lain	each other
+saling	mutually
+kedua	both
+ketiga	third
+keempat	fourth
+kelima	fifth
+pertama	first
+kedua	second
+terakhir	last
+akhir	final
+awal	beginning
+tengah	middle
+antara	between
+diantara	among
+sekitar	around
+kira-kira	approximately
+hampir	almost
+nyaris	nearly
+sudah	already
+belum	not yet
+masih	still
+tidak	no/not
+bukan	not (for nouns)
+jangan	don't
+ya	yes
+iya	yes
+tidak	no
+enggak	no (informal)

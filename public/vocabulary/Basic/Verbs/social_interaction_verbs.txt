@@ -1,0 +1,104 @@
+bertemu	meet
+berjumpa	encounter
+mengunjungi	visit
+mendatangi	approach
+mengajak	invite
+mengundang	invite formally
+menyambut	welcome
+menerima	receive
+menyapa	greet
+memperkenalkan	introduce
+berkenalan	get acquainted
+membantu	help
+menolong	assist
+mendukung	support
+menyokong	back up
+memberi	give
+memberikan	provide
+menyumbang	donate
+membagikan	distribute
+berbagi	share
+menukar	exchange
+mengganti	replace
+meminjam	borrow
+meminjamkan	lend
+berhutang	owe
+membayar	pay
+berterima kasih	thank
+memaafkan	forgive
+menyesal	regret
+mencintai	love
+menyayangi	care for
+menyukai	like
+membenci	hate
+memarahi	scold
+bertengkar	fight
+berkelahi	brawl
+berantem	quarrel
+berdamai	make peace
+berkompromi	compromise
+bernegosiasi	negotiate
+bermusyawarah	deliberate
+bekerja sama	cooperate
+berkolaborasi	collaborate
+bersatu	unite
+bergabung	join
+berpartisipasi	participate
+berkontribusi	contribute
+melayani	serve
+menjaga	care for
+merawat	look after
+melindungi	protect
+menyelamatkan	save
+menghormati	respect
+mempercayai	trust
+mendukung	encourage
+menyemangati	cheer up
+menghibur	comfort
+mengajari	teach
+membimbing	guide
+menasihati	advise
+memperingatkan	warn
+mengingatkan	remind
+meyakinkan	convince
+membujuk	persuade
+mempengaruhi	influence
+menginspirasi	inspire
+memotivasi	motivate
+menghargai	appreciate
+memuji	praise
+mengkritik	criticize
+menyalahkan	blame
+menuduh	accuse
+memfitnah	slander
+mengancam	threaten
+mengintimidasi	intimidate
+menghina	insult
+merendahkan	belittle
+mengejek	mock
+menertawakan	laugh at
+mengabaikan	ignore
+menolak	reject
+menerima	accept
+menyetujui	approve
+merestui	bless
+memberkati	bless
+mendoakan	pray for
+berpacaran	date
+berkencan	go on dates
+menikah	marry
+bercerai	divorce
+berpisah	separate
+meninggalkan	leave
+mengkhianati	betray
+menipu	deceive
+berbohong	lie
+jujur	be honest
+setia	be faithful
+mengaku	confess
+menyembunyikan	hide
+merahasiakan	keep secret
+membocorkan	leak
+mengungkapkan	reveal
+mengakui	admit
+menyangkal	deny

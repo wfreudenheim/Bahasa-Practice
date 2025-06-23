@@ -1,0 +1,109 @@
+penting	important
+vital	vital
+krusial	crucial
+esensial	essential
+utama	main
+primer	primary
+sekunder	secondary
+signifikan	significant
+tidak penting	unimportant
+sepele	trivial
+remeh	petty
+sulit	difficult
+mudah	easy
+gampang	simple
+rumit	complicated
+kompleks	complex
+sederhana	simple
+susah	hard
+berat	heavy/difficult
+ringan	light/easy
+menarik	interesting
+membosankan	boring
+seru	exciting
+asyik	fun
+keren	cool
+menyenangkan	enjoyable
+menghibur	entertaining
+menawan	captivating
+memukau	fascinating
+mungkin	possible
+tidak mungkin	impossible
+bisa	possible
+dapat	can/possible
+mampu	capable
+sanggup	able
+mustahil	impossible
+perlu	necessary
+diperlukan	needed
+wajib	mandatory
+harus	must
+optional	optional
+pilihan	choice
+bebas	free/optional
+sukarela	voluntary
+paksa	forced
+terpaksa	compelled
+logis	logical
+masuk akal	reasonable
+tidak masuk akal	unreasonable
+rasional	rational
+irasional	irrational
+realistis	realistic
+tidak realistis	unrealistic
+praktis	practical
+teoritis	theoretical
+abstrak	abstract
+konkret	concrete
+nyata	real
+virtual	virtual
+aktual	actual
+faktual	factual
+fiktif	fictional
+benar	true
+salah	false
+tepat	accurate
+keliru	mistaken
+valid	valid
+tidak valid	invalid
+sahih	legitimate
+resmi	official
+tidak resmi	unofficial
+formal	formal
+informal	informal
+serius	serious
+main-main	playful
+bercanda	joking
+sungguh-sungguh	serious
+setengah hati	half-hearted
+total	total
+parsial	partial
+lengkap	complete
+tidak lengkap	incomplete
+sempurna	perfect
+tidak sempurna	imperfect
+ideal	ideal
+utopis	utopian
+realistis	realistic
+pragmatis	pragmatic
+fleksibel	flexible
+kaku	rigid
+adaptif	adaptable
+statis	static
+dinamis	dynamic
+progresif	progressive
+konservatif	conservative
+liberal	liberal
+moderat	moderate
+ekstrem	extreme
+radikal	radical
+standar	standard
+khusus	special
+umum	general
+spesifik	specific
+universal	universal
+lokal	local
+global	global
+internasional	international
+nasional	national
+regional	regional

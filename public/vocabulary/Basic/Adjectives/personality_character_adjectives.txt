@@ -1,0 +1,106 @@
+pintar	smart
+cerdas	intelligent
+bijak	wise
+bodoh	stupid
+dungu	dumb
+pandai	clever
+jenius	genius
+brilliant	brilliant
+baik	kind
+jahat	evil
+ramah	friendly
+kasar	rude
+sopan	polite
+tidak sopan	impolite
+murah hati	generous
+pelit	stingy
+dermawan	charitable
+kikir	miserly
+jujur	honest
+bohong	dishonest
+setia	loyal
+khianat	treacherous
+dapat dipercaya	trustworthy
+tidak dapat dipercaya	untrustworthy
+berani	brave
+pengecut	cowardly
+pemberani	courageous
+takut	fearful
+rajin	diligent
+malas	lazy
+tekun	hardworking
+pemalas	lazy person
+aktif	active
+pasif	passive
+energik	energetic
+lemas	sluggish
+sabar	patient
+tidak sabar	impatient
+tenang	calm
+gelisah	restless
+damai	peaceful
+agresif	aggressive
+lembut	gentle
+keras	harsh
+halus	refined
+kasar	rough
+lucu	funny
+serius	serious
+humoris	humorous
+kaku	stiff
+fleksibel	flexible
+santai	relaxed
+tegang	tense
+optimis	optimistic
+pesimis	pessimistic
+positif	positive
+negatif	negative
+ceria	cheerful
+murung	gloomy
+riang	joyful
+sedih	sad
+bahagia	happy
+muram	sullen
+pemalu	shy
+percaya diri	confident
+rendah diri	insecure
+sombong	arrogant
+rendah hati	humble
+angkuh	haughty
+sederhana	modest
+pamer	show-off
+kreatif	creative
+inovatif	innovative
+konservatif	conservative
+progresif	progressive
+tradisional	traditional
+modern	modern
+terbuka	open-minded
+tertutup	closed-minded
+toleran	tolerant
+intoleran	intolerant
+dewasa	mature
+kekanak-kanakan	childish
+bijaksana	wise
+ceroboh	careless
+hati-hati	careful
+teliti	meticulous
+sembrono	reckless
+bertanggung jawab	responsible
+tidak bertanggung jawab	irresponsible
+mandiri	independent
+tergantung	dependent
+egois	selfish
+tidak egois	selfless
+peduli	caring
+acuh tak acuh	indifferent
+penyayang	loving
+kejam	cruel
+penyabar	patient
+pemarah	bad-tempered
+pemaaf	forgiving
+pendendam	vengeful
+pemurung	moody
+periang	cheerful
+pendiam	quiet
+cerewet	talkative

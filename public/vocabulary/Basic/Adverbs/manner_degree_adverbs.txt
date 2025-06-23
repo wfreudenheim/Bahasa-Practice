@@ -1,0 +1,113 @@
+sangat	very
+amat	very
+sekali	very
+banget	very (informal)
+begitu	so
+demikian	so
+sungguh	really
+benar-benar	really
+betul-betul	truly
+paling	most
+ter-	most (superlative prefix)
+lebih	more
+kurang	less
+agak	somewhat
+rada	somewhat (informal)
+sedikit	a little
+cukup	quite
+lumayan	quite
+cukup	enough
+terlalu	too
+kelewat	too much
+kebangeten	too much (informal)
+hampir	almost
+nyaris	nearly
+sekitar	around/about
+kira-kira	approximately
+kurang lebih	more or less
+lebih kurang	approximately
+baik	well
+bagus	well
+dengan baik	well
+buruk	badly
+jelek	badly
+salah	wrongly
+benar	correctly
+tepat	accurately
+pas	exactly
+persis	exactly
+betul	correctly
+keliru	mistakenly
+pelan	slowly
+lambat	slowly
+perlahan	slowly
+hati-hati	carefully
+dengan hati-hati	carefully
+teliti	carefully
+cermat	carefully
+seksama	thoroughly
+detail	in detail
+mendalam	deeply
+dalam-dalam	deeply
+dangkal	superficially
+sekilas	briefly
+sepintas	at a glance
+cepat	quickly
+dengan cepat	quickly
+buru-buru	hurriedly
+tergesa-gesa	hastily
+santai	relaxedly
+dengan santai	relaxedly
+tenang	calmly
+dengan tenang	calmly
+sabar	patiently
+dengan sabar	patiently
+keras	hard/loudly
+dengan keras	hard
+kuat	strongly
+dengan kuat	strongly
+lemah	weakly
+lembut	gently
+dengan lembut	gently
+halus	smoothly
+dengan halus	smoothly
+kasar	roughly
+dengan kasar	roughly
+jelas	clearly
+dengan jelas	clearly
+terang	clearly
+gamblang	clearly
+buram	unclearly
+kabur	vaguely
+samar	vaguely
+tidak jelas	unclearly
+mudah	easily
+dengan mudah	easily
+gampang	easily
+sulit	with difficulty
+susah	with difficulty
+diam-diam	secretly
+secara diam-diam	secretly
+terang-terangan	openly
+secara terbuka	openly
+jujur	honestly
+dengan jujur	honestly
+bohong	dishonestly
+palsu	falsely
+asli	genuinely
+sungguh-sungguh	seriously
+main-main	playfully
+bercanda	jokingly
+serius	seriously
+formal	formally
+informal	informally
+resmi	officially
+tidak resmi	unofficially
+sengaja	intentionally
+tidak sengaja	accidentally
+kebetulan	coincidentally
+untung	fortunately
+sayangnya	unfortunately
+mudah-mudahan	hopefully
+semoga	hopefully
+moga-moga	hopefully (informal)

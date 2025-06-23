@@ -1,0 +1,109 @@
+makan	eat
+minum	drink
+sarapan	have breakfast
+mengunyah	chew
+menelan	swallow
+merasakan	taste
+mencicipi	sample
+menyantap	dine
+berpuasa	fast
+diet	diet
+tidur	sleep
+tertidur	fall asleep
+bangun	wake up
+beristirahat	rest
+berbaring	lie down
+bermalas-malasan	laze around
+bekerja	work
+berkarir	have a career
+berbisnis	do business
+menganggur	be unemployed
+belajar	study
+bersekolah	attend school
+berkuliah	attend university
+mengajar	teach
+lulus	graduate
+bermain	play
+berolahraga	exercise
+berlatih	practice
+berkompetisi	compete
+menang	win
+kalah	lose
+hidup	live
+tinggal	reside
+mendiami	inhabit
+pindah	move
+bermigrasi	migrate
+menetap	settle
+lahir	be born
+meninggal	die
+tumbuh	grow
+berkembang	develop
+berubah	change
+menjadi dewasa	mature
+menua	age
+menikah	marry
+bercerai	divorce
+berpacaran	date
+bertunangan	get engaged
+berkencan	go on a date
+berteman	be friends
+bersosialisasi	socialize
+bergaul	mingle
+berkumpul	gather
+bertemu	meet
+mengunjungi	visit
+menjamu	host
+berlibur	vacation
+berpergian	travel
+berkelana	wander
+bertamasya	tour
+piknik	picnic
+berkemah	camp
+mendaki	hike
+memancing	fish
+berburu	hunt
+bercocok tanam	farm
+berkebun	garden
+berternak	raise livestock
+memelihara	keep pets
+merawat	care for
+mengasuh	raise children
+mendidik	educate
+membimbing	guide
+melindungi	protect
+menyelamatkan	save
+membantu	help
+melayani	serve
+menyumbang	donate
+berdonasi	make donations
+bersedekah	give charity
+beribadah	worship
+berdoa	pray
+bermeditasi	meditate
+beryoga	do yoga
+bernyanyi	sing
+menari	dance
+melukis	paint
+menggambar	draw
+bermain musik	play music
+membaca	read
+menulis	write
+memasak	cook
+mencuci	wash
+membersihkan	clean
+berbelanja	shop
+menjual	sell
+membeli	buy
+menabung	save money
+berinvestasi	invest
+berhutang	be in debt
+membayar	pay
+berusaha	try
+berhasil	succeed
+gagal	fail
+memulai	start
+menyelesaikan	finish
+melanjutkan	continue
+berhenti	stop
+beristirahat	take a break

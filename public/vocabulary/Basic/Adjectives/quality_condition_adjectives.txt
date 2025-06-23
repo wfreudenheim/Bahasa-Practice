@@ -1,0 +1,107 @@
+baik	good
+bagus	nice
+buruk	bad
+jelek	ugly
+sempurna	perfect
+istimewa	special
+luar biasa	extraordinary
+hebat	great
+menakjubkan	amazing
+fantastis	fantastic
+indah	beautiful
+cantik	beautiful
+elok	lovely
+rupawan	handsome
+menarik	attractive
+menawan	charming
+baru	new
+lama	old
+tua	old
+usang	outdated
+kuno	ancient
+modern	modern
+kontemporer	contemporary
+klasik	classic
+tradisional	traditional
+bersih	clean
+kotor	dirty
+rapi	neat
+berantakan	messy
+teratur	organized
+acak-acakan	disorganized
+rusak	broken
+hancur	destroyed
+pecah	shattered
+utuh	intact
+lengkap	complete
+tidak lengkap	incomplete
+penuh	full
+kosong	empty
+segar	fresh
+basi	stale
+busuk	rotten
+matang	ripe
+mentah	raw
+masak	cooked
+siap	ready
+belum siap	not ready
+selesai	finished
+setengah jadi	half-finished
+kuat	strong
+lemah	weak
+kokoh	sturdy
+rapuh	fragile
+awet	durable
+tahan lama	long-lasting
+mudah rusak	easily damaged
+berkualitas	high quality
+murahan	cheap quality
+mahal	expensive
+murah	cheap
+gratis	free
+berbayar	paid
+asli	original
+palsu	fake
+tiruan	imitation
+otentik	authentic
+nyata	real
+bohong	false
+benar	true
+salah	wrong
+tepat	accurate
+keliru	mistaken
+pas	fitting
+tidak pas	not fitting
+cocok	suitable
+tidak cocok	unsuitable
+layak	worthy
+tidak layak	unworthy
+pantas	appropriate
+tidak pantas	inappropriate
+normal	normal
+aneh	strange
+biasa	ordinary
+istimewa	special
+umum	common
+langka	rare
+unik	unique
+standar	standard
+khusus	special
+resmi	official
+tidak resmi	unofficial
+formal	formal
+informal	informal
+serius	serious
+santai	relaxed
+ketat	strict
+longgar	lenient
+tegas	firm
+lunak	soft
+keras	hard
+mudah	easy
+sulit	difficult
+rumit	complicated
+sederhana	simple
+kompleks	complex
+praktis	practical
+teoritis	theoretical

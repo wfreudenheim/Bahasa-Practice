@@ -1,0 +1,101 @@
+sini	here
+disini	here
+kesini	to here
+dari sini	from here
+sana	there
+disana	there
+kesana	to there
+dari sana	from there
+situ	there (medium distance)
+disitu	there
+kesitu	to there
+dari situ	from there
+dimana	where
+kemana	where to
+dari mana	from where
+dimana-mana	everywhere
+kemana-mana	everywhere
+ke mana-mana	to everywhere
+di manapun	anywhere
+ke manapun	to anywhere
+dari manapun	from anywhere
+atas	up/above
+ke atas	upward
+dari atas	from above
+di atas	above
+bawah	down/below
+ke bawah	downward
+dari bawah	from below
+di bawah	below
+depan	front
+ke depan	forward
+dari depan	from the front
+di depan	in front
+belakang	back
+ke belakang	backward
+dari belakang	from behind
+di belakang	behind
+kiri	left
+ke kiri	to the left
+dari kiri	from the left
+di kiri	on the left
+kanan	right
+ke kanan	to the right
+dari kanan	from the right
+di kanan	on the right
+tengah	middle
+ke tengah	to the middle
+dari tengah	from the middle
+di tengah	in the middle
+dalam	inside
+ke dalam	inward
+dari dalam	from inside
+di dalam	inside
+luar	outside
+ke luar	outward
+dari luar	from outside
+di luar	outside
+dekat	near/nearby
+di dekat	near
+ke dekat	closer
+dari dekat	from nearby
+jauh	far
+di jauh	far away
+ke jauh	farther
+dari jauh	from afar
+samping	side
+ke samping	to the side
+dari samping	from the side
+di samping	beside
+sebelah	next to
+di sebelah	next to
+ke sebelah	to next door
+dari sebelah	from next door
+sekitar	around
+di sekitar	around
+ke sekitar	around to
+dari sekitar	from around
+antara	between
+di antara	between
+ke antara	in between
+dari antara	from between
+maju	forward
+mundur	backward
+naik	upward
+turun	downward
+masuk	inward
+keluar	outward
+lewat	past/through
+melewati	passing through
+melalui	through
+menuju	toward
+arah	direction
+searah	in the same direction
+berlawanan arah	in opposite direction
+berputar	rotating
+memutar	turning
+berbelok	turning
+lurus	straight
+terus	straight ahead
+pulang	home/back
+kembali	back/return

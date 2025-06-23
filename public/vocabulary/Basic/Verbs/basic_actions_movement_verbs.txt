@@ -1,0 +1,101 @@
+pergi	go
+datang	come
+berangkat	depart
+tiba	arrive
+masuk	enter
+keluar	exit
+naik	go up
+turun	go down
+berjalan	walk
+berlari	run
+melompat	jump
+meloncat	leap
+terbang	fly
+berenang	swim
+menyelam	dive
+meluncur	slide
+merangkak	crawl
+memanjat	climb
+menginjak	step
+berhenti	stop
+beristirahat	rest
+duduk	sit
+berdiri	stand
+berbaring	lie down
+bangun	wake up
+mengambil	take
+membawa	bring
+mengangkat	lift
+meletakkan	put
+menyimpan	keep
+melempar	throw
+menangkap	catch
+mendorong	push
+menarik	pull
+membuka	open
+menutup	close
+mengunci	lock
+memutar	turn
+menggeser	move
+memindahkan	relocate
+mengirim	send
+menerima	receive
+memberi	give
+memegang	hold
+menyentuh	touch
+menekan	press
+mencabut	pull out
+menusuk	poke
+memotong	cut
+menyobek	tear
+melipat	fold
+membentuk	shape
+membangun	build
+menghancurkan	destroy
+merusak	break
+memperbaiki	fix
+membersihkan	clean
+mengotori	dirty
+mencuci	wash
+mengelap	wipe
+menyapu	sweep
+mengepel	mop
+menggosok	scrub
+menyikat	brush
+memoles	polish
+merapikan	tidy up
+mengatur	arrange
+menyusun	organize
+menumpuk	stack
+menyebar	spread
+mengumpulkan	collect
+memisahkan	separate
+menggabungkan	combine
+menyatukan	unite
+membagi	divide
+memilah	sort
+mengemas	pack
+membongkar	unpack
+memasang	install
+melepas	remove
+mengikat	tie
+melepaskan	release
+mengencangkan	tighten
+melonggarkan	loosen
+menggantung	hang
+menjatuhkan	drop
+menggulingkan	roll
+meluncurkan	launch
+menendang	kick
+memukul	hit
+menabrak	crash
+mendorong	shove
+menyeret	drag
+mengangkut	transport
+memuat	load
+menurunkan	unload
+menyimpan	store
+mengeluarkan	take out
+memasukkan	put in
+menyelipkan	slip in
+menyusupkan	sneak in

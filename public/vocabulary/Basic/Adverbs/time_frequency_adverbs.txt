@@ -1,0 +1,107 @@
+sekarang	now
+kini	now
+saat ini	at this moment
+sedang	currently
+lagi	in progress
+tengah	in the middle of
+baru	just
+baru saja	just now
+tadi	earlier
+barusan	just now
+kemarin	yesterday
+kemarin lusa	day before yesterday
+besok	tomorrow
+lusa	day after tomorrow
+hari ini	today
+minggu ini	this week
+bulan ini	this month
+tahun ini	this year
+minggu lalu	last week
+bulan lalu	last month
+tahun lalu	last year
+minggu depan	next week
+bulan depan	next month
+tahun depan	next year
+dulu	before/formerly
+dahulu	in the past
+tempo dulu	long ago
+zaman dulu	in the old days
+masa lalu	in the past
+nanti	later
+kelak	in the future
+suatu hari	someday
+kapan-kapan	sometime
+sewaktu-waktu	anytime
+selalu	always
+selamanya	forever
+abadi	eternally
+terus	continuously
+terus-menerus	continuously
+sering	often
+kerap	frequently
+acap kali	frequently
+kadang	sometimes
+kadang-kadang	sometimes
+sesekali	occasionally
+jarang	rarely
+jarang-jarang	very rarely
+tidak pernah	never
+pernah	ever
+belum pernah	never before
+sudah pernah	have done before
+biasanya	usually
+umumnya	generally
+normalnya	normally
+lazimnya	commonly
+pada umumnya	in general
+kebanyakan	mostly
+sebagian besar	for the most part
+hampir selalu	almost always
+hampir tidak pernah	almost never
+sekali-kali	once in a while
+sewaktu-waktu	from time to time
+dari waktu ke waktu	from time to time
+berkala	periodically
+rutin	regularly
+teratur	regularly
+tidak teratur	irregularly
+sporadis	sporadically
+mendadak	suddenly
+tiba-tiba	suddenly
+seketika	instantly
+langsung	immediately
+segera	soon
+cepat-cepat	quickly
+buru-buru	hurriedly
+pelan-pelan	slowly
+lambat	slowly
+lama	for a long time
+lama-lama	gradually
+bertahap	gradually
+berangsur	gradually
+perlahan	slowly
+awal	early
+pagi	early
+siang	at noon
+sore	in the afternoon
+malam	at night
+larut malam	late at night
+tengah malam	at midnight
+subuh	at dawn
+fajar	at dawn
+senja	at dusk
+terlambat	late
+telat	late
+duluan	first
+pertama	first
+terakhir	last
+akhir	finally
+pada akhirnya	in the end
+akhirnya	finally
+kemudian	then
+lalu	then
+selanjutnya	next
+berikutnya	next
+sesudahnya	afterwards
+sebelumnya	previously
+dahulu	previously

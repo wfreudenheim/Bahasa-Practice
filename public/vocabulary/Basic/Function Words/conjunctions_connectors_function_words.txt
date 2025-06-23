@@ -1,0 +1,104 @@
+dan	and
+serta	as well as
+plus	plus
+juga	also
+lagi	again/also
+pula	also
+atau	or
+ataupun	or
+entah	either
+tetapi	but
+tapi	but
+namun	however
+akan tetapi	however
+melainkan	but rather
+sedangkan	while
+sementara	while
+padahal	whereas
+meskipun	although
+walaupun	although
+walau	even though
+sekalipun	even though
+biarpun	even though
+kendatipun	although
+meski	despite
+karena	because
+sebab	because
+lantaran	because
+akibat	due to
+oleh karena	because of
+disebabkan	caused by
+berkat	thanks to
+gara-gara	because of
+kalau	if
+kalo	if (informal)
+jika	if
+bila	if
+seandainya	if only
+andaikan	suppose
+misalnya	for example
+seumpama	suppose
+ketika	when
+saat	when
+waktu	when
+sewaktu	when
+tatkala	when
+selagi	while
+sambil	while
+seraya	while
+begitu	as soon as
+setelah	after
+sesudah	after
+sebelum	before
+hingga	until
+sampai	until
+sejak	since
+semenjak	since
+mulai	starting from
+selama	during
+sepanjang	throughout
+agar	so that
+supaya	so that
+biar	so that
+untuk	in order to
+demi	for the sake of
+guna	for the purpose of
+dengan tujuan	with the purpose
+bahwa	that
+yaitu	that is
+yakni	namely
+ialah	that is
+adalah	is
+merupakan	is/constitutes
+sebagai	as
+seperti	like
+bagaikan	like
+bagai	like
+laksana	like
+ibarat	like
+seolah-olah	as if
+seakan-akan	as if
+sepertinya	it seems
+rupanya	apparently
+ternyata	it turns out
+memang	indeed
+sungguh	really
+benar-benar	really
+betul-betul	truly
+sebenarnya	actually
+sesungguhnya	actually
+kenyataannya	in fact
+faktanya	the fact is
+justru	actually
+malah	instead
+bahkan	even
+apalagi	moreover
+lagipula	furthermore
+selain itu	besides that
+disamping itu	besides that
+kemudian	then
+lalu	then
+setelah itu	after that
+selanjutnya	next
+akhirnya	finally
+pada akhirnya	in the end

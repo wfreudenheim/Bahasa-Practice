@@ -1,0 +1,99 @@
+mempunyai	have
+memiliki	own
+menguasai	possess
+mendapat	get
+memperoleh	obtain
+mengambil	take
+menerima	receive
+memberi	give
+memberikan	provide
+menyimpan	keep
+menahan	hold
+memegang	grasp
+menggenggam	grip
+kehilangan	lose
+menghilang	disappear
+membuang	throw away
+membeli	buy
+berbelanja	shop
+menjual	sell
+berdagang	trade
+menukar	exchange
+mengganti	replace
+menawar	bargain
+bernegosiasi	negotiate
+menyewa	rent
+menyewakan	rent out
+mengontrak	contract
+membayar	pay
+berhutang	owe
+menghutangi	lend money
+menagih	collect debt
+meminjam	borrow
+meminjamkan	lend
+berutang	be in debt
+menabung	save
+berinvestasi	invest
+mendeposit	deposit
+menarik	withdraw
+mentransfer	transfer
+mengirim	send
+mengekspor	export
+mengimpor	import
+mendistribusi	distribute
+mensuplai	supply
+menyetok	stock
+mencadangkan	reserve
+mengumpulkan	collect
+mengklaim	claim
+mewarisi	inherit
+menghibahkan	donate
+bersedekah	give charity
+menyumbangkan	contribute
+memberikan	grant
+mengalokasikan	allocate
+mendistribusikan	distribute
+membagi	divide
+membagikan	share out
+mengontrol	control
+mengelola	manage
+mengadministrasi	administer
+mengatur	organize
+menyimpan	store
+mengamankan	secure
+melindungi	protect
+menjaga	guard
+mengawasi	watch over
+memelihara	maintain
+merawat	care for
+menggunakan	use
+memanfaatkan	utilize
+mengonsumsi	consume
+menghabiskan	spend
+memboroskan	waste
+menghemat	save
+berhemat	economize
+mengirit	be frugal
+menghargai	value
+menilai	assess
+menaksir	appraise
+memperkirakan	estimate
+mengaudit	audit
+menghitung	count
+mengkalkulasi	calculate
+mengukur	measure
+menimbang	weigh
+memeriksa	check
+menginspeksi	inspect
+memverifikasi	verify
+memvalidasi	validate
+mengotorisasi	authorize
+menyetujui	approve
+mengesahkan	endorse
+meratifikasi	ratify
+menandatangani	sign
+menyegel	seal
+mengunci	lock
+membuka	unlock
+mengakses	access
+mengoperasikan	operate

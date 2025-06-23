@@ -1,0 +1,107 @@
+senang	happy
+bahagia	blissful
+gembira	joyful
+riang	cheerful
+ceria	bright
+girang	elated
+puas	satisfied
+lega	relieved
+bangga	proud
+optimis	optimistic
+bersemangat	enthusiastic
+antusias	excited
+excited	thrilled
+bergairah	passionate
+berapi-api	fiery
+bersukacita	rejoicing
+sedih	sad
+murung	gloomy
+muram	sullen
+duka	sorrowful
+nestapa	grief-stricken
+galau	confused/troubled
+melankolis	melancholic
+putus asa	desperate
+patah hati	heartbroken
+kecewa	disappointed
+frustrasi	frustrated
+marah	angry
+kesal	annoyed
+dongkol	upset
+jengkel	irritated
+geram	furious
+berang	enraged
+murka	wrathful
+tersinggung	offended
+dendam	vengeful
+iri	envious
+cemburu	jealous
+sirik	envious
+takut	afraid
+cemas	anxious
+khawatir	worried
+panik	panicked
+was-was	apprehensive
+gelisah	restless
+tegang	tense
+gugup	nervous
+grogi	nervous
+malu	ashamed
+sungkan	shy
+canggung	awkward
+minder	insecure
+rendah diri	low self-esteem
+tenang	calm
+damai	peaceful
+santai	relaxed
+kalem	composed
+cool	cool-headed
+sabar	patient
+tabah	steadfast
+tegar	resilient
+kuat	strong emotionally
+terkejut	surprised
+kaget	shocked
+heran	amazed
+bingung	confused
+kagum	admiring
+takjub	astonished
+terpesona	fascinated
+terkesima	mesmerized
+terkesan	impressed
+terharu	touched/moved
+tersentuh	moved
+terpukau	captivated
+bosan	bored
+jenuh	fed up
+lelah	tired
+capek	exhausted
+lesu	lethargic
+loyo	weak
+lemas	sluggish
+segar	fresh
+bugar	fit
+sehat	healthy
+sakit	sick
+tidak enak badan	unwell
+stress	stressed
+tertekan	pressured
+depresi	depressed
+trauma	traumatized
+shock	shocked
+terguncang	shaken
+hancur	devastated
+remuk	crushed
+porak-poranda	shattered
+berantakan	messed up
+kacau	chaotic emotionally
+campur aduk	mixed up
+bimbang	hesitant
+ragu	doubtful
+yakin	confident
+pasti	certain
+mantap	sure
+percaya diri	self-confident
+berani	brave
+nekat	reckless
+nekad	determined

@@ -1,0 +1,104 @@
+melihat	see
+memandang	look at
+menatap	stare
+mengamati	observe
+memperhatikan	notice
+menyaksikan	witness
+menonton	watch
+memantau	monitor
+mengawasi	supervise
+mengintip	peek
+melirik	glance
+menyorot	shine light on
+berfokus	focus
+berkonsentrasi	concentrate
+mendengar	hear
+mendengarkan	listen
+menyimak	listen carefully
+menguping	eavesdrop
+memperdengarkan	play sound
+merasakan	feel
+menyentuh	touch
+meraba	grope
+membelai	caress
+mengelus	stroke
+memijat	massage
+mencubit	pinch
+mencakar	scratch
+menggigit	bite
+mencium	smell/kiss
+menghirup	inhale
+mengendus	sniff
+mencicipi	taste
+mengecap	taste
+menikmati	enjoy
+menyantap	savor
+menyukai	like
+mencintai	love
+menyayangi	care for
+mengagumi	admire
+menghargai	appreciate
+memuji	praise
+menginginkan	want
+mendambakan	crave
+merindukan	miss
+mengharapkan	hope for
+bermimpi	dream
+berangan-angan	fantasize
+membayangkan	imagine
+mengidamkan	long for
+haus	thirst for
+lapar	hunger for
+membenci	hate
+jijik	be disgusted
+muak	be sick of
+marah	be angry
+kesal	be annoyed
+dongkol	be upset
+sedih	be sad
+kecewa	be disappointed
+putus asa	despair
+menyesal	regret
+takut	fear
+cemas	be anxious
+khawatir	worry
+panik	panic
+gugup	be nervous
+tegang	be tense
+gelisah	be restless
+was-was	be apprehensive
+malu	be ashamed
+sungkan	be shy
+canggung	be awkward
+bangga	be proud
+senang	be happy
+gembira	be joyful
+bahagia	be blissful
+puas	be satisfied
+lega	be relieved
+tenang	be calm
+damai	be peaceful
+santai	be relaxed
+nyaman	be comfortable
+aman	feel safe
+percaya diri	be confident
+yakin	be certain
+ragu	doubt
+bingung	be confused
+heran	be surprised
+kagum	be amazed
+takjub	be astonished
+terpesona	be fascinated
+terkesan	be impressed
+terharu	be touched
+terkejut	be shocked
+kaget	be startled
+terkaget-kaget	be startled repeatedly
+tersinggung	be offended
+tersakiti	be hurt
+terluka	be wounded
+tersiksa	be tormented
+menderita	suffer
+merasakan sakit	feel pain
+merasa tidak enak	feel unwell
+merasa sehat	feel healthy

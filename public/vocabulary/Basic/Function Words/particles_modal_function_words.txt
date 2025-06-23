@@ -1,0 +1,101 @@
+bisa	can
+dapat	can
+mampu	able to
+sanggup	capable of
+boleh	may
+tidak boleh	may not
+jangan	don't
+dilarang	forbidden
+harus	must
+wajib	must
+mesti	must
+perlu	need to
+butuh	need
+sebaiknya	should
+seharusnya	should
+seyogyanya	ought to
+akan	will
+bakal	will
+hendak	will
+mau	want to/will
+ingin	want to
+nanti	later/will
+sudah	already
+telah	have/has
+pernah	ever
+belum	not yet
+tidak pernah	never
+masih	still
+sedang	currently
+lagi	in the process of
+tengah	in the middle of
+baru	just
+baru saja	just now
+saja	just
+hanya	only
+cuma	only
+semata	only
+melulu	only
+doang	only (informal)
+aja	just (informal)
+kan	right? (particle)
+lah	emphasis particle
+dong	emphasis particle
+sih	questioning particle
+kok	why/how come
+deh	emphasis particle
+tuh	that (pointing)
+nih	this (offering)
+ya	yes/right
+iya	yes
+nggak	no (informal)
+tidak	no
+bukan	not (for nouns)
+enggak	no (informal)
+gak	no (very informal)
+mungkin	maybe
+barangkali	perhaps
+kira-kira	approximately
+agaknya	it seems
+sepertinya	it appears
+kayaknya	seems like (informal)
+rasanya	it feels like
+kemungkinan	possibly
+bisa jadi	could be
+bolehjadi	might be
+entah	I don't know
+siapa tahu	who knows
+pasti	definitely
+tentu	certainly
+jelas	clearly
+sudah pasti	definitely
+memang	indeed
+benar	really
+betul	correct
+iya dong	of course
+yah	well
+wah	wow
+aduh	ouch
+ih	ew
+lho	huh
+kok	how come
+duh	oh no
+asli	really (slang)
+beneran	really (informal)
+serius	seriously
+sungguh	really
+benar-benar	really
+betul-betul	truly
+sekali	very
+banget	very (informal)
+amat	very
+sangat	very
+terlalu	too
+agak	somewhat
+lumayan	quite
+cukup	enough
+hampir	almost
+nyaris	nearly
+sekitar	around
+kurang lebih	more or less
+lebih kurang	approximately
