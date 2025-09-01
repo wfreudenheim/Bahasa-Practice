@@ -1,0 +1,70 @@
+Demam	Fever
+Pilek	Cold
+Batuk	Cough
+Sakit kepala	Headache
+Sakit gigi	Toothache
+Sakit perut	Stomachache
+Radang tenggorokan	Sore throat
+Flu	Flu
+Diare	Diarrhea
+Mual	Nausea
+Pusing	Dizziness
+Sesak napas	Shortness of breath
+Nyeri dada	Chest pain
+Gatal	Itching
+Ruam	Rash
+Bengkak	Swelling
+Lemas	Fatigue / Weakness
+Keringat dingin	Cold sweat
+Dehidrasi	Dehydration
+Infeksi	Infection
+Asma	Asthma
+Diabetes	Diabetes
+Hipertensi	Hypertension / High blood pressure
+Stroke	Stroke
+Serangan jantung	Heart attack
+Kanker	Cancer
+TBC	Tuberculosis
+Hepatitis	Hepatitis
+Pneumonia	Pneumonia
+Penyakit ginjal	Kidney disease
+Luka	Wound
+Patah tulang	Broken bone
+Memar	Bruise
+Luka bakar	Burn
+Keseleo	Sprain
+Lecet	Scratch / Abrasion
+Gegar otak	Concussion
+Pendarahan	Bleeding
+Luka sayat	Cut
+Cidera olahraga	Sports injury
+Rumah sakit	Hospital
+Klinik	Clinic
+UGD	Emergency Room (ER)
+ICU	Intensive Care Unit
+Ruang operasi	Operating room
+Ruang rawat inap	Inpatient room
+Ruang tunggu	Waiting room
+Apotek	Pharmacy
+Dokter	Doctor
+Perawat	Nurse
+Bidan	Midwife
+Dokter gigi	Dentist
+Dokter anak	Pediatrician
+Dokter bedah	Surgeon
+Apoteker	Pharmacist
+Ahli gizi	Nutritionist
+Sopir ambulans	Ambulance driver
+Pasien	Patient
+Janji temu	Appointment
+Pendaftaran	Registration
+Obat	Medicine
+Vitamin	Vitamin
+Suntikan	Injection
+Vaksin	Vaccine
+Imunisasi	Immunization
+Termometer	Thermometer
+Kursi roda	Wheelchair
+Tandu	Stretcher
+Infus	IV drip
+Tabung oksigen	Oxygen tank

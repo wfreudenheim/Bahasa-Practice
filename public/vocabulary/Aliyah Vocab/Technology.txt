@@ -1,0 +1,70 @@
+Aplikasi	Application
+Perangkat lunak	Software
+Perangkat keras	Hardware
+Jaringan	Network
+Internet	Internet
+Layar	Screen
+Tombol	Button
+Papan ketik	Keyboard
+Tetikus	Mouse
+Pencetak	Printer
+Pemindai	Scanner
+Kamera	Camera
+Mikrofon	Microphone
+Speaker	Speaker
+Proyektor	Projector
+Layar sentuh	Touchscreen
+Pengisian daya	Charging
+Baterai	Battery
+Sinyal	Signal
+Koneksi	Connection
+Wi-Fi	Wi-Fi
+Bluetooth	Bluetooth
+Data	Data
+Penyimpanan	Storage
+Awan digital	Cloud
+Unduh	Download
+Unggah	Upload
+Peramban	Browser
+Situs web	Website
+Tautan	Link
+Kata sandi	Password
+Nama pengguna	Username
+Log masuk	Log in
+Keluar	Log out
+Perbarui	Update
+Unduh ulang	Redownload
+Hapus	Delete
+Salin	Copy
+Tempel	Paste
+Potong	Cut
+Pencarian	Search
+Mesin pencari	Search engine
+Media sosial	Social media
+Pesan instan	Instant message
+Surel	Email
+Lampiran	Attachment
+File	File
+Folder	Folder
+Dokumen	Document
+Presentasi	Presentation
+Lembar kerja	Spreadsheet
+Gambar	Image
+Video	Video
+Musik	Music
+Rekaman	Recording
+Antivirus	Antivirus
+Keamanan	Security
+Peretasan	Hacking
+Peretas	Hacker
+Kata kunci	Keyword
+Streaming	Streaming
+Siaran langsung	Live broadcast
+Panggilan video	Video call
+Konferensi daring	Online conference
+Platform	Platform
+Algoritme	Algorithm
+Robot	Robot
+Kecerdasan buatan	AI
+Realitas virtual	Virtual reality
+Realitas tertambah	Augmented reality

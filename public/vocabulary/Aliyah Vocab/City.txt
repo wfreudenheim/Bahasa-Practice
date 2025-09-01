@@ -1,0 +1,70 @@
+Kota	City
+Ibu kota	Capital city
+Wilayah	Region / Area
+Padat	Crowded
+Ramai	Busy / Lively
+Pusat	Center
+Daerah	District / Area
+Lingkungan	Environment
+Perkotaan	Urban
+Perumahan	Housing area
+Kemacetan	Traffic jam
+Kendaraan	Vehicle
+Sepeda motor	Motorcycle
+Mobil	Car
+Jalan raya	Main road
+Trotoar	Sidewalk
+Penyeberangan	Crossing
+Angkutan umum	Public transport
+Bus kota	City bus
+Kereta	Train
+Gedung	Building
+Kantor	Office
+Mall	Mall
+Pasar	Market
+Rumah sakit	Hospital
+Sekolah	School
+Masjid	Mosque
+Jembatan	Bridge
+Flyover	Overpass
+Terowongan	Tunnel
+Polusi	Pollution
+Sampah	Garbage / Trash
+Udara	Air
+Air bersih	Clean water
+Sungai	River
+Banjir	Flood
+Taman	Park
+Pohon	Tree
+Ruang terbuka	Open space
+Suhu	Temperature
+Penduduk	Resident / Population
+Warga	Citizen
+Kemiskinan	Poverty
+Pengangguran	Unemployment
+Kriminalitas	Crime
+Keamanan	Safety
+Kesehatan	Health
+Pendidikan	Education
+Kesempatan kerja	Job opportunity
+Ketimpangan	Inequality
+Proyek	Project
+Perencanaan	Planning
+Pembangunan	Development
+Renovasi	Renovation
+Modernisasi	Modernization
+Pertumbuhan	Growth
+Perbaikan	Improvement
+Kemajuan	Progress
+Perubahan	Change
+Pengembangan	Expansion
+Tinggal	To live
+Bekerja	To work
+Bersekolah	To study at school
+Bepergian	To travel
+Berjalan	To walk
+Berangkat	To depart
+Macet	To be stuck in traffic
+Tersedia	To be available
+Menikmati	To enjoy
+Mengeluh	To complain
